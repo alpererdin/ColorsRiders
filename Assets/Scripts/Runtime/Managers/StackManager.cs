@@ -90,7 +90,7 @@ namespace Runtime.Managers
 
         private void OnStackMove(Vector2 direction)
         {
-            transform.position = new Vector3(0, gameObject.transform.position.y, direction.y + 2f);
+            transform.position = new Vector3(0, gameObject.transform.position.y, direction.y - 2f);
             if (gameObject.transform.childCount > 0)
             {
                 _stackMoverCommand.Execute(direction.x, _collectableStack);

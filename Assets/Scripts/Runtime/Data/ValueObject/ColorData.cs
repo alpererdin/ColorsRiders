@@ -1,7 +1,11 @@
+using System;
+using UnityEngine;
+
 namespace Runtime.Data.ValueObject
 {
-    public struct ColorData
+    [Serializable]
+    public class ColorData
     {
-        
+        public Color Color;
     }
 }

@@ -3,7 +3,7 @@ using Cinemachine;
 using Runtime.Controllers.MiniGame;
 using Runtime.Enums;
 using Runtime.Signals;
-using Sirenix.OdinInspector;
+
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -22,7 +22,7 @@ namespace Runtime.Managers
 
         #region Private Variables
 
-        [ShowInInspector] private float3 _initialPosition;
+        private float3 _initialPosition;
 
         #endregion
 

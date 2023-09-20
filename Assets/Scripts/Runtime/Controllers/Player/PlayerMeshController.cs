@@ -12,6 +12,7 @@ namespace Runtime.Controllers.Player
         #region Serialized Variables
 
         [SerializeField] private TextMeshPro scoreText;
+        //[SerializeField] private Material RunnersColorMaterial;
 
         #endregion
 
@@ -21,5 +22,10 @@ namespace Runtime.Controllers.Player
         {
             scoreText.text = value.ToString();
         }
+     /*   internal void SetColor()
+        {
+            RunnersColorMaterial.SetColor("_Color",Color.red );
+        }*/
+        
     }
 }

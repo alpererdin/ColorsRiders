@@ -50,7 +50,7 @@ namespace Runtime.Managers
         {
             CoreGameSignals.Instance.onLevelInitialize += _levelLoader.Execute;
             CoreGameSignals.Instance.onClearActiveLevel += _levelDestroyer.Execute;
-            CoreGameSignals.Instance.onGetLevelID += GetLevelID;
+           CoreGameSignals.Instance.onGetLevelID += GetLevelID;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
         }
@@ -59,7 +59,7 @@ namespace Runtime.Managers
         {
             CoreGameSignals.Instance.onLevelInitialize -= _levelLoader.Execute;
             CoreGameSignals.Instance.onClearActiveLevel -= _levelDestroyer.Execute;
-            CoreGameSignals.Instance.onGetLevelID -= GetLevelID;
+           CoreGameSignals.Instance.onGetLevelID -= GetLevelID;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
         }
@@ -89,7 +89,7 @@ namespace Runtime.Managers
         {
             SaveSignals.Instance.onSaveGameData?.Invoke();
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
-            CoreGameSignals.Instance.onLevelInitialize?.Invoke(GetLevelID());
+           CoreGameSignals.Instance.onLevelInitialize?.Invoke(GetLevelID());
         }
     }
 }

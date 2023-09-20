@@ -3,7 +3,7 @@ using Runtime.Controllers.Collectables;
 using Runtime.Data.UnityObject;
 using Runtime.Data.ValueObject;
 using Runtime.Signals;
-using Sirenix.OdinInspector;
+using Runtime.Enums;
 using UnityEngine;
 
 namespace Runtime.Managers
@@ -16,13 +16,14 @@ namespace Runtime.Managers
 
         [SerializeField] private CollectableMeshController meshController;
         [SerializeField] private CollectablePhysicsController physicsController;
+        
 
         #endregion
 
         #region Private Variables
 
-        [ShowInInspector] private CollectableData _data;
-        [ShowInInspector] private byte _currentValue = 0;
+         private CollectableData _data;
+         private byte _currentValue = 0;
 
         private readonly string _collectableDataPath = "Data/CD_Collectable";
 
@@ -59,6 +60,8 @@ namespace Runtime.Managers
         public void InteractionWithCollectable(GameObject collectableGameObject)
         {
             StackSignals.Instance.onInteractionCollectable?.Invoke(collectableGameObject);
+           
+
         }
 
         public void InteractionWithAtm(GameObject collectableGameObject)

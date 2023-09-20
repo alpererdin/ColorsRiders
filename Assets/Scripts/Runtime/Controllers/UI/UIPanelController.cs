@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Runtime.Enums;
 using Runtime.Signals;
-using Sirenix.OdinInspector;
+
 using UnityEngine;
 
 namespace Runtime.Controllers.UI
@@ -46,14 +46,14 @@ namespace Runtime.Controllers.UI
 
         #endregion
 
-        [Button("OpenPanel")]
+        
         private void OnOpenPanel(UIPanelTypes panel, int layerValue)
         {
             CoreUISignals.Instance.onClosePanel?.Invoke(layerValue);
             Instantiate(Resources.Load<GameObject>($"Screens/{panel}Panel"), layers[layerValue].transform);
         }
 
-        [Button("ClosePanel")]
+        
         private void OnClosePanel(int layerValue)
         {
             if (layers[layerValue].transform.childCount > 0)
@@ -63,7 +63,7 @@ namespace Runtime.Controllers.UI
                 }
         }
 
-        [Button("CloseAllPanels")]
+       
         private void OnCloseAllPanel()
         {
             foreach (var layer in layers)

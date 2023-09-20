@@ -3,7 +3,7 @@ using Runtime.Data.ValueObject;
 using Runtime.Keys;
 using Runtime.Managers;
 using Runtime.Signals;
-using Sirenix.OdinInspector;
+
 using UnityEngine;
 
 namespace Runtime.Controllers.Player
@@ -21,10 +21,10 @@ namespace Runtime.Controllers.Player
 
         #region Private Variables
 
-        [Header("Data")] [ShowInInspector] private PlayerMovementData _data;
-        [ShowInInspector] private bool _isReadyToMove, _isReadyToPlay;
-        [ShowInInspector] private float _inputValue;
-        [ShowInInspector] private Vector2 _clampValues;
+        [Header("Data")]  private PlayerMovementData _data;
+         private bool _isReadyToMove, _isReadyToPlay;
+         private float _inputValue;
+        private Vector2 _clampValues;
 
         #endregion
 

@@ -21,13 +21,42 @@ namespace Runtime.Controllers.Player
         private readonly string _atm = "ATM";
         private readonly string _collectable = "Collectable";
         private readonly string _conveyor = "Conveyor";
-
+        private readonly string _stageArea = "StageArea";
+        private readonly string _gate = "Gate";
         #endregion
 
         #endregion
 
         private void OnTriggerEnter(Collider other)
         {
+          /*  if (other.CompareTag(_stageArea))
+            {
+             
+                manager.ForceCommand.Execute();
+                CoreGameSignals.Instance.onStageAreaEntered?.Invoke();
+                InputSignals.Instance.onDisableInput?.Invoke();
+
+                DOVirtual.DelayedCall(3, () =>
+                {
+                    var result = other.transform.parent.GetComponentInChildren<PoolController>()
+                        .TakeResults(manager.StageValue);
+
+                    if (result)
+                    {
+                        CoreGameSignals.Instance.onStageAreaSuccessful?.Invoke(manager.StageValue);
+                        InputSignals.Instance.onEnableInput?.Invoke();
+                    }
+                    else
+                    {
+                        CoreGameSignals.Instance.onLevelFailed?.Invoke();
+                    }
+                });
+                return;
+            }*/
+        /*  if (other.CompareTag(_gate))
+          {
+              
+          }*/
             if (other.CompareTag(_obstacle))
             {
                 managerRigidbody.transform.DOMoveZ(managerRigidbody.transform.position.z - 10f, 1f)
@@ -45,6 +74,7 @@ namespace Runtime.Controllers.Player
             {
                 other.tag = "Collected";
                 StackSignals.Instance.onInteractionCollectable?.Invoke(other.transform.parent.gameObject);
+                CollectableSignals.Instance.onChangeCollectableAnimationState?.Invoke(CollectableAnimationStates.Run);
                 return;
             }
 

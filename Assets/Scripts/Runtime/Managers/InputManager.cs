@@ -4,7 +4,7 @@ using Runtime.Data.UnityObject;
 using Runtime.Data.ValueObject;
 using Runtime.Keys;
 using Runtime.Signals;
-using Sirenix.OdinInspector;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -25,8 +25,8 @@ namespace Runtime.Managers
         private Vector3 _moveVector; //ref type
 
         [Header("Data")] private InputData _data;
-        [ShowInInspector] private bool _isFirstTimeTouchTaken;
-        [ShowInInspector] private bool _isAvailableForTouch;
+        private bool _isFirstTimeTouchTaken;
+        private bool _isAvailableForTouch;
 
         #endregion
 

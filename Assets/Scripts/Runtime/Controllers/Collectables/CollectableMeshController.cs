@@ -1,5 +1,5 @@
 using Runtime.Data.ValueObject;
-using Sirenix.OdinInspector;
+
 using UnityEngine;
 
 namespace Runtime.Controllers.Collectables
@@ -16,7 +16,7 @@ namespace Runtime.Controllers.Collectables
 
         #region Private Variables
 
-        [ShowInInspector] private CollectableMeshData _data;
+        private CollectableMeshData _data;
 
         #endregion
 

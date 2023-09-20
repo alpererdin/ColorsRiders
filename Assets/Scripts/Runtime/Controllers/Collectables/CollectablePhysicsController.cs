@@ -16,12 +16,14 @@ namespace Runtime.Controllers.Collectables
 
         #region Private Variables
 
+        
         private readonly string _collectable = "Collectable";
         private readonly string _collected = "Collected";
         private readonly string _gate = "Gate";
         private readonly string _atm = "ATM";
         private readonly string _obstacle = "Obstacle";
         private readonly string _conveyor = "Conveyor";
+        
 
         #endregion
 

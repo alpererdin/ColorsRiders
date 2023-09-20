@@ -25,7 +25,7 @@ namespace Runtime.Commands.Stack
         {
             for (int i = 0; i <= _collectableStack.Count - 1; i++)
             {
-                int index = (_collectableStack.Count - 1) - i;
+                int index =  i;
                 _collectableStack[index].transform
                     .DOScale(
                         new Vector3(_stackData.StackScaleValue, _stackData.StackScaleValue, _stackData.StackScaleValue),

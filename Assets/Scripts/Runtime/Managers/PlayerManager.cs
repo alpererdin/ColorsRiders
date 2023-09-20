@@ -5,7 +5,7 @@ using Runtime.Data.ValueObject;
 using Runtime.Enums;
 using Runtime.Keys;
 using Runtime.Signals;
-using Sirenix.OdinInspector;
+
 using UnityEngine;
 
 namespace Runtime.Managers
@@ -25,7 +25,7 @@ namespace Runtime.Managers
 
         #region Private Variables
 
-        [ShowInInspector] private PlayerData _data;
+        private PlayerData _data;
         private const string PlayerDataPath = "Data/CD_Player";
 
         #endregion
@@ -89,6 +89,10 @@ namespace Runtime.Managers
             meshController.SetTotalScore(value);
         }
 
+       /* private void SetColor()
+        {
+            meshController.SetColor();
+        }*/
         private void OnReset()
         {
             movementController.OnReset();

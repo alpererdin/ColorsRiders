@@ -1,5 +1,5 @@
 using Runtime.Signals;
-using Sirenix.OdinInspector;
+
 using UnityEngine;
 
 namespace Runtime.Managers
@@ -10,10 +10,10 @@ namespace Runtime.Managers
 
         #region Private Variables
 
-        [ShowInInspector] private int _money;
-        [ShowInInspector] private int _stackValueMultiplier;
-        [ShowInInspector] private int _scoreCache = 0;
-        [ShowInInspector] private int _atmScoreValue = 0;
+        private int _money;
+         private int _stackValueMultiplier;
+        private int _scoreCache = 0;
+         private int _atmScoreValue = 0;
 
         #endregion
 
@@ -57,7 +57,7 @@ namespace Runtime.Managers
         private void OnSetAtmScore(int atmValues)
         {
             _atmScoreValue += atmValues * _stackValueMultiplier;
-            AtmSignals.Instance.onSetAtmScoreText?.Invoke(_atmScoreValue);
+            
         }
 
         private void OnSetValueMultiplier()

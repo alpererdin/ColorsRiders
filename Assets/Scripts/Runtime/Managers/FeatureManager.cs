@@ -1,6 +1,6 @@
 using Runtime.Commands.Feature;
 using Runtime.Signals;
-using Sirenix.OdinInspector;
+
 using UnityEngine;
 
 namespace Runtime.Managers
@@ -21,9 +21,9 @@ namespace Runtime.Managers
 
         #region Private Variables
 
-        [ShowInInspector] private byte _incomeLevel = 1;
-        [ShowInInspector] private byte _stackLevel = 1;
-        [ShowInInspector] private int _newPriceTag;
+         private byte _incomeLevel = 1;
+        private byte _stackLevel = 1;
+         private int _newPriceTag;
 
         private readonly OnClickIncomeCommand _onClickIncomeCommand;
         private readonly OnClickStackCommand _onClickStackCommand;
