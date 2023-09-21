@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 3783389435460376085}
+  animator: {fileID: 5627387058280208923}
 --- !u!136 &9203018490854240882
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -192,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshController: {fileID: 2886249332767685872}
   physicsController: {fileID: 743675539387639454}
+  animController: {fileID: 2059127417198740108}
 --- !u!1 &8125028646171859363
 GameObject:
   m_ObjectHideFlags: 0

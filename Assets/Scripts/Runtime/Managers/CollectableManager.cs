@@ -16,7 +16,7 @@ namespace Runtime.Managers
 
         [SerializeField] private CollectableMeshController meshController;
         [SerializeField] private CollectablePhysicsController physicsController;
-        
+        [SerializeField] private CollectableAnimationController animController;
 
         #endregion
 
@@ -44,6 +44,7 @@ namespace Runtime.Managers
             meshController.SetMeshData(_data.MeshData);
         }
 
+       
       
         internal void CollectableUpgrade(int value)
         {
@@ -62,6 +63,12 @@ namespace Runtime.Managers
             StackSignals.Instance.onInteractionCollectable?.Invoke(collectableGameObject);
            
 
+        }
+        public void InteractionWithPlayer(GameObject collectableGameObject)
+        {
+            
+            CollectableSignals.Instance.onChangeCollectableAnimationState?.Invoke(CollectableAnimationStates.Run, collectableGameObject);
+   
         }
 
         public void InteractionWithAtm(GameObject collectableGameObject)

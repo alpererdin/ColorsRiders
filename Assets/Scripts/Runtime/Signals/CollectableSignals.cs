@@ -1,11 +1,12 @@
 using Runtime.Extentions;
 using UnityEngine.Events;
 using Runtime.Enums;
+using UnityEngine;
+ 
 namespace Runtime.Signals
 {
     public class CollectableSignals : MonoSingleton<CollectableSignals>
     {
-        public UnityAction<int> onCollectableUpgrade = delegate { };
-        public UnityAction<CollectableAnimationStates> onChangeCollectableAnimationState = delegate { };
+        public UnityAction<CollectableAnimationStates, GameObject> onChangeCollectableAnimationState = delegate { };
     }
 }

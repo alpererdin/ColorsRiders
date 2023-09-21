@@ -89,10 +89,7 @@ namespace Runtime.Managers
             meshController.SetTotalScore(value);
         }
 
-       /* private void SetColor()
-        {
-            meshController.SetColor();
-        }*/
+       
         private void OnReset()
         {
             movementController.OnReset();

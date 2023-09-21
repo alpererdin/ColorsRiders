@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Runtime.Enums;
+using Runtime.Managers;
 using Runtime.Signals;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ namespace Runtime.Controllers.Player
         #region Serialized Variables
 
         [SerializeField] private Rigidbody managerRigidbody;
+        [SerializeField] private PlayerManager manager;
+         
 
         #endregion
 
@@ -53,10 +56,11 @@ namespace Runtime.Controllers.Player
                 });
                 return;
             }*/
-        /*  if (other.CompareTag(_gate))
+          if (other.CompareTag(_gate))
           {
-              
-          }*/
+              PlayerSignals.Instance.OnGatePassed?.Invoke();
+           
+          }
             if (other.CompareTag(_obstacle))
             {
                 managerRigidbody.transform.DOMoveZ(managerRigidbody.transform.position.z - 10f, 1f)
@@ -74,7 +78,7 @@ namespace Runtime.Controllers.Player
             {
                 other.tag = "Collected";
                 StackSignals.Instance.onInteractionCollectable?.Invoke(other.transform.parent.gameObject);
-                CollectableSignals.Instance.onChangeCollectableAnimationState?.Invoke(CollectableAnimationStates.Run);
+                
                 return;
             }
 

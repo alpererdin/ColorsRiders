@@ -11,6 +11,7 @@ namespace Runtime.Controllers.Collectables
         #region Serialized Variables
 
         [SerializeField] private CollectableManager manager;
+        [SerializeField] private GameObject animator;
 
         #endregion
 
@@ -31,6 +32,7 @@ namespace Runtime.Controllers.Collectables
 
         private void OnTriggerEnter(Collider other)
         {
+             
             if (other.CompareTag(_collectable) && CompareTag(_collected))
             {
                 other.tag = _collected;
@@ -56,6 +58,12 @@ namespace Runtime.Controllers.Collectables
             {
                 manager.InteractionWithConveyor();
             }
+
+            if (other.CompareTag("Player") || other.CompareTag(_collected))
+            {
+                manager.InteractionWithPlayer(animator);
+            }
+ 
         }
     }
 }

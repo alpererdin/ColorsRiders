@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3728413453173965148}
   m_Layer: 0
   m_Name: PlayerManager
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 3972194527216279057}
   m_Layer: 0
   m_Name: Physics
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,6 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   managerRigidbody: {fileID: 8957997245628761113}
+  manager: {fileID: 614604432351197866}
 --- !u!1 &3664098379501064820
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,6 +606,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 5049815272723777552}
+  RunnersColorMaterial: {fileID: 2100000, guid: 8612ab69f064269409eac06eebc1707c,
+    type: 2}
 --- !u!1001 &1044023338978089692
 PrefabInstance:
   m_ObjectHideFlags: 0

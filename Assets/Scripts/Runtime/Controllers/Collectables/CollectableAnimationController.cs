@@ -26,10 +26,15 @@ namespace Runtime.Controllers.Collectables
             CollectableSignals.Instance.onChangeCollectableAnimationState += OnChangeAnimationState;
         }
 
-        private void OnChangeAnimationState(CollectableAnimationStates animationState)
+        public void OnChangeAnimationState(CollectableAnimationStates animationState, GameObject collectableGameObject)
         {
-            animator.SetTrigger(animationState.ToString());
+            if (gameObject == collectableGameObject)
+            {
+                animator.SetTrigger(animationState.ToString());
+            }
         }
+
+ 
 
         private void UnSubscribeEvents()
         {
@@ -43,7 +48,7 @@ namespace Runtime.Controllers.Collectables
 
         internal void OnReset()
         {
-            CollectableSignals.Instance.onChangeCollectableAnimationState?.Invoke(CollectableAnimationStates.Idle);
+           // CollectableSignals.Instance.onChangeCollectableAnimationState?.Invoke(CollectableAnimationStates.Idle);
         }
     }
 }

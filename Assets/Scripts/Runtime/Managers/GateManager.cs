@@ -1,19 +1,13 @@
 using Runtime.Data.UnityObject;
 using Runtime.Data.ValueObject;
 using UnityEngine;
-
+using Runtime.Signals;
+using Extentions;
 namespace Runtime.Managers
 {
     public class GateManager : MonoBehaviour
     {
         #region SelfVariables
-
-        #region SerializedVariables
-
-        
-        
-
-        #endregion
 
         #region PrivateVariables
 
@@ -29,5 +23,11 @@ namespace Runtime.Managers
             
         }
         private ColorData GetGateData() => Resources.Load<CD_Color>(GateDataPath).Colors[0];
+        
+        private void GatePassed()
+        { 
+            PlayerSignals.Instance.OnGatePassed.Invoke();
+        }
     }
+    
 }
