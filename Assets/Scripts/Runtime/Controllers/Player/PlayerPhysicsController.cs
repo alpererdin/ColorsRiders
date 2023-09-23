@@ -14,6 +14,7 @@ namespace Runtime.Controllers.Player
 
         [SerializeField] private Rigidbody managerRigidbody;
         [SerializeField] private PlayerManager manager;
+        //[SerializeField] private GateManager gatemanager;
          
 
         #endregion
@@ -24,7 +25,7 @@ namespace Runtime.Controllers.Player
         private readonly string _atm = "ATM";
         private readonly string _collectable = "Collectable";
         private readonly string _conveyor = "Conveyor";
-        private readonly string _stageArea = "StageArea";
+        //private readonly string _stageArea = "StageArea";
         private readonly string _gate = "Gate";
         #endregion
 
@@ -58,7 +59,7 @@ namespace Runtime.Controllers.Player
             }*/
           if (other.CompareTag(_gate))
           {
-              PlayerSignals.Instance.OnGatePassed?.Invoke();
+              PlayerSignals.Instance.OnGatePassed?.Invoke(other.GetComponent<GateManager>().currentColorType);
            
           }
             if (other.CompareTag(_obstacle))
@@ -74,10 +75,15 @@ namespace Runtime.Controllers.Player
                 return;
             }
 
-            if (other.CompareTag(_collectable))
+            if (other.CompareTag(_collectable) )
             {
-                other.tag = "Collected";
-                StackSignals.Instance.onInteractionCollectable?.Invoke(other.transform.parent.gameObject);
+               
+                if (manager.currentColor == other.GetComponentInParent<CollectableManager>().currentColorType)
+                {
+                    
+                    other.tag = "Collected";
+                    StackSignals.Instance.onInteractionCollectable?.Invoke(other.transform.parent.gameObject);
+                }
                 
                 return;
             }
@@ -91,6 +97,9 @@ namespace Runtime.Controllers.Player
                     () => CameraSignals.Instance.onSetCinemachineTarget?.Invoke(CameraTargetState.FakePlayer));
                 return;
             }
+
+             
+            
         }
     }
 }

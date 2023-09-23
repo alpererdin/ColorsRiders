@@ -1,6 +1,10 @@
+using System;
 using Runtime.Data.ValueObject;
-
+using Runtime.Enums;
+using Runtime.Managers;
+using Runtime.Signals;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Runtime.Controllers.Collectables
 {
@@ -10,7 +14,9 @@ namespace Runtime.Controllers.Collectables
 
         #region Serialized Variables
 
-        [SerializeField] private MeshFilter meshFilter;
+         
+        [SerializeField] private CollectableManager manager;
+        [SerializeField] private SkinnedMeshRenderer renderer;
 
         #endregion
 
@@ -18,15 +24,26 @@ namespace Runtime.Controllers.Collectables
 
         private CollectableMeshData _data;
 
+         
         #endregion
 
         #endregion
 
+        
 
         private void OnEnable()
         {
             ActivateMeshVisuals();
+             
+            CollectableSignals.Instance.onChangeCollectedMaterial += onChangemat;
         }
+
+        public void onChangemat(Material mat)
+        {
+            renderer.material = mat;
+        }
+         
+         
 
         internal void SetMeshData(CollectableMeshData meshData)
         {
@@ -35,12 +52,13 @@ namespace Runtime.Controllers.Collectables
 
         private void ActivateMeshVisuals()
         {
-            meshFilter.mesh = _data.MeshList[0];
+            
         }
 
         internal void UpgradeCollectableVisual(int value)
         {
-            meshFilter.mesh = _data.MeshList[value];
+             
         }
+      
     }
 }

@@ -28,7 +28,7 @@ namespace Runtime.Commands.Stack
                 _collectableStack[i].transform.DOJump(
                     new Vector3(
                         Random.Range(-_data.JumpItemsClampX, _data.JumpItemsClampX + 1),
-                        1.12f,
+                        1f,
                         _collectableStack[i].transform.position.z + Random.Range(10, 15)),
                     _data.JumpForce,
                     Random.Range(1, 3), 0.5f
