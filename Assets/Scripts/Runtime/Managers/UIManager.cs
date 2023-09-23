@@ -24,8 +24,8 @@ namespace Runtime.Managers
         private void OpenStartPanel()
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 0);
-            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
-            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Shop, 2);
+          //  CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
+         //   CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Shop, 2);
         }
 
         private void OnLevelInitialize(byte levelValue)

@@ -1,5 +1,6 @@
 using Runtime.Enums;
 using Runtime.Extentions;
+using Runtime.Managers;
 using UnityEngine.Events;
 using UnityEngine;
 
@@ -12,6 +13,6 @@ namespace Runtime.Signals
         public UnityAction<bool> onMoveConditionChanged = delegate { };
         public UnityAction<int> onSetTotalScore = delegate { };
 
-        public UnityAction OnGatePassed;
+        public UnityAction<MaterialColorTypes> OnGatePassed = delegate {  };
     }
 }

@@ -14,13 +14,14 @@ namespace Runtime.Managers
     {
         #region Self Variables
 
+        public MaterialColorTypes currentColor;
         #region Serialized Variables
 
         [SerializeField] private PlayerMovementController movementController;
         [SerializeField] private PlayerAnimationController animationController;
         [SerializeField] private PlayerPhysicsController physicsController;
         [SerializeField] private PlayerMeshController meshController;
-
+        
         #endregion
 
         #region Private Variables
@@ -64,6 +65,7 @@ namespace Runtime.Managers
 
             PlayerSignals.Instance.onSetTotalScore += OnSetTotalScore;
             CoreGameSignals.Instance.onMiniGameEntered += OnMiniGameEntered;
+            PlayerSignals.Instance.OnGatePassed += OnChangePlayerColor;
         }
 
 
@@ -110,7 +112,34 @@ namespace Runtime.Managers
 
             PlayerSignals.Instance.onSetTotalScore -= OnSetTotalScore;
             CoreGameSignals.Instance.onMiniGameEntered -= OnMiniGameEntered;
+            PlayerSignals.Instance.OnGatePassed -= OnChangePlayerColor;
         }
+
+         private void OnChangePlayerColor(MaterialColorTypes type)
+        {
+         
+            Color color = GetColorForMaterialColorType(type); 
+            meshController.ChangeMaterialColor(color);
+            currentColor = type;
+        }
+
+        
+         
+         private Color GetColorForMaterialColorType(MaterialColorTypes colorType)
+         {
+             switch (colorType)
+             {
+                 case MaterialColorTypes.red:
+                     return Color.red;
+                 case MaterialColorTypes.blue:
+                     return Color.blue;
+                 case MaterialColorTypes.black:
+                     return Color.black;
+                 default:
+                     return Color.white;  
+             }
+         }
+
 
         private void OnDisable()
         {
@@ -123,7 +152,7 @@ namespace Runtime.Managers
             Vector2 pos = new Vector2(position.x, position.z);
             StackSignals.Instance.onStackFollowPlayer?.Invoke(pos);
         }
-
+        
         private IEnumerator WaitForFinal()
         {
             PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Idle);

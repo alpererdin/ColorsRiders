@@ -4,6 +4,7 @@ using Runtime.Data.UnityObject;
 using Runtime.Data.ValueObject;
 using Runtime.Signals;
 using Runtime.Enums;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Runtime.Managers
@@ -11,7 +12,10 @@ namespace Runtime.Managers
     public class CollectableManager : MonoBehaviour
     {
         #region Self Variables
-
+        
+        public MaterialColorTypes currentColorType;
+        public SkinnedMeshRenderer _mesh;
+        public Material baseMaterial;
         #region Serialized Variables
 
         [SerializeField] private CollectableMeshController meshController;
@@ -21,9 +25,11 @@ namespace Runtime.Managers
         #endregion
 
         #region Private Variables
-
+        private ColorData _colorData;
          private CollectableData _data;
          private byte _currentValue = 0;
+         
+         private Material _material;
 
         private readonly string _collectableDataPath = "Data/CD_Collectable";
 
@@ -35,8 +41,19 @@ namespace Runtime.Managers
         {
             _data = GetCollectableData();
             SendDataToController();
+            GetCollectableColorData();
+           Init();
         }
 
+        public void Init()
+        {
+             
+            _material = _mesh.material;
+            _material.color = _colorData.Color;
+            
+        }
+
+        private void GetCollectableColorData() => _colorData = Resources.Load<CD_Color>("Data/CD_Color").Colors[(int)currentColorType];
         private CollectableData GetCollectableData() => Resources.Load<CD_Collectable>(_collectableDataPath).Data;
 
         private void SendDataToController()
@@ -44,12 +61,15 @@ namespace Runtime.Managers
             meshController.SetMeshData(_data.MeshData);
         }
 
-       
+        public void ChangeMaterial(Material mat)
+        {
+            meshController.onChangemat(mat);
+        }
       
         internal void CollectableUpgrade(int value)
         {
             if (_currentValue < 2) _currentValue++;
-            meshController.UpgradeCollectableVisual(_currentValue);
+         //   meshController.UpgradeCollectableVisual(_currentValue);
             StackSignals.Instance.onUpdateType?.Invoke();
         }
 
@@ -68,7 +88,7 @@ namespace Runtime.Managers
         {
             
             CollectableSignals.Instance.onChangeCollectableAnimationState?.Invoke(CollectableAnimationStates.Run, collectableGameObject);
-   
+     
         }
 
         public void InteractionWithAtm(GameObject collectableGameObject)
@@ -84,6 +104,13 @@ namespace Runtime.Managers
         public void InteractionWithConveyor()
         {
             StackSignals.Instance.onInteractionConveyor?.Invoke();
+        } 
+        public void InteractionWithGate(GameObject collectedGO)
+        {
+            SkinnedMeshRenderer thisGO = collectedGO.GetComponentInChildren<SkinnedMeshRenderer>();
+           // CollectableSignals.Instance.onChangeCollectedMaterial?.Invoke(thisGO);
         }
+      
+ 
     }
 }
