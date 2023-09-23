@@ -1,5 +1,6 @@
 using Runtime.Managers;
 using Runtime.Signals;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Runtime.Controllers.Collectables
@@ -33,15 +34,17 @@ namespace Runtime.Controllers.Collectables
         private void OnTriggerEnter(Collider other)
         {
              
-            if (other.CompareTag(_collectable) && CompareTag(_collected))
+           /* if (other.CompareTag(_collectable) && CompareTag(_collected))
             {
                 other.tag = _collected;
                 manager.InteractionWithCollectable(other.transform.parent.gameObject);
-            }
+            }*/
 
             if (other.CompareTag(_gate) && CompareTag(_collected))
             {
-                manager.CollectableUpgrade(manager.GetCurrentValue());
+                //manager.CollectableUpgrade(manager.GetCurrentValue());
+                manager.InteractionWithGate(transform.parent.gameObject);
+                
             }
 
             if (other.CompareTag(_atm) && CompareTag(_collected))
@@ -59,10 +62,17 @@ namespace Runtime.Controllers.Collectables
                 manager.InteractionWithConveyor();
             }
 
-            if (other.CompareTag("Player") || other.CompareTag(_collected))
+            if (other.CompareTag("Player") /*|| other.CompareTag(_collected)*/)
             {
-                manager.InteractionWithPlayer(animator);
+                if (manager.currentColorType==other.GetComponentInParent<PlayerManager>().currentColor)
+                {
+                    manager.InteractionWithPlayer(animator);
+                    manager.ChangeMaterial(manager.baseMaterial);
+                }
+                
+               // manager.ChangeMaterial(other.GetComponentInChildren<SkinnedMeshRenderer>().material);
             }
+
  
         }
     }

@@ -1,4 +1,5 @@
 using System;
+using Runtime.Enums;
 using Runtime.Signals;
 using TMPro;
 using UnityEngine;
@@ -12,10 +13,10 @@ namespace Runtime.Controllers.Player
         #region Serialized Variables
 
         [SerializeField] private TextMeshPro scoreText;
-        [SerializeField] private Material RunnersColorMaterial;
+        [SerializeField] public Material RunnersColorMaterial;
 
-      
-
+        
+        
         #endregion
 
         #endregion
@@ -24,22 +25,37 @@ namespace Runtime.Controllers.Player
         {
             scoreText.text = value.ToString();
         }
-        internal void ChangeMaterial()
+       /* internal void ChangeMaterial()
         {
             RunnersColorMaterial.SetColor("_Color", Color.red);
             Debug.Log("degistimi");
-        }
+        }*/
 
-        private void OnEnable()
+      /*  private void OnEnable()
         {
             PlayerSignals.Instance.OnGatePassed +=ChangeMaterial;
         }
+         
+        
+        private void ChangeMaterial(MaterialColorTypes colorType)
+        {
+            // Debug.Log(colorType);
 
-        private void OnDisable()
+
+        }
+        */
+        public void ChangeMaterialColor(Color color)
+        {
+            RunnersColorMaterial.color = color;
+        }
+
+         
+
+       /* private void OnDisable()
         {
             PlayerSignals.Instance.OnGatePassed -=ChangeMaterial;
         }
-      
+      */
         
     }
 }
