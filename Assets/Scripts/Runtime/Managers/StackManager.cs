@@ -5,6 +5,7 @@ using Runtime.Data.UnityObject;
 using Runtime.Data.ValueObject;
 using Runtime.Signals;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Runtime.Managers
 {
@@ -86,6 +87,13 @@ namespace Runtime.Managers
             StackSignals.Instance.onUpdateType += StackTypeUpdaterCommand.Execute;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
+            StackSignals.Instance.onUpdateStack += OnUpdateStack;
+            StackSignals.Instance.onRemoveStackObject += _itemRemoverOnStackCommand.Execute;
+        }
+
+        private void OnUpdateStack()
+        {
+            _stackInitializerCommand.Execute();
         }
 
         private void OnStackMove(Vector2 direction)
@@ -99,8 +107,8 @@ namespace Runtime.Managers
 
         private void OnInteractionWithATM(GameObject collectableGameObject)
         {
-            ScoreSignals.Instance.onSetAtmScore?.Invoke((int)collectableGameObject.GetComponent<CollectableManager>()
-                .GetCurrentValue() + 1);
+            //ScoreSignals.Instance.onSetAtmScore?.Invoke((int)collectableGameObject.GetComponent<CollectableManager>()
+           //     .GetCurrentValue() + 1);
             if (LastCheck == false)
             {
                 _itemRemoverOnStackCommand.Execute(collectableGameObject);

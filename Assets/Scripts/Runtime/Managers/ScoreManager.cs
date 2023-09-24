@@ -1,5 +1,5 @@
 using Runtime.Signals;
-
+ 
 using UnityEngine;
 
 namespace Runtime.Managers
@@ -10,9 +10,9 @@ namespace Runtime.Managers
 
         #region Private Variables
 
-        private int _money;
+         private int _money;
          private int _stackValueMultiplier;
-        private int _scoreCache = 0;
+          private int _scoreCache = 0;
          private int _atmScoreValue = 0;
 
         #endregion
@@ -52,12 +52,13 @@ namespace Runtime.Managers
         {
             _scoreCache = (setScore * _stackValueMultiplier) + _atmScoreValue;
             PlayerSignals.Instance.onSetTotalScore?.Invoke(_scoreCache);
+            
         }
 
         private void OnSetAtmScore(int atmValues)
         {
             _atmScoreValue += atmValues * _stackValueMultiplier;
-            
+            //AtmSignals.Instance.onSetAtmScoreText?.Invoke(_atmScoreValue);
         }
 
         private void OnSetValueMultiplier()

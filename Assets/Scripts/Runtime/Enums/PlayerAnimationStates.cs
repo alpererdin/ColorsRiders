@@ -5,5 +5,6 @@ namespace Runtime.Enums
         Idle,
         Run,
         Happy,
+        Crouch,
     }
 }

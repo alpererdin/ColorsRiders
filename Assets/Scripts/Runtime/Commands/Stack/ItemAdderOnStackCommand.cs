@@ -36,5 +36,6 @@ namespace Runtime.Commands.Stack
                 _collectableStack.Add(collectableGameObject);
             }
         }
+     
     }
 }

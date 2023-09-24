@@ -66,10 +66,10 @@ namespace Runtime.Managers
             meshController.onChangemat(mat);
         }
       
-        internal void CollectableUpgrade(int value)
+        public void CollectableUpgrade(int value)
         {
             if (_currentValue < 2) _currentValue++;
-         //   meshController.UpgradeCollectableVisual(_currentValue);
+            meshController.UpgradeCollectableVisual(_currentValue);
             StackSignals.Instance.onUpdateType?.Invoke();
         }
 
@@ -89,7 +89,14 @@ namespace Runtime.Managers
             
             CollectableSignals.Instance.onChangeCollectableAnimationState?.Invoke(CollectableAnimationStates.Run, collectableGameObject);
      
+        } 
+        public void InteractionWithStage(GameObject collectableGameObject)
+        {
+            
+            CollectableSignals.Instance.onChangeCollectableAnimationState?.Invoke(CollectableAnimationStates.Crouch, collectableGameObject);
+     
         }
+         
 
         public void InteractionWithAtm(GameObject collectableGameObject)
         {
@@ -108,7 +115,7 @@ namespace Runtime.Managers
         public void InteractionWithGate(GameObject collectedGO)
         {
             SkinnedMeshRenderer thisGO = collectedGO.GetComponentInChildren<SkinnedMeshRenderer>();
-           // CollectableSignals.Instance.onChangeCollectedMaterial?.Invoke(thisGO);
+   
         }
       
  

@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using Runtime.Commands.Stack;
 using Runtime.Controllers.Player;
 using Runtime.Data.UnityObject;
 using Runtime.Data.ValueObject;
@@ -13,6 +15,7 @@ namespace Runtime.Managers
     public class PlayerManager : MonoBehaviour
     {
         #region Self Variables
+        public  Material _material;
 
         public MaterialColorTypes currentColor;
         #region Serialized Variables
@@ -21,6 +24,7 @@ namespace Runtime.Managers
         [SerializeField] private PlayerAnimationController animationController;
         [SerializeField] private PlayerPhysicsController physicsController;
         [SerializeField] private PlayerMeshController meshController;
+
         
         #endregion
 
@@ -28,7 +32,11 @@ namespace Runtime.Managers
 
         private PlayerData _data;
         private const string PlayerDataPath = "Data/CD_Player";
+        private ColorData _colorData;
 
+        private int _score=1;
+        private byte _currentValue = 0;
+     
         #endregion
 
         #endregion
@@ -37,7 +45,20 @@ namespace Runtime.Managers
         {
             _data = GetPlayerData();
             SendPlayerDataToControllers();
+            GetPlayerColorData();
+            Init();
         }
+
+    
+        public void Init()
+        {
+             
+            
+            _material.color = _colorData.Color;
+            
+        }
+
+        private void GetPlayerColorData() => _colorData = Resources.Load<CD_Color>("Data/CD_Color").Colors[(int)currentColor];
 
         private PlayerData GetPlayerData() => Resources.Load<CD_Player>(PlayerDataPath).Data;
 
@@ -45,7 +66,10 @@ namespace Runtime.Managers
         {
             movementController.SetMovementData(_data.MovementData);
         }
-
+     
+        
+       
+         
         private void OnEnable()
         {
             SubscribeEvents();
@@ -88,7 +112,10 @@ namespace Runtime.Managers
 
         private void OnSetTotalScore(int value)
         {
-            meshController.SetTotalScore(value);
+            
+            _score += value;
+            meshController.SetTotalScore(_score);
+        
         }
 
        

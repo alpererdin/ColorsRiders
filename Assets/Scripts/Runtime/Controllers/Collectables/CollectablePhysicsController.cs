@@ -1,3 +1,4 @@
+using System;
 using Runtime.Managers;
 using Runtime.Signals;
 using Unity.VisualScripting;
@@ -31,6 +32,17 @@ namespace Runtime.Controllers.Collectables
 
         #endregion
 
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("StageArea"))
+            {
+                manager.InteractionWithPlayer(animator);
+                //StackSignals.Instance.onRemoveStackObject(transform.parent.gameObject);
+                //StackSignals.Instance.onUpdateStack?.Invoke();
+                
+            }
+        }
+
         private void OnTriggerEnter(Collider other)
         {
              
@@ -39,17 +51,21 @@ namespace Runtime.Controllers.Collectables
                 other.tag = _collected;
                 manager.InteractionWithCollectable(other.transform.parent.gameObject);
             }*/
-
+           if (other.CompareTag("StageArea"))
+           {
+               manager.InteractionWithStage(animator);
+           }
             if (other.CompareTag(_gate) && CompareTag(_collected))
             {
                 //manager.CollectableUpgrade(manager.GetCurrentValue());
                 manager.InteractionWithGate(transform.parent.gameObject);
-                
+        
             }
 
             if (other.CompareTag(_atm) && CompareTag(_collected))
             {
                 manager.InteractionWithAtm(transform.parent.gameObject);
+                
             }
 
             if (other.CompareTag(_obstacle) && CompareTag(_collected))

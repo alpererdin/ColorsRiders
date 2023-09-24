@@ -9,6 +9,7 @@ namespace Runtime.Commands.Stack
         private StackManager _stackManager;
         private List<GameObject> _collectableStack;
         private Transform _levelHolder;
+         
 
         public ItemRemoverOnStackCommand(StackManager stackManager, ref List<GameObject> collectableStack)
         {
@@ -19,13 +20,16 @@ namespace Runtime.Commands.Stack
 
         public void Execute(GameObject collectableGameObject)
         {
-            int index = _collectableStack.IndexOf(collectableGameObject);
+           // int index = _collectableStack.IndexOf(collectableGameObject);
             int last = _collectableStack.Count - 1;
-            collectableGameObject.transform.SetParent(_levelHolder.transform.GetChild(0));
-            collectableGameObject.SetActive(false);
-            _stackManager.StackJumperCommand.Execute(last, index);
-            _collectableStack.RemoveAt(index);
+          //  collectableGameObject.transform.SetParent(_levelHolder.transform.GetChild(0));
+            
+           // _stackManager.StackJumperCommand.Execute(last, index);
+            _collectableStack.RemoveAt(last);
             _collectableStack.TrimExcess();
+            GameObject a = collectableGameObject.transform.GetChild(last).gameObject;
+            Object.Destroy(a);
+            
             _stackManager.StackTypeUpdaterCommand.Execute();
         }
     }
