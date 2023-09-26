@@ -23,12 +23,12 @@ namespace Runtime.Commands.Stack
         {
             for (int i = last; i > index; i--)
             {
-                // Elemanları ilerlet
+               
                 Vector3 newPosition = _collectableStack[i].transform.position;
-                newPosition.z += _data.CollectableOffsetInStack; // Yeni elemanın z pozisyonunu ayarlayın
+                newPosition.z += _data.CollectableOffsetInStack; 
                 _collectableStack[i].transform.DOMove(newPosition, 0.5f);
 
-                // Elemanları yeniden sırala
+                
                 SwapItems(i, i - 1);
             }
             

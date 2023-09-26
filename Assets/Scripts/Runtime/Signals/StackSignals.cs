@@ -14,5 +14,7 @@ namespace Runtime.Signals
         public UnityAction onInteractionConveyor = delegate { };
         public UnityAction onUpdateStack=delegate {  };
         public UnityAction<GameObject> onRemoveStackObject= delegate {  };
+        
+        public UnityAction<Vector2> onMinigameState=delegate {  };
     }
 }

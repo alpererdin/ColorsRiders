@@ -91,8 +91,19 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onReset += OnReset;
             StackSignals.Instance.onUpdateStack += OnUpdateStack;
             StackSignals.Instance.onRemoveStackObject += _itemRemoverOnStackCommand.Execute;
+
+            StackSignals.Instance.onMinigameState += onStackMinigameMove;
         }
 
+        private void onStackMinigameMove(Vector2 direction)
+        {
+            
+            transform.position = new Vector3(0, gameObject.transform.position.y, direction.y - 2f);
+            if (gameObject.transform.childCount > 0)
+            {
+                _stackMoverCommand.Execute(direction.x, _collectableStack);
+            }
+        }
         private void OnUpdateStack()
         {
             _stackInitializerCommand.Execute();
@@ -116,7 +127,7 @@ namespace Runtime.Managers
                 stackOffset += _data.CollectableOffsetInStack;
             }
         }
-
+        
        
         private void OnInteractionWithATM(GameObject collectableGameObject)
         {
@@ -145,7 +156,7 @@ namespace Runtime.Managers
             _stackInitializerCommand.Execute();
         }
 
-
+        
         private void UnSubscribeEvents()
         {
             StackSignals.Instance.onInteractionCollectable -= OnInteractionWithCollectable;

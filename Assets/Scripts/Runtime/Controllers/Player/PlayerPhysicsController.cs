@@ -31,6 +31,7 @@ namespace Runtime.Controllers.Player
         private readonly string _conveyor = "Conveyor";
         private readonly string _stageArea = "StageArea";
         private readonly string _gate = "Gate";
+        private readonly string _drone = "DroneArea";
         #endregion
 
         #endregion
@@ -62,6 +63,11 @@ namespace Runtime.Controllers.Player
 
        private void OnTriggerEnter(Collider other)
         {
+            if (other.CompareTag(_drone))
+            {
+                CoreGameSignals.Instance.onMiniGameEntered?.Invoke();
+                
+            }
           /*  if (other.CompareTag(_stageArea))
             {
              

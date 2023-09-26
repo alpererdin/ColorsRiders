@@ -114,6 +114,13 @@ namespace Runtime.Controllers.Player
             rigidbody.angularVelocity = Vector3.zero;
         }
 
+        public void StopHorizontal()
+        {
+            _data.ForwardSpeed = 0;
+            
+        }
+
+      
         private void Stop()
         {
             rigidbody.velocity = Vector3.zero;

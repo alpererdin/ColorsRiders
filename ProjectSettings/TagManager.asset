@@ -12,6 +12,7 @@ TagManager:
   - Collected
   - StageArea
   - GunBullet
+  - DroneArea
   layers:
   - Default
   - TransparentFX

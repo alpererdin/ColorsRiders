@@ -77,7 +77,16 @@ namespace Runtime.Managers
             _data.MovementData.ForwardSpeed = _data.MovementData.ForwardSpeed * 2f;
             SendPlayerDataToControllers();
         }
-        
+        public void PlayerDroneStageArea()
+        {
+            _data.MovementData.ForwardSpeed = 0f;
+            SendPlayerDataToControllers();
+        } 
+        public void PlayerExitDroneStageArea()
+        {
+            _data.MovementData.ForwardSpeed = 14f;
+            SendPlayerDataToControllers();
+        }
        
          
         private void OnEnable()
@@ -116,7 +125,7 @@ namespace Runtime.Managers
 
         private void OnMiniGameEntered()
         {
-            PlayerSignals.Instance.onPlayConditionChanged?.Invoke(false);
+            //PlayerSignals.Instance.onPlayConditionChanged?.Invoke(false);
             StartCoroutine(WaitForFinal());
         }
 
@@ -192,10 +201,17 @@ namespace Runtime.Managers
         
         private IEnumerator WaitForFinal()
         {
-            PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Idle);
-            yield return new WaitForSeconds(2f);
+            PlayerSpeedStageArea();
             gameObject.SetActive(false);
-            CoreGameSignals.Instance.onMiniGameStart?.Invoke();
+            yield return new WaitForSeconds(3f);
+            PlayerDroneStageArea();
+            
+            PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Crouch);
+            yield return new WaitForSeconds(3f);
+            PlayerExitDroneStageArea();
+            Debug.Log("3sn bekledik");
+          
+            // CoreGameSignals.Instance.onMiniGameStart?.Invoke();
         }
     }
 }

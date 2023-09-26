@@ -14,6 +14,7 @@ namespace Runtime.Controllers.Collectables
 
         [SerializeField] private CollectableManager manager;
         [SerializeField] private GameObject animator;
+        [SerializeField] private CapsuleCollider testCollider;
 
         #endregion
 
@@ -27,6 +28,7 @@ namespace Runtime.Controllers.Collectables
         private readonly string _obstacle = "Obstacle";
         private readonly string _conveyor = "Conveyor";
         private readonly string _gunBullet = "GunBullet";
+        private readonly string _drone = "DroneArea";
         
 
         #endregion
@@ -35,10 +37,12 @@ namespace Runtime.Controllers.Collectables
 
         private void OnTriggerExit(Collider other)
         {
+            
             if (other.CompareTag("StageArea"))
             {
                 manager.InteractionWithPlayer(animator);
-        
+                
+                testCollider.enabled = true;
                 
             }
         }
@@ -50,14 +54,18 @@ namespace Runtime.Controllers.Collectables
                 
                 if (manager.currentColorType==other.GetComponentInParent<GateManager>().currentColorType)
                 {
-                    Debug.Log("doğru yerde",gameObject);
+                   
+                    testCollider.isTrigger = false;
+                    
                     
                 }
                 else
                 {
-                    Debug.Log("yanlıs yerde",gameObject);
+                    testCollider.enabled = true;
+                
                     
                     manager.InteractionWithTurret(gameObject);
+                   
                 }
                 
             }
@@ -65,6 +73,10 @@ namespace Runtime.Controllers.Collectables
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other.CompareTag(_drone))
+            {
+                
+            }
              
            /* if (other.CompareTag(_collectable) && CompareTag(_collected))
             {
@@ -82,7 +94,8 @@ namespace Runtime.Controllers.Collectables
             {
                 //manager.CollectableUpgrade(manager.GetCurrentValue());
                 manager.InteractionWithGate(transform.parent.gameObject);
-          
+                manager.currentColorType=other.GetComponent<GateManager>().currentColorType;
+
             }
 
             if (other.CompareTag(_atm) && CompareTag(_collected))

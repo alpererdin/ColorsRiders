@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 3783389435460376085}
   animator: {fileID: 5627387058280208923}
+  testCollider: {fileID: 9203018490854240882}
 --- !u!136 &9203018490854240882
 CapsuleCollider:
   m_ObjectHideFlags: 0
