@@ -40,23 +40,23 @@ namespace Runtime.Controllers.Player
             _stackHolder= GameObject.Find("StackManager").transform;
         }
 
-       /* private void OnTriggerStay(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if (other.CompareTag(_stageArea))
             {
-                if (manager.currentColor == other.GetComponentInParent<CollectableManager>().currentColorType)
-                {
-                    
-                }
+                PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Crouch);
+               
             }
             
-        }*/
+        }
        private void OnTriggerExit(Collider other)
        {
            if (other.CompareTag(_stageArea))
            {
+               CoreGameSignals.Instance.onExitTurretArea?.Invoke();
                PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Run);
-              // manager.SetStackPosition();
+               manager.PlayerSpeedExitStageArea();
+               // manager.SetStackPosition();
            }
        }
 
@@ -88,7 +88,9 @@ namespace Runtime.Controllers.Player
             }*/
           if (other.CompareTag(_stageArea))
           {
+              //CoreGameSignals.Instance.onEnterTurretArea?.Invoke();
               PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Crouch);
+              manager.PlayerSpeedStageArea();
           }
 
           if (other.CompareTag(_gate))

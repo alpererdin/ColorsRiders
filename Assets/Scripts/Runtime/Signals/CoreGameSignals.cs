@@ -23,6 +23,8 @@ namespace Runtime.Signals
         public UnityAction<GameObject> onAtmTouched = delegate { };
         public UnityAction onMiniGameStart = delegate { };
 
+        public UnityAction<GameObject> onEnterTurretArea=delegate {  };
+        public UnityAction onExitTurretArea=delegate {  };
         
 
         public Func<byte> onGetIncomeLevel = delegate { return 0; };

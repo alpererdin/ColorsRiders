@@ -66,7 +66,17 @@ namespace Runtime.Managers
         {
             movementController.SetMovementData(_data.MovementData);
         }
-     
+
+        public void PlayerSpeedStageArea()
+        {
+            _data.MovementData.ForwardSpeed = _data.MovementData.ForwardSpeed / 2f;
+            SendPlayerDataToControllers();
+        }
+        public void PlayerSpeedExitStageArea()
+        {
+            _data.MovementData.ForwardSpeed = _data.MovementData.ForwardSpeed * 2f;
+            SendPlayerDataToControllers();
+        }
         
        
          

@@ -117,6 +117,11 @@ namespace Runtime.Managers
             SkinnedMeshRenderer thisGO = collectedGO.GetComponentInChildren<SkinnedMeshRenderer>();
    
         }
+
+        public void InteractionWithTurret(GameObject GO)
+        {
+            CoreGameSignals.Instance.onEnterTurretArea?.Invoke(GO);
+        }
       
  
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using Runtime.Commands.Stack;
@@ -41,7 +42,7 @@ namespace Runtime.Managers
         private StackAnimatorCommand _stackAnimatorCommand;
         private StackInteractionWithConveyorCommand _stackInteractionWithConveyorCommand;
         private StackInitializerCommand _stackInitializerCommand;
-
+        private StackRemoverOnStackCommand _stackRemoverCommand;
         private readonly string _stackDataPath = "Data/CD_Stack";
 
         #endregion
@@ -64,6 +65,7 @@ namespace Runtime.Managers
             _stackInteractionWithConveyorCommand = new StackInteractionWithConveyorCommand(this, ref _collectableStack);
             StackTypeUpdaterCommand = new StackTypeUpdaterCommand(ref _collectableStack);
             _stackInitializerCommand = new StackInitializerCommand(this, ref money);
+            _stackRemoverCommand = new StackRemoverOnStackCommand(this, ref _collectableStack);
         }
 
         private StackData GetStackData()
@@ -79,7 +81,7 @@ namespace Runtime.Managers
         private void SubscribeEvents()
         {
             StackSignals.Instance.onInteractionCollectable += OnInteractionWithCollectable;
-            StackSignals.Instance.onInteractionObstacle += _itemRemoverOnStackCommand.Execute;
+            StackSignals.Instance.onInteractionObstacle += _stackRemoverCommand.Execute;
             StackSignals.Instance.onInteractionATM += OnInteractionWithATM;
             StackSignals.Instance.onInteractionConveyor +=
                 _stackInteractionWithConveyorCommand.Execute;
@@ -104,7 +106,18 @@ namespace Runtime.Managers
                 _stackMoverCommand.Execute(direction.x, _collectableStack);
             }
         }
+        public void UpdateStack()
+        {
+            float stackOffset = 0f;
+            for (int i = 0; i < _collectableStack.Count; i++)
+            {
+                Vector3 newPos = new Vector3(0f, 1f, -0.335f + stackOffset);
+                _collectableStack[i].transform.localPosition = newPos;
+                stackOffset += _data.CollectableOffsetInStack;
+            }
+        }
 
+       
         private void OnInteractionWithATM(GameObject collectableGameObject)
         {
             //ScoreSignals.Instance.onSetAtmScore?.Invoke((int)collectableGameObject.GetComponent<CollectableManager>()

@@ -90,6 +90,7 @@ namespace Runtime.Controllers.Player
             else
                 Stop();
         }
+        
 
         private void Move()
         {

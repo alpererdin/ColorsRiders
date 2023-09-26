@@ -11,6 +11,7 @@ TagManager:
   - Gate
   - Collected
   - StageArea
+  - GunBullet
   layers:
   - Default
   - TransparentFX

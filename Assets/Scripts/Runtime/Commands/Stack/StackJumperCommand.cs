@@ -23,20 +23,22 @@ namespace Runtime.Commands.Stack
         {
             for (int i = last; i > index; i--)
             {
-                _collectableStack[i].transform.GetChild(1).tag = "Collectable";
-                _collectableStack[i].transform.SetParent(_levelHolder.transform.GetChild(0));
-                _collectableStack[i].transform.DOJump(
-                    new Vector3(
-                        Random.Range(-_data.JumpItemsClampX, _data.JumpItemsClampX + 1),
-                        1f,
-                        _collectableStack[i].transform.position.z + Random.Range(10, 15)),
-                    _data.JumpForce,
-                    Random.Range(1, 3), 0.5f
-                );
-                _collectableStack[i].transform.DOScale(Vector3.one, 0);
-                _collectableStack.RemoveAt(i);
-                _collectableStack.TrimExcess();
+                // Elemanları ilerlet
+                Vector3 newPosition = _collectableStack[i].transform.position;
+                newPosition.z += _data.CollectableOffsetInStack; // Yeni elemanın z pozisyonunu ayarlayın
+                _collectableStack[i].transform.DOMove(newPosition, 0.5f);
+
+                // Elemanları yeniden sırala
+                SwapItems(i, i - 1);
             }
+            
+            
+        }
+        private void SwapItems(int indexA, int indexB)
+        {
+            GameObject temp = _collectableStack[indexA];
+            _collectableStack[indexA] = _collectableStack[indexB];
+            _collectableStack[indexB] = temp;
         }
     }
 }
