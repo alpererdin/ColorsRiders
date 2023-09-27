@@ -21,6 +21,8 @@ namespace Runtime.Managers
         public StackTypeUpdaterCommand StackTypeUpdaterCommand { get; private set; }
 
         public ItemAdderOnStackCommand AdderOnStackCommand { get; private set; }
+        
+      
 
         public bool LastCheck { get; set; }
 
@@ -43,6 +45,7 @@ namespace Runtime.Managers
         private StackInteractionWithConveyorCommand _stackInteractionWithConveyorCommand;
         private StackInitializerCommand _stackInitializerCommand;
         private StackRemoverOnStackCommand _stackRemoverCommand;
+ 
         private readonly string _stackDataPath = "Data/CD_Stack";
 
         #endregion
@@ -66,6 +69,7 @@ namespace Runtime.Managers
             StackTypeUpdaterCommand = new StackTypeUpdaterCommand(ref _collectableStack);
             _stackInitializerCommand = new StackInitializerCommand(this, ref money);
             _stackRemoverCommand = new StackRemoverOnStackCommand(this, ref _collectableStack);
+             
         }
 
         private StackData GetStackData()
@@ -86,24 +90,18 @@ namespace Runtime.Managers
             StackSignals.Instance.onInteractionConveyor +=
                 _stackInteractionWithConveyorCommand.Execute;
             StackSignals.Instance.onStackFollowPlayer += OnStackMove;
+            
             StackSignals.Instance.onUpdateType += StackTypeUpdaterCommand.Execute;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
             StackSignals.Instance.onUpdateStack += OnUpdateStack;
             StackSignals.Instance.onRemoveStackObject += _itemRemoverOnStackCommand.Execute;
 
-            StackSignals.Instance.onMinigameState += onStackMinigameMove;
+           // StackSignals.Instance.onMinigameState +=;
+   
         }
 
-        private void onStackMinigameMove(Vector2 direction)
-        {
-            
-            transform.position = new Vector3(0, gameObject.transform.position.y, direction.y - 2f);
-            if (gameObject.transform.childCount > 0)
-            {
-                _stackMoverCommand.Execute(direction.x, _collectableStack);
-            }
-        }
+       
         private void OnUpdateStack()
         {
             _stackInitializerCommand.Execute();
@@ -117,6 +115,7 @@ namespace Runtime.Managers
                 _stackMoverCommand.Execute(direction.x, _collectableStack);
             }
         }
+        //+
         public void UpdateStack()
         {
             float stackOffset = 0f;
@@ -160,7 +159,7 @@ namespace Runtime.Managers
         private void UnSubscribeEvents()
         {
             StackSignals.Instance.onInteractionCollectable -= OnInteractionWithCollectable;
-            StackSignals.Instance.onInteractionObstacle -= _itemRemoverOnStackCommand.Execute;
+            StackSignals.Instance.onInteractionObstacle -= _stackRemoverCommand.Execute;
             StackSignals.Instance.onInteractionATM -= OnInteractionWithATM;
             StackSignals.Instance.onInteractionConveyor -=
                 _stackInteractionWithConveyorCommand.Execute;
@@ -168,6 +167,7 @@ namespace Runtime.Managers
             StackSignals.Instance.onUpdateType -= StackTypeUpdaterCommand.Execute;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
+ 
         }
 
         private void OnDisable()

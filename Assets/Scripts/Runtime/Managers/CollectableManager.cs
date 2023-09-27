@@ -122,6 +122,10 @@ namespace Runtime.Managers
         {
             CoreGameSignals.Instance.onEnterTurretArea?.Invoke(GO);
         }
+        
+       
+
+    
       
  
     }

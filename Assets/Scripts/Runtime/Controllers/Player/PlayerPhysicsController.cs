@@ -65,7 +65,7 @@ namespace Runtime.Controllers.Player
         {
             if (other.CompareTag(_drone))
             {
-                CoreGameSignals.Instance.onMiniGameEntered?.Invoke();
+                //CoreGameSignals.Instance.onMiniGameEntered?.Invoke();
                 
             }
           /*  if (other.CompareTag(_stageArea))

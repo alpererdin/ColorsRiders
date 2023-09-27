@@ -201,16 +201,18 @@ namespace Runtime.Managers
         
         private IEnumerator WaitForFinal()
         {
-            PlayerSpeedStageArea();
-            gameObject.SetActive(false);
-            yield return new WaitForSeconds(3f);
-            PlayerDroneStageArea();
+           // PlayerSpeedStageArea();
+          //  gameObject.SetActive(false);
+             gameObject.transform.GetChild(0).gameObject.SetActive(false);
             
-            PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Crouch);
+            //PlayerDroneStageArea();
+            
+           // PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Crouch);
             yield return new WaitForSeconds(3f);
-            PlayerExitDroneStageArea();
+           // PlayerExitDroneStageArea();
             Debug.Log("3sn bekledik");
-          
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Run);
             // CoreGameSignals.Instance.onMiniGameStart?.Invoke();
         }
     }

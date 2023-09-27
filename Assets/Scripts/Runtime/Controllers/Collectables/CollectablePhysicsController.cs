@@ -19,7 +19,7 @@ namespace Runtime.Controllers.Collectables
         #endregion
 
         #region Private Variables
-
+        private Transform _stackHolder;
         
         private readonly string _collectable = "Collectable";
         private readonly string _collected = "Collected";
@@ -34,7 +34,10 @@ namespace Runtime.Controllers.Collectables
         #endregion
 
         #endregion
-
+        private void Awake()
+        {
+            _stackHolder= GameObject.Find("StackManager").transform;
+        }
         private void OnTriggerExit(Collider other)
         {
             
@@ -75,7 +78,10 @@ namespace Runtime.Controllers.Collectables
         {
             if (other.CompareTag(_drone))
             {
+               // manager.InteractionWithDroneArea(transform.parent.gameObject);
                 
+
+ 
             }
              
            /* if (other.CompareTag(_collectable) && CompareTag(_collected))

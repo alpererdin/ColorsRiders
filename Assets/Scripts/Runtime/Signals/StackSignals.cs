@@ -10,11 +10,15 @@ namespace Runtime.Signals
         public UnityAction<GameObject> onInteractionObstacle = delegate { };
         public UnityAction<GameObject> onInteractionCollectable = delegate { };
         public UnityAction<Vector2> onStackFollowPlayer = delegate { };
+        
         public UnityAction onUpdateType = delegate { };
         public UnityAction onInteractionConveyor = delegate { };
         public UnityAction onUpdateStack=delegate {  };
         public UnityAction<GameObject> onRemoveStackObject= delegate {  };
         
-        public UnityAction<Vector2> onMinigameState=delegate {  };
+        public UnityAction<GameObject> onMinigameState=delegate {  };
+        
+    
+        
     }
 }

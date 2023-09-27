@@ -20,8 +20,11 @@ namespace Runtime.Commands.Stack
 
         public void Execute(GameObject collectableGameObject)
         {
-           
+            // int index = _collectableStack.IndexOf(collectableGameObject);
             int last = _collectableStack.Count - 1;
+            //  collectableGameObject.transform.SetParent(_levelHolder.transform.GetChild(0));
+            
+            // _stackManager.StackJumperCommand.Execute(last, index);
             _collectableStack.RemoveAt(last);
             _collectableStack.TrimExcess();
             GameObject a = collectableGameObject.transform.GetChild(last).gameObject;
