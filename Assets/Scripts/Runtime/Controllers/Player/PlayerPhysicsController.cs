@@ -58,6 +58,7 @@ namespace Runtime.Controllers.Player
                PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Run);
                manager.PlayerSpeedExitStageArea();
                // manager.SetStackPosition();
+               
            }
        }
 
@@ -65,7 +66,21 @@ namespace Runtime.Controllers.Player
         {
             if (other.CompareTag(_drone))
             {
-                //CoreGameSignals.Instance.onMiniGameEntered?.Invoke();
+                CoreGameSignals.Instance.onMiniGameEntered?.Invoke();
+                
+                DOVirtual.DelayedCall(.5f,
+                    () =>manager.PlayerSpeedStageArea());
+                DOVirtual.DelayedCall(2f,
+                    () =>manager.PlayerDroneStageArea());
+             
+                
+                DOVirtual.DelayedCall(.5f,
+                    () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.DroneArea));
+                DOVirtual.DelayedCall(4.5f,
+                    () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow));
+                //PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Run);
+            
+                return;
                 
             }
           /*  if (other.CompareTag(_stageArea))

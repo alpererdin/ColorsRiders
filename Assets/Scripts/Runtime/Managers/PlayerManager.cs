@@ -108,6 +108,7 @@ namespace Runtime.Managers
 
             PlayerSignals.Instance.onSetTotalScore += OnSetTotalScore;
             CoreGameSignals.Instance.onMiniGameEntered += OnMiniGameEntered;
+          
             PlayerSignals.Instance.OnGatePassed += OnChangePlayerColor;
         }
 
@@ -197,7 +198,8 @@ namespace Runtime.Managers
             var position = transform.position;
             Vector2 pos = new Vector2(position.x, position.z);
             StackSignals.Instance.onStackFollowPlayer?.Invoke(pos);
-        }
+        } 
+       
         
         private IEnumerator WaitForFinal()
         {
@@ -208,9 +210,10 @@ namespace Runtime.Managers
             //PlayerDroneStageArea();
             
            // PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Crouch);
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(5f);
            // PlayerExitDroneStageArea();
-            Debug.Log("3sn bekledik");
+            Debug.Log("5sn bekledik");
+            gameObject.transform.position += new Vector3(0, 0, 10f);
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
             PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Run);
             // CoreGameSignals.Instance.onMiniGameStart?.Invoke();

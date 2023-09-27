@@ -121,7 +121,8 @@ namespace Runtime.Managers
         public void InteractionWithTurret(GameObject GO)
         {
             CoreGameSignals.Instance.onEnterTurretArea?.Invoke(GO);
-        }
+        } 
+     
         
        
 

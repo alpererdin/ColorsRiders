@@ -32,7 +32,7 @@ namespace Runtime.Commands.Stack
                 collectableStack[i].transform.localPosition = new Vector3(direct, pos.y, pos.z);
             }
         }
-      
+        
 
         
     }

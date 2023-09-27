@@ -18,7 +18,10 @@ namespace Runtime.Signals
         
         public UnityAction<GameObject> onMinigameState=delegate {  };
         
-    
         
+        public UnityAction onStackUnFollowPlayer = delegate { };
+        
+    
+        public UnityAction<GameObject> onFirstInFirstOutSignal=delegate {  };
     }
 }

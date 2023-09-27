@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using Runtime.Managers;
 using Runtime.Signals;
 using Unity.VisualScripting;
@@ -78,10 +79,22 @@ namespace Runtime.Controllers.Collectables
         {
             if (other.CompareTag(_drone))
             {
-               // manager.InteractionWithDroneArea(transform.parent.gameObject);
-                
+                DOVirtual.DelayedCall(.2f,
+                    () => StackSignals.Instance.onFirstInFirstOutSignal?.Invoke(transform.parent.gameObject));
 
- 
+                transform.parent.gameObject.transform.DOMove(new Vector3(transform.position.x, transform.position.y,
+                    other.transform.position.z), 2).OnComplete(() =>
+                {
+                    if (manager.currentColorType == other.GetComponent<GateManager>().currentColorType)
+                    {
+                        Debug.Log("dogru",gameObject);
+                        
+                    }
+                   
+
+                });
+                // 
+
             }
              
            /* if (other.CompareTag(_collectable) && CompareTag(_collected))

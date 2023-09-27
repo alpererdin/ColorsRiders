@@ -45,6 +45,7 @@ namespace Runtime.Managers
         private StackInteractionWithConveyorCommand _stackInteractionWithConveyorCommand;
         private StackInitializerCommand _stackInitializerCommand;
         private StackRemoverOnStackCommand _stackRemoverCommand;
+        private FirstInFirstOutInStackCommand _test;
  
         private readonly string _stackDataPath = "Data/CD_Stack";
 
@@ -69,7 +70,8 @@ namespace Runtime.Managers
             StackTypeUpdaterCommand = new StackTypeUpdaterCommand(ref _collectableStack);
             _stackInitializerCommand = new StackInitializerCommand(this, ref money);
             _stackRemoverCommand = new StackRemoverOnStackCommand(this, ref _collectableStack);
-             
+            _test = new FirstInFirstOutInStackCommand(this, ref _collectableStack);
+
         }
 
         private StackData GetStackData()
@@ -97,8 +99,10 @@ namespace Runtime.Managers
             StackSignals.Instance.onUpdateStack += OnUpdateStack;
             StackSignals.Instance.onRemoveStackObject += _itemRemoverOnStackCommand.Execute;
 
-           // StackSignals.Instance.onMinigameState +=;
-   
+            StackSignals.Instance.onFirstInFirstOutSignal += _test.Execute;
+            // StackSignals.Instance.onMinigameState +=;
+
+
         }
 
        
@@ -115,6 +119,7 @@ namespace Runtime.Managers
                 _stackMoverCommand.Execute(direction.x, _collectableStack);
             }
         }
+        
         //+
         public void UpdateStack()
         {

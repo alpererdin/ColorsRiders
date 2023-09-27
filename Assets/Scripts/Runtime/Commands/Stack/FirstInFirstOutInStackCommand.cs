@@ -23,7 +23,7 @@ namespace Runtime.Commands.Stack
         {
             // int index = _collectableStack.IndexOf(collectableGameObject);
             int last = 0;
-            // collectableGameObject.transform.SetParent(_levelHolder.transform.GetChild(0));
+             collectableGameObject.transform.SetParent(_levelHolder.transform.GetChild(0));
             
             // _stackManager.StackJumperCommand.Execute(last, index);
             _collectableStack.RemoveAt(last);
