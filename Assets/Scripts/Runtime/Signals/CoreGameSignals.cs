@@ -29,5 +29,8 @@ namespace Runtime.Signals
 
         public Func<byte> onGetIncomeLevel = delegate { return 0; };
         public Func<byte> onGetStackLevel = delegate { return 0; };
+        
+        public UnityAction onEnterDroneArea=delegate {  };
+        public UnityAction onExitDroneArea=delegate {  };
     }
 }

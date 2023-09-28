@@ -68,19 +68,19 @@ namespace Runtime.Controllers.Player
             {
                 CoreGameSignals.Instance.onMiniGameEntered?.Invoke();
                 
-                DOVirtual.DelayedCall(.5f,
+              /*   DOVirtual.DelayedCall(.5f,
                     () =>manager.PlayerSpeedStageArea());
-                DOVirtual.DelayedCall(2f,
-                    () =>manager.PlayerDroneStageArea());
+               DOVirtual.DelayedCall(2f,
+                    () =>manager.PlayerDroneStageArea());*/
              
                 
-                DOVirtual.DelayedCall(.5f,
+                /*DOVirtual.DelayedCall(.5f,
                     () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.DroneArea));
                 DOVirtual.DelayedCall(4.5f,
-                    () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow));
+                    () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow));*/
                 //PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Run);
             
-                return;
+               // return;
                 
             }
           /*  if (other.CompareTag(_stageArea))

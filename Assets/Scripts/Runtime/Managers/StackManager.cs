@@ -109,18 +109,29 @@ namespace Runtime.Managers
 
             StackSignals.Instance.onFirstInFirstOutSignal += _test.Execute;
             // StackSignals.Instance.onMinigameState +=;
-            StackSignals.Instance.onStackEnterDroneArea += _stackEnterDroneAreaCommand.OnStackEnterDroneArea;
+            //StackSignals.Instance.onStackEnterDroneArea += _stackEnterDroneAreaCommand.OnStackEnterDroneArea;
 
             StackSignals.Instance.onLastCollectableEnterDroneArea += OnlastCollectale;
+            
+            
+            CoreGameSignals.Instance.onEnterDroneArea += DroneArea;
 
+        }
+
+        private void DroneArea()
+        {
+            throw new NotImplementedException();
         }
 
         private void OnlastCollectale()
         {
-            Debug.Log("sonuncu da gecti");
+            Debug.Log("son obje gecti  coregamesignals uyandı");
+            CoreGameSignals.Instance.onExitDroneArea?.Invoke();
+
         }
 
 
+        
         private void OnUpdateStack()
         {
             _stackInitializerCommand.Execute();

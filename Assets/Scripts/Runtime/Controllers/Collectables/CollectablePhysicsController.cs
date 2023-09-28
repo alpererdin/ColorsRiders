@@ -79,7 +79,7 @@ namespace Runtime.Controllers.Collectables
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(_droneGate)&&(manager.currentColorType==other.gameObject.GetComponent<GateManager>().currentColorType))
+            if (other.CompareTag(_droneGate)&&(manager.currentColorType==other.gameObject.GetComponent<DroneAreaManager>().currentColorType))
             {
                 Debug.Log("bu obje dogrudur");
                // transform.parent.gameObject.transform.SetParent(_stackHolder );
@@ -89,11 +89,11 @@ namespace Runtime.Controllers.Collectables
             }
             if (other.CompareTag(_drone))
             {
-                DOVirtual.DelayedCall(.2f,
-                    () => StackSignals.Instance.onFirstInFirstOutSignal?.Invoke(transform.parent.gameObject));
+                DOVirtual.DelayedCall(.3f,
+                    () => StackSignals.Instance.onFirstInFirstOutSignal?.Invoke());
 
-                transform.parent.gameObject.transform.DOMove(new Vector3(transform.position.x, transform.position.y,
-                    other.transform.position.z), 2);
+             /*   transform.parent.gameObject.transform.DOMove(new Vector3(transform.position.x, transform.position.y,
+                    other.transform.position.z), 2);*/
                 // 
 
             }

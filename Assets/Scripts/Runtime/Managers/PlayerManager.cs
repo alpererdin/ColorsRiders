@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Runtime.Commands.Stack;
 using Runtime.Controllers.Player;
 using Runtime.Data.UnityObject;
@@ -62,6 +63,8 @@ namespace Runtime.Managers
 
         private PlayerData GetPlayerData() => Resources.Load<CD_Player>(PlayerDataPath).Data;
 
+        #region MyRegion
+
         private void SendPlayerDataToControllers()
         {
             movementController.SetMovementData(_data.MovementData);
@@ -87,6 +90,9 @@ namespace Runtime.Managers
             _data.MovementData.ForwardSpeed = 14f;
             SendPlayerDataToControllers();
         }
+
+        #endregion
+     
        
          
         private void OnEnable()
@@ -110,6 +116,25 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onMiniGameEntered += OnMiniGameEntered;
           
             PlayerSignals.Instance.OnGatePassed += OnChangePlayerColor;
+
+            CoreGameSignals.Instance.onEnterDroneArea += OnEnterDroneArea;
+            CoreGameSignals.Instance.onExitDroneArea += OnExitDroneArea;
+
+        }
+
+        private void OnExitDroneArea()
+        {
+            Debug.Log("player manager exitttt drone area foonk");
+            PlayerExitDroneStageArea();
+            DOVirtual.DelayedCall(.5f,
+                () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow));
+        }
+
+        private void OnEnterDroneArea()
+        {
+            Debug.Log("player manager enter drone area foonk");
+        
+           
         }
 
 
@@ -127,9 +152,19 @@ namespace Runtime.Managers
         private void OnMiniGameEntered()
         {
             //PlayerSignals.Instance.onPlayConditionChanged?.Invoke(false);
+            
+            DOVirtual.DelayedCall(.5f,
+                () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.DroneArea));
             StartCoroutine(WaitForFinal());
         }
 
+        private void ExitDrone()
+        {
+            DOVirtual.DelayedCall(.5f,
+                () =>PlayerSpeedStageArea());
+            DOVirtual.DelayedCall(2f,
+                () =>PlayerDroneStageArea());
+        }
         private void OnSetTotalScore(int value)
         {
             
@@ -203,9 +238,13 @@ namespace Runtime.Managers
         
         private IEnumerator WaitForFinal()
         {
+            
+            ///drone areadan çıkınca hızlanmıyor bug
+            ExitDrone();
            // PlayerSpeedStageArea();
           //  gameObject.SetActive(false);
              gameObject.transform.GetChild(0).gameObject.SetActive(false);
+             //PlayerDroneStageArea();
             
             //PlayerDroneStageArea();
             

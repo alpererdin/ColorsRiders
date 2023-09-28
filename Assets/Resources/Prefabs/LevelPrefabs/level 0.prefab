@@ -790,7 +790,7 @@ GameObject:
   - component: {fileID: 5155051632604628955}
   - component: {fileID: 936010743378738750}
   - component: {fileID: 5581730695066734740}
-  - component: {fileID: 631698741676132736}
+  - component: {fileID: 5911912054835838818}
   m_Layer: 0
   m_Name: Plane
   m_TagString: DroneGate
@@ -884,7 +884,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 5.54, z: 5.96}
   m_Center: {x: 0, y: 1.93, z: 0}
---- !u!114 &631698741676132736
+--- !u!114 &5911912054835838818
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -893,7 +893,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7394270630312961267}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbcf14845596445cb0e70da970316470, type: 3}
+  m_Script: {fileID: 11500000, guid: 03a85f2ae9524368ade51da6aba9c520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentColorType: 1
@@ -1309,7 +1309,7 @@ GameObject:
   - component: {fileID: 7846078694098370856}
   - component: {fileID: 2740656640675633947}
   - component: {fileID: 6064531330457876337}
-  - component: {fileID: 4748573743533774861}
+  - component: {fileID: 1733827478434687755}
   m_Layer: 0
   m_Name: Plane
   m_TagString: DroneGate
@@ -1403,7 +1403,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 5.54, z: 5.96}
   m_Center: {x: 0, y: 1.93, z: 0}
---- !u!114 &4748573743533774861
+--- !u!114 &1733827478434687755
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1412,7 +1412,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8848397513537978886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbcf14845596445cb0e70da970316470, type: 3}
+  m_Script: {fileID: 11500000, guid: 03a85f2ae9524368ade51da6aba9c520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentColorType: 0

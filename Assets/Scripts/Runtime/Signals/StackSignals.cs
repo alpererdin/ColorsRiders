@@ -23,7 +23,7 @@ namespace Runtime.Signals
         public UnityAction onStackUnFollowPlayer = delegate { };
         
     
-        public UnityAction<GameObject> onFirstInFirstOutSignal=delegate {  };
+        public UnityAction onFirstInFirstOutSignal=delegate {  };
 
         public Action<Transform> onStackEnterDroneArea;
         public UnityAction onLastCollectableEnterDroneArea = delegate { };
