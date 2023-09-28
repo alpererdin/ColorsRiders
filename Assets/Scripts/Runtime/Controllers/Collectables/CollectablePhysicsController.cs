@@ -21,6 +21,7 @@ namespace Runtime.Controllers.Collectables
 
         #region Private Variables
         private Transform _stackHolder;
+        private byte stackInit=0;
         
         private readonly string _collectable = "Collectable";
         private readonly string _collected = "Collected";
@@ -30,6 +31,7 @@ namespace Runtime.Controllers.Collectables
         private readonly string _conveyor = "Conveyor";
         private readonly string _gunBullet = "GunBullet";
         private readonly string _drone = "DroneArea";
+        private readonly string _droneGate = "DroneGate";
         
 
         #endregion
@@ -77,22 +79,21 @@ namespace Runtime.Controllers.Collectables
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other.CompareTag(_droneGate)&&(manager.currentColorType==other.gameObject.GetComponent<GateManager>().currentColorType))
+            {
+                Debug.Log("bu obje dogrudur");
+               // transform.parent.gameObject.transform.SetParent(_stackHolder );
+                
+               // StackSignals.Instance.onStackEnterDroneArea?.Invoke(gameObject.transform);
+
+            }
             if (other.CompareTag(_drone))
             {
                 DOVirtual.DelayedCall(.2f,
                     () => StackSignals.Instance.onFirstInFirstOutSignal?.Invoke(transform.parent.gameObject));
 
                 transform.parent.gameObject.transform.DOMove(new Vector3(transform.position.x, transform.position.y,
-                    other.transform.position.z), 2).OnComplete(() =>
-                {
-                    if (manager.currentColorType == other.GetComponent<GateManager>().currentColorType)
-                    {
-                        Debug.Log("dogru",gameObject);
-                        
-                    }
-                   
-
-                });
+                    other.transform.position.z), 2);
                 // 
 
             }

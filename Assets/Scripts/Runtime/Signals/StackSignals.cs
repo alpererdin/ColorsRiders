@@ -1,3 +1,4 @@
+using System;
 using Runtime.Extentions;
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,5 +24,8 @@ namespace Runtime.Signals
         
     
         public UnityAction<GameObject> onFirstInFirstOutSignal=delegate {  };
+
+        public Action<Transform> onStackEnterDroneArea;
+        public UnityAction onLastCollectableEnterDroneArea = delegate { };
     }
 }

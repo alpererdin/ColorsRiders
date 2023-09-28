@@ -211,6 +211,7 @@ namespace Runtime.Managers
             
            // PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Crouch);
             yield return new WaitForSeconds(5f);
+            
            // PlayerExitDroneStageArea();
             Debug.Log("5sn bekledik");
             gameObject.transform.position += new Vector3(0, 0, 10f);

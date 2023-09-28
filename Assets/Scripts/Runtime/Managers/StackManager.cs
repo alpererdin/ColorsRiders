@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using Runtime.Commands;
 using Runtime.Commands.Stack;
 using Runtime.Data.UnityObject;
 using Runtime.Data.ValueObject;
@@ -31,6 +32,9 @@ namespace Runtime.Managers
         #region Seralized Veriables
 
         [SerializeField] private GameObject money;
+        
+        [SerializeField] private List<Transform> _collectableList = new List<Transform>();
+        [SerializeField] private List<Transform> _tempList = new List<Transform>();
 
         #endregion
 
@@ -47,6 +51,8 @@ namespace Runtime.Managers
         private StackRemoverOnStackCommand _stackRemoverCommand;
         private FirstInFirstOutInStackCommand _test;
  
+        private StackEnterDroneAreaCommand _stackEnterDroneAreaCommand;
+        
         private readonly string _stackDataPath = "Data/CD_Stack";
 
         #endregion
@@ -71,6 +77,8 @@ namespace Runtime.Managers
             _stackInitializerCommand = new StackInitializerCommand(this, ref money);
             _stackRemoverCommand = new StackRemoverOnStackCommand(this, ref _collectableStack);
             _test = new FirstInFirstOutInStackCommand(this, ref _collectableStack);
+            
+            _stackEnterDroneAreaCommand = new StackEnterDroneAreaCommand(ref _collectableList, ref _tempList);
 
         }
 
@@ -101,11 +109,18 @@ namespace Runtime.Managers
 
             StackSignals.Instance.onFirstInFirstOutSignal += _test.Execute;
             // StackSignals.Instance.onMinigameState +=;
+            StackSignals.Instance.onStackEnterDroneArea += _stackEnterDroneAreaCommand.OnStackEnterDroneArea;
 
+            StackSignals.Instance.onLastCollectableEnterDroneArea += OnlastCollectale;
 
         }
 
-       
+        private void OnlastCollectale()
+        {
+            Debug.Log("sonuncu da gecti");
+        }
+
+
         private void OnUpdateStack()
         {
             _stackInitializerCommand.Execute();

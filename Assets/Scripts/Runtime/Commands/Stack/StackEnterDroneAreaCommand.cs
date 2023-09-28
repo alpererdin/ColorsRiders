@@ -19,17 +19,17 @@ namespace Runtime.Commands
             _tempList = tempList;
         }
 
-        public void OnStackEnterDroneArea(Transform collectable, Transform mat)
+        public void OnStackEnterDroneArea(Transform collectable)
         {
             if (!_collectable.Contains(collectable)) return;
             _tempList.Add(collectable);
             _collectable.Remove(collectable);
             _collectable.TrimExcess();
             _tempList.TrimExcess();
-            collectable.DOMove(
+           /* collectable.DOMove(
                     new Vector3(mat.position.x, collectable.position.y,
                         collectable.position.z + UnityEngine.Random.Range(6, 10)), 3f);
-             
+             */
             if (_collectable.Count == 0)
             {
                 StackSignals.Instance.onLastCollectableEnterDroneArea?.Invoke();
