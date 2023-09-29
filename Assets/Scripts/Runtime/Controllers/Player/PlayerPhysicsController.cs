@@ -66,7 +66,9 @@ namespace Runtime.Controllers.Player
         {
             if (other.CompareTag(_drone))
             {
-                CoreGameSignals.Instance.onMiniGameEntered?.Invoke();
+               // CoreGameSignals.Instance.onMiniGameEntered?.Invoke();
+                CoreGameSignals.Instance.onEnterDroneArea?.Invoke();
+              
                 
               /*   DOVirtual.DelayedCall(.5f,
                     () =>manager.PlayerSpeedStageArea());

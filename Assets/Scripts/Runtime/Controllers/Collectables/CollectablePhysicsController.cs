@@ -20,7 +20,7 @@ namespace Runtime.Controllers.Collectables
         #endregion
 
         #region Private Variables
-        private Transform _stackHolder;
+     
         private byte stackInit=0;
         
         private readonly string _collectable = "Collectable";
@@ -37,10 +37,7 @@ namespace Runtime.Controllers.Collectables
         #endregion
 
         #endregion
-        private void Awake()
-        {
-            _stackHolder= GameObject.Find("StackManager").transform;
-        }
+       
         private void OnTriggerExit(Collider other)
         {
             
@@ -52,28 +49,20 @@ namespace Runtime.Controllers.Collectables
                 
             }
         }
-
         private void OnTriggerStay(Collider other)
         {
             if (other.CompareTag("StageArea"))
             {
-                
                 if (manager.currentColorType==other.GetComponentInParent<GateManager>().currentColorType)
                 {
                    
                     testCollider.isTrigger = false;
-                    
-                    
                 }
                 else
                 {
                     testCollider.enabled = true;
-                
-                    
                     manager.InteractionWithTurret(gameObject);
-                   
                 }
-                
             }
         }
 
@@ -87,16 +76,16 @@ namespace Runtime.Controllers.Collectables
                // StackSignals.Instance.onStackEnterDroneArea?.Invoke(gameObject.transform);
 
             }
-            if (other.CompareTag(_drone))
+           /*    if (other.CompareTag(_drone))
             {
-                DOVirtual.DelayedCall(.3f,
+              DOVirtual.DelayedCall(.3f,
                     () => StackSignals.Instance.onFirstInFirstOutSignal?.Invoke());
 
-             /*   transform.parent.gameObject.transform.DOMove(new Vector3(transform.position.x, transform.position.y,
-                    other.transform.position.z), 2);*/
+               transform.parent.gameObject.transform.DOMove(new Vector3(transform.position.x, transform.position.y,
+                    other.transform.position.z), 2);
                 // 
 
-            }
+            }*/
              
            /* if (other.CompareTag(_collectable) && CompareTag(_collected))
             {

@@ -82,7 +82,7 @@ namespace Runtime.Managers
         }
         public void PlayerDroneStageArea()
         {
-            _data.MovementData.ForwardSpeed = 0f;
+            _data.MovementData.ForwardSpeed =1f;
             SendPlayerDataToControllers();
         } 
         public void PlayerExitDroneStageArea()
@@ -124,7 +124,7 @@ namespace Runtime.Managers
 
         private void OnExitDroneArea()
         {
-            Debug.Log("player manager exitttt drone area foonk");
+            
             PlayerExitDroneStageArea();
             DOVirtual.DelayedCall(.5f,
                 () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow));
@@ -132,10 +132,17 @@ namespace Runtime.Managers
 
         private void OnEnterDroneArea()
         {
-            Debug.Log("player manager enter drone area foonk");
-        
-           
+            
+            DOVirtual.DelayedCall(.5f,
+                () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.DroneArea));
+           // StartCoroutine(WaitForFinal());
+           PlayerDroneStageArea();
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            
+
         }
+
+         
 
 
         private void OnPlay()
@@ -160,9 +167,7 @@ namespace Runtime.Managers
 
         private void ExitDrone()
         {
-            DOVirtual.DelayedCall(.5f,
-                () =>PlayerSpeedStageArea());
-            DOVirtual.DelayedCall(2f,
+            DOVirtual.DelayedCall(3f,
                 () =>PlayerDroneStageArea());
         }
         private void OnSetTotalScore(int value)
@@ -195,6 +200,9 @@ namespace Runtime.Managers
             PlayerSignals.Instance.onSetTotalScore -= OnSetTotalScore;
             CoreGameSignals.Instance.onMiniGameEntered -= OnMiniGameEntered;
             PlayerSignals.Instance.OnGatePassed -= OnChangePlayerColor;
+            
+            CoreGameSignals.Instance.onEnterDroneArea -= OnEnterDroneArea;
+            CoreGameSignals.Instance.onExitDroneArea -= OnExitDroneArea;
         }
 
          private void OnChangePlayerColor(MaterialColorTypes type)
@@ -238,9 +246,9 @@ namespace Runtime.Managers
         
         private IEnumerator WaitForFinal()
         {
-            
-            ///drone areadan çıkınca hızlanmıyor bug
             ExitDrone();
+            
+            
            // PlayerSpeedStageArea();
           //  gameObject.SetActive(false);
              gameObject.transform.GetChild(0).gameObject.SetActive(false);
@@ -249,7 +257,8 @@ namespace Runtime.Managers
             //PlayerDroneStageArea();
             
            // PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Crouch);
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(50f);
+            
             
            // PlayerExitDroneStageArea();
             Debug.Log("5sn bekledik");

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Runtime.Commands;
@@ -107,7 +108,11 @@ namespace Runtime.Managers
             StackSignals.Instance.onUpdateStack += OnUpdateStack;
             StackSignals.Instance.onRemoveStackObject += _itemRemoverOnStackCommand.Execute;
 
+            //StackSignals.Instance.onFirstInFirstOutSignal += _test.Execute;
             StackSignals.Instance.onFirstInFirstOutSignal += _test.Execute;
+            
+            
+            
             // StackSignals.Instance.onMinigameState +=;
             //StackSignals.Instance.onStackEnterDroneArea += _stackEnterDroneAreaCommand.OnStackEnterDroneArea;
 
@@ -120,8 +125,10 @@ namespace Runtime.Managers
 
         private void DroneArea()
         {
-            throw new NotImplementedException();
+            //StartCoroutine(WaitStackObjects());
+            _test.Execute();
         }
+        
 
         private void OnlastCollectale()
         {
@@ -198,6 +205,15 @@ namespace Runtime.Managers
             StackSignals.Instance.onUpdateType -= StackTypeUpdaterCommand.Execute;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
+            
+            StackSignals.Instance.onFirstInFirstOutSignal -= _test.Execute;
+            // StackSignals.Instance.onMinigameState +=;
+            //StackSignals.Instance.onStackEnterDroneArea += _stackEnterDroneAreaCommand.OnStackEnterDroneArea;
+
+            StackSignals.Instance.onLastCollectableEnterDroneArea -= OnlastCollectale;
+            
+            
+            CoreGameSignals.Instance.onEnterDroneArea -= DroneArea;
  
         }
 
