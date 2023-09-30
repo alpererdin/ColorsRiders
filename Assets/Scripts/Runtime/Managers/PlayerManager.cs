@@ -126,8 +126,11 @@ namespace Runtime.Managers
         {
             
             PlayerExitDroneStageArea();
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Run);
             DOVirtual.DelayedCall(.5f,
                 () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow));
+            
         }
 
         private void OnEnterDroneArea()

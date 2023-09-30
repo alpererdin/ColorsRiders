@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Runtime.Commands
 {
-    public class StackEnterDroneAreaCommand
+   /* public class StackEnterDroneAreaCommand
     {
         private List<Transform> _collectable;
         private List<Transform> _tempList;
@@ -29,11 +29,11 @@ namespace Runtime.Commands
            /* collectable.DOMove(
                     new Vector3(mat.position.x, collectable.position.y,
                         collectable.position.z + UnityEngine.Random.Range(6, 10)), 3f);
-             */
+            
             if (_collectable.Count == 0)
             {
                 StackSignals.Instance.onLastCollectableEnterDroneArea?.Invoke();
             }
         }
-    }
+    } */
 }

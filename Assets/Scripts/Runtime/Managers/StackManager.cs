@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using Runtime.Commands;
 using Runtime.Commands.Stack;
@@ -34,8 +35,8 @@ namespace Runtime.Managers
 
         [SerializeField] private GameObject money;
         
-        [SerializeField] private List<Transform> _collectableList = new List<Transform>();
-        [SerializeField] private List<Transform> _tempList = new List<Transform>();
+        //[SerializeField] private List<Transform> _collectableList = new List<Transform>();
+       // [SerializeField] private List<Transform> _tempList = new List<Transform>();
 
         #endregion
 
@@ -50,9 +51,9 @@ namespace Runtime.Managers
         private StackInteractionWithConveyorCommand _stackInteractionWithConveyorCommand;
         private StackInitializerCommand _stackInitializerCommand;
         private StackRemoverOnStackCommand _stackRemoverCommand;
-        private FirstInFirstOutInStackCommand _test;
+        private FirstInFirstOutInStackCommand _firstInOutStack;
  
-        private StackEnterDroneAreaCommand _stackEnterDroneAreaCommand;
+       // private StackEnterDroneAreaCommand _stackEnterDroneAreaCommand;
         
         private readonly string _stackDataPath = "Data/CD_Stack";
 
@@ -77,9 +78,9 @@ namespace Runtime.Managers
             StackTypeUpdaterCommand = new StackTypeUpdaterCommand(ref _collectableStack);
             _stackInitializerCommand = new StackInitializerCommand(this, ref money);
             _stackRemoverCommand = new StackRemoverOnStackCommand(this, ref _collectableStack);
-            _test = new FirstInFirstOutInStackCommand(this, ref _collectableStack);
+            _firstInOutStack = new FirstInFirstOutInStackCommand(this, ref _collectableStack);
             
-            _stackEnterDroneAreaCommand = new StackEnterDroneAreaCommand(ref _collectableList, ref _tempList);
+            //_stackEnterDroneAreaCommand = new StackEnterDroneAreaCommand(ref _collectableList, ref _tempList);
 
         }
 
@@ -109,30 +110,37 @@ namespace Runtime.Managers
             StackSignals.Instance.onRemoveStackObject += _itemRemoverOnStackCommand.Execute;
 
             //StackSignals.Instance.onFirstInFirstOutSignal += _test.Execute;
-            StackSignals.Instance.onFirstInFirstOutSignal += _test.Execute;
+           // StackSignals.Instance.onFirstInFirstOutSignal += _firstInOutStack.Execute;
             
             
             
             // StackSignals.Instance.onMinigameState +=;
             //StackSignals.Instance.onStackEnterDroneArea += _stackEnterDroneAreaCommand.OnStackEnterDroneArea;
-
-            StackSignals.Instance.onLastCollectableEnterDroneArea += OnlastCollectale;
-            
+ 
             
             CoreGameSignals.Instance.onEnterDroneArea += DroneArea;
-
+            
+            StackSignals.Instance.onLastCollectableEnterDroneArea += OnlastCollectale;
         }
 
         private void DroneArea()
         {
             //StartCoroutine(WaitStackObjects());
-            _test.Execute();
+            int collectableCount = _collectableStack.Count;
+            for (int i = 0; i < collectableCount; i++)
+            {
+                DOVirtual.DelayedCall(i,
+                    () => 
+               _firstInOutStack.Execute());
+        
+            }
+     
         }
         
 
         private void OnlastCollectale()
         {
-            Debug.Log("son obje gecti  coregamesignals uyandı");
+             
             CoreGameSignals.Instance.onExitDroneArea?.Invoke();
 
         }
@@ -206,7 +214,7 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
             
-            StackSignals.Instance.onFirstInFirstOutSignal -= _test.Execute;
+           // StackSignals.Instance.onFirstInFirstOutSignal -= _firstInOutStack.Execute;
             // StackSignals.Instance.onMinigameState +=;
             //StackSignals.Instance.onStackEnterDroneArea += _stackEnterDroneAreaCommand.OnStackEnterDroneArea;
 
