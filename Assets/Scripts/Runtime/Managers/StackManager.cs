@@ -42,6 +42,8 @@ namespace Runtime.Managers
 
         #region Private Variables
 
+        private int countlvl;
+
         private StackData _data;
         private List<GameObject> _collectableStack = new List<GameObject>();
 
@@ -121,18 +123,30 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onEnterDroneArea += DroneArea;
             
             StackSignals.Instance.onLastCollectableEnterDroneArea += OnlastCollectale;
+           
+            StackSignals.Instance.onSetStackCount += setStack;
+            
+            
         }
+
+        private int setStack() => countlvl;
+        
 
         private void DroneArea()
         {
             //StartCoroutine(WaitStackObjects());
+            
             int collectableCount = _collectableStack.Count;
+            int multipleCount = collectableCount * 2;
+            countlvl = collectableCount;
+         //   StackSignals.Instance.onSetStackCount?.Invoke(collectableCount);
             for (int i = 0; i < collectableCount; i++)
             {
-                DOVirtual.DelayedCall(i,
+                DOVirtual.DelayedCall((i+1)/2f,
                     () => 
                _firstInOutStack.Execute());
-        
+                
+
             }
      
         }
@@ -167,9 +181,11 @@ namespace Runtime.Managers
             float stackOffset = 0f;
             for (int i = 0; i < _collectableStack.Count; i++)
             {
-                Vector3 newPos = new Vector3(0f, 1f, -0.335f + stackOffset);
-                _collectableStack[i].transform.localPosition = newPos;
+                Vector3 newPos = new Vector3(_collectableStack[i].transform.position.x, _collectableStack[i].transform.position.y, -0.335f + stackOffset);
+              _collectableStack[i].transform.localPosition = newPos;
+                //_collectableStack[i].transform.DOLocalMove(newPos,.8f);
                 stackOffset += _data.CollectableOffsetInStack;
+                //transform pos ++
             }
         }
         

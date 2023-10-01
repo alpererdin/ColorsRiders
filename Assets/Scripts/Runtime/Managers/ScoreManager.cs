@@ -1,3 +1,4 @@
+using System;
 using Runtime.Signals;
  
 using UnityEngine;
@@ -41,8 +42,12 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onLevelSuccessful += RefreshMoney;
             CoreGameSignals.Instance.onLevelFailed += RefreshMoney;
             UISignals.Instance.onClickIncome += OnSetValueMultiplier;
+
+    
+
         }
 
+       
         private void OnSendMoney(int value)
         {
             _money = value;
@@ -54,6 +59,7 @@ namespace Runtime.Managers
             PlayerSignals.Instance.onSetTotalScore?.Invoke(_scoreCache);
             
         }
+       
 
         private void OnSetAtmScore(int atmValues)
         {

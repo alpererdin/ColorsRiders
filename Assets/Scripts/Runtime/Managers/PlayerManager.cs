@@ -82,7 +82,7 @@ namespace Runtime.Managers
         }
         public void PlayerDroneStageArea()
         {
-            _data.MovementData.ForwardSpeed =1f;
+            _data.MovementData.ForwardSpeed =0f;
             SendPlayerDataToControllers();
         } 
         public void PlayerExitDroneStageArea()
@@ -130,7 +130,11 @@ namespace Runtime.Managers
             PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Run);
             DOVirtual.DelayedCall(.5f,
                 () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow));
-            
+
+           //CoreGameSignals.Instance.onGetStackLevel?.Invoke(); silinsinnn
+           DOVirtual.DelayedCall(2f, 
+               () =>StackSignals.Instance.onUpdateStack?.Invoke());
+        
         }
 
         private void OnEnterDroneArea()
@@ -141,12 +145,8 @@ namespace Runtime.Managers
            // StartCoroutine(WaitForFinal());
            PlayerDroneStageArea();
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
-            
-
+      
         }
-
-         
-
 
         private void OnPlay()
         {
@@ -178,7 +178,6 @@ namespace Runtime.Managers
             
             _score += value;
             meshController.SetTotalScore(_score);
-        
         }
 
        

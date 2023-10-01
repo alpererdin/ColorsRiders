@@ -34,8 +34,8 @@ namespace Runtime.Commands.Stack
             // _stackManager.StackJumperCommand.Execute(last, index);
             _collectableStack.RemoveAt(last);
             _collectableStack.TrimExcess();
-           
-            
+           _stackManager.UpdateStack();
+           PlayerSignals.Instance.onSetTotalScore?.Invoke(-1);
             //_stackManager.StackTypeUpdaterCommand.Execute();
             if (_collectableStack.Count == 0)
             {

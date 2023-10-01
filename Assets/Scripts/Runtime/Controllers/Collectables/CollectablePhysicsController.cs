@@ -73,15 +73,14 @@ namespace Runtime.Controllers.Collectables
                 manager.InteractionWithStage(animator);
                 
             }
-          /*  if (other.CompareTag(_droneGate)&&(manager.currentColorType==other.gameObject.GetComponent<DroneAreaManager>().currentColorType))
+          if (other.CompareTag(_droneGate)&&(manager.currentColorType==other.gameObject.GetComponent<DroneAreaManager>().currentColorType))
             {
-                Debug.Log("bu obje dogrudur");
-               // transform.parent.gameObject.transform.SetParent(_stackHolder );
-                
-               // StackSignals.Instance.onStackEnterDroneArea?.Invoke(gameObject.transform);
+               // PlayerSignals.Instance.onSetTotalScore?.Invoke(1);
+               // ScoreSignals.Instance.onTestAciton?.Invoke();
+                Debug.Log("1 artacaktı");
 
             }
-               if (other.CompareTag(_drone))
+           /*      if (other.CompareTag(_drone))
             {
               DOVirtual.DelayedCall(.3f,
                     () => StackSignals.Instance.onFirstInFirstOutSignal?.Invoke());

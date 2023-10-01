@@ -27,5 +27,8 @@ namespace Runtime.Signals
 
         public Action<Transform> onStackEnterDroneArea;
         public UnityAction onLastCollectableEnterDroneArea = delegate { };
+        
+        public Func<int> onSetStackCount= delegate { return 0; };
+         
     }
 }

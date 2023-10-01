@@ -13,5 +13,7 @@ namespace Runtime.Signals
         public Func<int> onGetMoney = delegate { return 0; };
 
         public Func<float> onGetMultiplier = delegate { return 0; };
+        
+        public UnityAction onTestAciton= delegate {  };
     }
 }

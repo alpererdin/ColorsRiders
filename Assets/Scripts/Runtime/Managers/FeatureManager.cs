@@ -1,7 +1,8 @@
 using Runtime.Commands.Feature;
 using Runtime.Signals;
-using Sirenix.OdinInspector;
+ 
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Runtime.Managers
 {
@@ -13,7 +14,7 @@ namespace Runtime.Managers
 
         public FeatureManager()
         {
-            _onClickIncomeCommand = new OnClickIncomeCommand(this, ref _newPriceTag, ref _incomeLevel);
+            
             _onClickStackCommand = new OnClickStackCommand(this, ref _newPriceTag, ref _stackLevel);
         }
 
@@ -21,11 +22,12 @@ namespace Runtime.Managers
 
         #region Private Variables
 
-        [ShowInInspector] private byte _incomeLevel = 1;
-        [ShowInInspector] private byte _stackLevel = 1;
-        [ShowInInspector] private int _newPriceTag;
+           
+         private byte _stackLevel = 0;
+         private int _newPriceTag;
+          
 
-        private readonly OnClickIncomeCommand _onClickIncomeCommand;
+        
         private readonly OnClickStackCommand _onClickStackCommand;
 
         #endregion
@@ -34,7 +36,7 @@ namespace Runtime.Managers
 
         private void Awake()
         {
-            _incomeLevel = LoadIncomeData();
+         
             _stackLevel = LoadStackData();
         }
 
@@ -45,20 +47,28 @@ namespace Runtime.Managers
 
         private void Subscription()
         {
-            UISignals.Instance.onClickIncome += _onClickIncomeCommand.Execute;
+             
             UISignals.Instance.onClickStack += _onClickStackCommand.Execute;
-            CoreGameSignals.Instance.onGetIncomeLevel += OnGetIncomeLevel;
+            
             CoreGameSignals.Instance.onGetStackLevel += OnGetStackLevel;
+
+             
+            ScoreSignals.Instance.onTestAciton += ontest;
         }
 
-        private byte OnGetIncomeLevel() => _incomeLevel;
+        private void ontest()
+        {
+            _stackLevel++;
+        }
+
+
         private byte OnGetStackLevel() => _stackLevel;
 
         private void UnSubscription()
         {
-            UISignals.Instance.onClickIncome -= _onClickIncomeCommand.Execute;
+             
             UISignals.Instance.onClickStack -= _onClickStackCommand.Execute;
-            CoreGameSignals.Instance.onGetIncomeLevel -= OnGetIncomeLevel;
+        
             CoreGameSignals.Instance.onGetStackLevel -= OnGetStackLevel;
         }
 
@@ -66,12 +76,7 @@ namespace Runtime.Managers
         {
             UnSubscription();
         }
-
-        private byte LoadIncomeData()
-        {
-            if (!ES3.FileExists()) return 1;
-            return (byte)(ES3.KeyExists("IncomeLevel") ? ES3.Load<int>("IncomeLevel") : 1);
-        }
+        
 
         private byte LoadStackData()
         {

@@ -18,9 +18,13 @@ namespace Runtime.Commands.Stack
 
         public void Execute()
         {
-            var stackLevel = CoreGameSignals.Instance.onGetStackLevel();
+           // var stackLevel =StackSignals.Instance.onSetStackCount();
+            //var stackLevel = CoreGameSignals.Instance.onGetStackLevel();
+            var stackLevel =StackSignals.Instance.onSetStackCount();
+            
             for (int i = 1; i < stackLevel; i++)
             {
+                Debug.Log("kadar calisir");
                GameObject obj = Object.Instantiate(_money);
                _stackManager.AdderOnStackCommand.Execute(obj);
             }
