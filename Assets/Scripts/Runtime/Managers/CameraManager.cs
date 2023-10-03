@@ -35,6 +35,7 @@ namespace Runtime.Managers
             Init();
         }
 
+       
         private void Init()
         {
             _initialPosition = transform.position;

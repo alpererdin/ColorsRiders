@@ -11,5 +11,9 @@ namespace Runtime.Signals
         public UnityAction<HorizontalInputParams> onInputDragged = delegate { };
         public UnityAction onInputReleased = delegate { };
         public UnityAction<bool> onChangeInputState = delegate { };
+        
+        public UnityAction<IdleInputParams> onJoystickDragged = delegate{ };
+        
+        
     }
 }

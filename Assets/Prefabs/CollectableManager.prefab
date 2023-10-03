@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf21bd88ee2427f9261524bfbcb07d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentColorType: 0
+  currentColorType: 1
   _mesh: {fileID: 7628312373253145143}
   baseMaterial: {fileID: 2100000, guid: 8612ab69f064269409eac06eebc1707c, type: 2}
   meshController: {fileID: 2886249332767685872}

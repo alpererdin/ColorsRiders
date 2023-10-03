@@ -77,6 +77,7 @@ namespace Runtime.Controllers.Collectables
             {
                // PlayerSignals.Instance.onSetTotalScore?.Invoke(1);
                // ScoreSignals.Instance.onTestAciton?.Invoke();
+               StackSignals.Instance.droneareaAdder?.Invoke(transform.parent.gameObject);
                 Debug.Log("1 artacaktı");
 
             }

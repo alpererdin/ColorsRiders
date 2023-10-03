@@ -60,10 +60,19 @@ namespace Runtime.Controllers.Player
                // manager.SetStackPosition();
                
            }
+
+           if (other.CompareTag(_drone))
+           {
+               Destroy(other.transform.parent.gameObject);
+           }
        }
 
        private void OnTriggerEnter(Collider other)
         {
+            if (other.CompareTag("JumpArea"))
+            {
+               StackSignals.Instance.JumperArea?.Invoke();
+            }
             if (other.CompareTag(_drone))
             {
                // CoreGameSignals.Instance.onMiniGameEntered?.Invoke();

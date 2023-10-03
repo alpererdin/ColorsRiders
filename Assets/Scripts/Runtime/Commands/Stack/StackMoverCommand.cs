@@ -14,22 +14,31 @@ namespace Runtime.Commands.Stack
             _data = stackData;
         }
 
-        public void Execute(float directionX, List<GameObject> collectableStack)
+        public void Execute(float directionX,float directionY, List<GameObject> collectableStack)
         {
             float direct = Mathf.Lerp(collectableStack[0].transform.localPosition.x, directionX,
                 _data.LerpSpeed);
-            collectableStack[0].transform.localPosition = new Vector3(direct, 1f, 0.335f);
+           // collectableStack[0].transform.localPosition = new Vector3(direct, 1f, 0.335f);
+            
+            //y axis
+            float directY = Mathf.Lerp(collectableStack[0].transform.localPosition.y, directionY, _data.LerpSpeed);
+            collectableStack[0].transform.localPosition = new Vector3(direct, directY, 0.335f);
+        //y ax
             StackItemsLerpMove(collectableStack);
         }
 
-        private void StackItemsLerpMove(List<GameObject> collectableStack)
+        public void StackItemsLerpMove(List<GameObject> collectableStack)
         {
             for (int i = 1; i < collectableStack.Count; i++)
             {
                 Vector3 pos = collectableStack[i].transform.localPosition;
                 pos.x = collectableStack[i - 1].transform.localPosition.x;
+                pos.y = collectableStack[i - 1].transform.localPosition.y;
                 float direct = Mathf.Lerp(collectableStack[i].transform.localPosition.x, pos.x, _data.LerpSpeed);
-                collectableStack[i].transform.localPosition = new Vector3(direct, pos.y, pos.z);
+               //
+               float directY = Mathf.Lerp(collectableStack[i].transform.localPosition.y, pos.y, _data.LerpSpeed);
+                
+                collectableStack[i].transform.localPosition = new Vector3(direct, directY, pos.z);
             }
         }
         

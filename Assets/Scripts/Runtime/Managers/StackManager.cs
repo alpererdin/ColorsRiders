@@ -35,7 +35,7 @@ namespace Runtime.Managers
 
         [SerializeField] private GameObject money;
         
-        //[SerializeField] private List<Transform> _collectableList = new List<Transform>();
+         [SerializeField] public List<GameObject> _collectableList = new List<GameObject>();
        // [SerializeField] private List<Transform> _tempList = new List<Transform>();
 
         #endregion
@@ -54,6 +54,7 @@ namespace Runtime.Managers
         private StackInitializerCommand _stackInitializerCommand;
         private StackRemoverOnStackCommand _stackRemoverCommand;
         private FirstInFirstOutInStackCommand _firstInOutStack;
+        private StackNewInitalizerCommand _newInit;
  
        // private StackEnterDroneAreaCommand _stackEnterDroneAreaCommand;
         
@@ -81,7 +82,7 @@ namespace Runtime.Managers
             _stackInitializerCommand = new StackInitializerCommand(this, ref money);
             _stackRemoverCommand = new StackRemoverOnStackCommand(this, ref _collectableStack);
             _firstInOutStack = new FirstInFirstOutInStackCommand(this, ref _collectableStack);
-            
+            _newInit = new StackNewInitalizerCommand(this, ref _collectableList );
             //_stackEnterDroneAreaCommand = new StackEnterDroneAreaCommand(ref _collectableList, ref _tempList);
 
         }
@@ -126,9 +127,22 @@ namespace Runtime.Managers
            
             StackSignals.Instance.onSetStackCount += setStack;
             
-            
+              StackSignals.Instance.droneareaAdder  += onAdderDroneareaObject;
+             // StackSignals.Instance.JumperArea  += onJumperArea;
+
+
         }
 
+        private void onJumperArea()
+        {
+            StartCoroutine(_stackAnimatorCommand.Execute());
+
+        }
+        private void onAdderDroneareaObject(GameObject collectableGameObject)
+        {
+            _collectableList.Add(collectableGameObject);
+            
+        }
         private int setStack() => countlvl;
         
 
@@ -137,8 +151,8 @@ namespace Runtime.Managers
             //StartCoroutine(WaitStackObjects());
             
             int collectableCount = _collectableStack.Count;
-            int multipleCount = collectableCount * 2;
-            countlvl = collectableCount;
+            //int multipleCount = collectableCount * 2;
+           // countlvl = multipleCount;
          //   StackSignals.Instance.onSetStackCount?.Invoke(collectableCount);
             for (int i = 0; i < collectableCount; i++)
             {
@@ -161,17 +175,18 @@ namespace Runtime.Managers
 
 
         
-        private void OnUpdateStack()
+        private void OnUpdateStack( )
         {
-            _stackInitializerCommand.Execute();
+            //_stackInitializerCommand.Execute();
+            _newInit.Execute();
         }
 
-        private void OnStackMove(Vector2 direction)
+        private void OnStackMove(Vector3 direction)
         {
-            transform.position = new Vector3(0, gameObject.transform.position.y, direction.y - 2f);
+            transform.position = new Vector3(0, 0, direction.z - 2f);
             if (gameObject.transform.childCount > 0)
             {
-                _stackMoverCommand.Execute(direction.x, _collectableStack);
+                _stackMoverCommand.Execute(direction.x,direction.y, _collectableStack);
             }
         }
         
@@ -204,6 +219,7 @@ namespace Runtime.Managers
             }
         }
 
+        
         private void OnInteractionWithCollectable(GameObject collectableGameObject)
         {
             DOTween.Complete(StackJumperCommand);

@@ -1,3 +1,4 @@
+using System;
 using Runtime.Enums;
 using Runtime.Signals;
 using UnityEngine;
@@ -11,7 +12,11 @@ namespace Runtime.Managers
             SubscribeEvents();
 
             OpenStartPanel();
+            
+      
         }
+
+     
 
         private void SubscribeEvents()
         {
@@ -21,11 +26,14 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onReset += OnReset;
         }
 
+       
         private void OpenStartPanel()
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 0);
-          //  CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
-         //   CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Shop, 2);
+            //CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Idle,2);
+            
+            //  CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
+            //   CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Shop, 2);
         }
 
         private void OnLevelInitialize(byte levelValue)
@@ -33,6 +41,8 @@ namespace Runtime.Managers
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 0);
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Shop, 2);
+            
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Idle,2);
             UISignals.Instance.onSetNewLevelValue?.Invoke(levelValue);
         }
 
@@ -40,7 +50,7 @@ namespace Runtime.Managers
         {
             CoreGameSignals.Instance.onPlay?.Invoke();
             CoreUISignals.Instance.onClosePanel?.Invoke(0);
-            CoreUISignals.Instance.onClosePanel?.Invoke(2);
+           // CoreUISignals.Instance.onClosePanel?.Invoke(2);
             CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow);
         }
 
@@ -49,6 +59,7 @@ namespace Runtime.Managers
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Win, 2);
         }
 
+        
         private void OnOpenFailPanel()
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Fail, 2);

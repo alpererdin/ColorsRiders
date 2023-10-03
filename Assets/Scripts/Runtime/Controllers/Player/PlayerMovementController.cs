@@ -1,5 +1,6 @@
 using System;
 using Runtime.Data.ValueObject;
+using Runtime.Enums;
 using Runtime.Keys;
 using Runtime.Managers;
 using Runtime.Signals;
@@ -25,7 +26,10 @@ namespace Runtime.Controllers.Player
          private bool _isReadyToMove, _isReadyToPlay;
          private float _inputValue;
         private Vector2 _clampValues;
+        [SerializeField] private GameStates currentGameState;
+        private Vector3 _movementDirection;
 
+        public void UpdateIdleInputValue(IdleInputParams inputParam) => _movementDirection = inputParam.joystickMovement;
         #endregion
 
         #endregion
@@ -80,17 +84,45 @@ namespace Runtime.Controllers.Player
             {
                 if (_isReadyToMove)
                 {
-                    Move();
+                    if (currentGameState == GameStates.Runner)
+                    {
+                        Move();
+                    }
+                    else if (currentGameState == GameStates.Idle)
+                    {
+                        IdleMove();
+                    }
                 }
                 else
                 {
-                    StopSideways();
+                    if (currentGameState == GameStates.Runner)
+                    {
+                        StopSideways();
+                    }
+                    else if (currentGameState == GameStates.Idle)
+                    {
+                        Stop();
+                    }
                 }
             }
             else
                 Stop();
         }
         
+        private void IdleMove()
+        {
+            Vector3 velocity = rigidbody.velocity;
+            velocity = new Vector3(_movementDirection.x * _data.ForwardSpeed, velocity.y,
+                _movementDirection.z * _data.ForwardSpeed);
+            rigidbody.velocity = velocity;
+
+            if (_movementDirection != Vector3.zero)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
+                transform.rotation = toRotation;
+                return;
+            }
+        }
 
         private void Move()
         {

@@ -10,7 +10,7 @@ namespace Runtime.Signals
         public UnityAction<GameObject> onInteractionATM = delegate { };
         public UnityAction<GameObject> onInteractionObstacle = delegate { };
         public UnityAction<GameObject> onInteractionCollectable = delegate { };
-        public UnityAction<Vector2> onStackFollowPlayer = delegate { };
+        public UnityAction<Vector3> onStackFollowPlayer = delegate { };
         
         public UnityAction onUpdateType = delegate { };
         public UnityAction onInteractionConveyor = delegate { };
@@ -29,6 +29,12 @@ namespace Runtime.Signals
         public UnityAction onLastCollectableEnterDroneArea = delegate { };
         
         public Func<int> onSetStackCount= delegate { return 0; };
+        
+        public UnityAction<GameObject> droneareaAdder = delegate {  };
+        public UnityAction<GameObject> droneareaExitAdder = delegate {  };
+        
+        public UnityAction JumperArea= delegate {  };
+        
          
     }
 }

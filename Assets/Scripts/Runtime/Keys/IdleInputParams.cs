@@ -1,7 +1,9 @@
+using UnityEngine;
+
 namespace Runtime.Keys
 {
-    public class IdleInputParams
+    public struct IdleInputParams
     {
-        
+        public Vector3 joystickMovement;
     }
 }

@@ -1,6 +1,7 @@
 using Runtime.Enums;
 using Runtime.Signals;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Runtime.Controllers.Collectables
 {
@@ -24,8 +25,15 @@ namespace Runtime.Controllers.Collectables
         private void SubscribeEvents()
         {
             CollectableSignals.Instance.onChangeCollectableAnimationState += OnChangeAnimationState;
+             
+            CollectableSignals.Instance.OnAfterDroneArea += onafter;
         }
 
+        public void onafter()
+        {
+           
+            animator.SetTrigger(CollectableAnimationStates.Run.ToString());
+        }
         public void OnChangeAnimationState(CollectableAnimationStates animationState, GameObject collectableGameObject)
         {
             if (gameObject == collectableGameObject)

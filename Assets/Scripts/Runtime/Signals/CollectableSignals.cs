@@ -11,8 +11,13 @@ namespace Runtime.Signals
         public UnityAction<CollectableAnimationStates, GameObject> onChangeCollectableAnimationState = delegate { };
         
         public UnityAction<Material> onChangeCollectedMaterial=delegate {  };
+       
         
         public UnityAction<MaterialColorTypes> onGatePassed=delegate {  };
+        
+        public UnityAction OnAfterDroneArea=delegate {  };
+        
+        public UnityAction  InitChangeCollectedMaterial=delegate {  };
         
     }
 }

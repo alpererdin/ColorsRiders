@@ -1,7 +1,9 @@
+using UnityEngine;
+
 namespace Runtime.Managers
 {
-    public class JumpAreaManager
+    public class JumpAreaManager : MonoBehaviour
     {
-        
+         
     }
 }

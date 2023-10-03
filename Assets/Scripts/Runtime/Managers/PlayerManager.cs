@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Runtime.Commands;
 using Runtime.Commands.Stack;
 using Runtime.Controllers.Player;
 using Runtime.Data.UnityObject;
@@ -31,7 +32,9 @@ namespace Runtime.Managers
 
         #region Private Variables
 
+        private JumpCommand _jumpCommand;
         private PlayerData _data;
+        private StackData _stackDatadata;
         private const string PlayerDataPath = "Data/CD_Player";
         private ColorData _colorData;
 
@@ -53,7 +56,7 @@ namespace Runtime.Managers
     
         public void Init()
         {
-             
+            _jumpCommand = new JumpCommand(ref _stackDatadata,transform);
             
             _material.color = _colorData.Color;
             
@@ -120,6 +123,10 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onEnterDroneArea += OnEnterDroneArea;
             CoreGameSignals.Instance.onExitDroneArea += OnExitDroneArea;
 
+            StackSignals.Instance.JumperArea += _jumpCommand.Execute;
+            
+            InputSignals.Instance.onJoystickDragged += OnJoystickDragged;
+
         }
 
         private void OnExitDroneArea()
@@ -167,6 +174,7 @@ namespace Runtime.Managers
                 () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.DroneArea));
             StartCoroutine(WaitForFinal());
         }
+        private void OnJoystickDragged(IdleInputParams inputParams) => movementController.UpdateIdleInputValue(inputParams);
 
         private void ExitDrone()
         {
@@ -205,6 +213,8 @@ namespace Runtime.Managers
             
             CoreGameSignals.Instance.onEnterDroneArea -= OnEnterDroneArea;
             CoreGameSignals.Instance.onExitDroneArea -= OnExitDroneArea;
+            
+            InputSignals.Instance.onJoystickDragged -= OnJoystickDragged;
         }
 
          private void OnChangePlayerColor(MaterialColorTypes type)
@@ -241,7 +251,7 @@ namespace Runtime.Managers
         internal void SetStackPosition()
         {
             var position = transform.position;
-            Vector2 pos = new Vector2(position.x, position.z);
+            Vector3 pos = new Vector3(position.x,position.y, position.z);
             StackSignals.Instance.onStackFollowPlayer?.Invoke(pos);
         } 
        
