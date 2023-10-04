@@ -34,5 +34,7 @@ namespace Runtime.Signals
         public UnityAction onExitDroneArea=delegate {  };
         
         public UnityAction<GameStates> onChangeGameState = delegate { };
+        
+        public Func<GameStates> onGetGameState;
     }
 }

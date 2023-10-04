@@ -125,7 +125,7 @@ namespace Runtime.Managers
 
             StackSignals.Instance.JumperArea += _jumpCommand.Execute;
             
-            InputSignals.Instance.onJoystickDragged += OnJoystickDragged;
+             
 
         }
 
@@ -174,7 +174,6 @@ namespace Runtime.Managers
                 () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.DroneArea));
             StartCoroutine(WaitForFinal());
         }
-        private void OnJoystickDragged(IdleInputParams inputParams) => movementController.UpdateIdleInputValue(inputParams);
 
         private void ExitDrone()
         {
@@ -213,8 +212,7 @@ namespace Runtime.Managers
             
             CoreGameSignals.Instance.onEnterDroneArea -= OnEnterDroneArea;
             CoreGameSignals.Instance.onExitDroneArea -= OnExitDroneArea;
-            
-            InputSignals.Instance.onJoystickDragged -= OnJoystickDragged;
+          
         }
 
          private void OnChangePlayerColor(MaterialColorTypes type)

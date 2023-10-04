@@ -24,6 +24,8 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             CoreGameSignals.Instance.onReset += OnReset;
+            
+           
         }
 
        
@@ -54,6 +56,7 @@ namespace Runtime.Managers
             CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow);
         }
 
+     
         private void OnOpenWinPanel()
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Win, 2);

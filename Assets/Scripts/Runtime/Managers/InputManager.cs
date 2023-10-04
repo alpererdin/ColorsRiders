@@ -5,6 +5,7 @@ using Runtime.Data.ValueObject;
 using Runtime.Enums;
 using Runtime.Keys;
 using Runtime.Signals;
+using Runtime.Managers;
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -28,10 +29,11 @@ namespace Runtime.Managers
         [Header("Data")] private InputData _data;
         private bool _isFirstTimeTouchTaken;
         private bool _isAvailableForTouch;
+
+        [SerializeField] public Joystick joyStick;
+        [SerializeField] private GameObject joystickContainer;
         
-        private Vector3 _joystickPosition;
-        [SerializeField] private FloatingJoystick floatingJoystick;
-        [SerializeField] private GameStates currentGameState;
+
         #endregion
 
         #endregion
@@ -39,8 +41,14 @@ namespace Runtime.Managers
         private void Awake()
         {
             _data = GetInputData();
+             
         }
 
+        private void Start()
+        {
+            GameStateManager.SetGameState(GameStateManager.GameState.Runner);
+            joystickContainer.SetActive(false);
+        }
         private InputData GetInputData() => Resources.Load<CD_Input>("Data/CD_Input").Data;
 
         private void OnEnable()
@@ -53,7 +61,8 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
             InputSignals.Instance.onChangeInputState += OnChangeInputState;
-            CoreGameSignals.Instance.onChangeGameState += OnChangeGameState;
+            
+      
         }
 
         private void OnPlay()
@@ -72,7 +81,7 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             InputSignals.Instance.onChangeInputState -= OnChangeInputState;
-            CoreGameSignals.Instance.onChangeGameState -= OnChangeGameState;
+            
         }
 
         private void OnDisable()
@@ -83,34 +92,60 @@ namespace Runtime.Managers
 
         private void Update()
         {
-            if (!_isAvailableForTouch) return;
-
-            if (Input.GetMouseButtonUp(0) && !IsPointerOverUIElement())
+            if (Input.GetKeyDown(KeyCode.K))
             {
-                _isTouching = false;
+                GameStateManager.SetGameState(GameStateManager.GameState.Idle);
+            }
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                GameStateManager.SetGameState(GameStateManager.GameState.Runner);
+            }
+            if (!_isAvailableForTouch) return;
+            
+            GameStateManager.GameState gameState = GameStateManager.CurrentGameState;
 
-                InputSignals.Instance.onInputReleased?.Invoke();
+            if (gameState == GameStateManager.GameState.Idle)
+            {
+                
+                joystickContainer.SetActive(true);
+              //  _isTouching = true;
+                InputSignals.Instance.onInputTaken?.Invoke();
+
+                
+            }
+            else
+            {
+                joystickContainer.SetActive(false);
             }
 
-            if (Input.GetMouseButtonDown(0) && !IsPointerOverUIElement())
+            if (gameState == GameStateManager.GameState.Runner)
             {
-                _isTouching = true;
-                InputSignals.Instance.onInputTaken?.Invoke();
-                if (!_isFirstTimeTouchTaken)
+
+                if (Input.GetMouseButtonUp(0) && !IsPointerOverUIElement())
                 {
-                    _isFirstTimeTouchTaken = true;
-                    InputSignals.Instance.onFirstTimeTouchTaken?.Invoke();
+                    _isTouching = false;
+
+                    InputSignals.Instance.onInputReleased?.Invoke();
                 }
 
-                _mousePosition = Input.mousePosition;
-            }
-
-            if (Input.GetMouseButton(0) && !IsPointerOverUIElement())
-            {
-                if (_isTouching)
+                if (Input.GetMouseButtonDown(0) && !IsPointerOverUIElement())
                 {
-                    if (currentGameState == GameStates.Runner)
+                    _isTouching = true;
+                    InputSignals.Instance.onInputTaken?.Invoke();
+                    if (!_isFirstTimeTouchTaken)
                     {
+                        _isFirstTimeTouchTaken = true;
+                        InputSignals.Instance.onFirstTimeTouchTaken?.Invoke();
+                    }
+
+                    _mousePosition = Input.mousePosition;
+                }
+
+                if (Input.GetMouseButton(0) && !IsPointerOverUIElement())
+                {
+                    if (_isTouching)
+                    {
+
                         if (_mousePosition != null)
                         {
                             Vector2 mouseDeltaPos = (Vector2)Input.mousePosition - _mousePosition.Value;
@@ -132,44 +167,14 @@ namespace Runtime.Managers
                                 HorizontalInputClampSides = _data.HorizontalInputClampNegativeSides,
                             });
                         }
+
                     }
                 }
             }
-            if (currentGameState == GameStates.Idle)
-            {
-                if (Input.GetMouseButton(0))
-                {
-                    if (_isTouching)
-                    {
-                        if (currentGameState == GameStates.Idle)
-                        {
-                            _joystickPosition = new Vector3(floatingJoystick.Horizontal, 0, floatingJoystick.Vertical);
-                            
-                            _moveVector = _joystickPosition;
-                            
-                            InputSignals.Instance.onJoystickDragged?.Invoke(new IdleInputParams()
-                            {
-                                joystickMovement = _moveVector
-                            });
-                        }
-                    }
-                }
-            }
+
         }
         
-        private void OnChangeGameState(GameStates currentStates)
-        {
-            currentGameState = currentStates;
-            
-            if (currentGameState == GameStates.Idle)
-            {
-                floatingJoystick.gameObject.SetActive(true);
-            }
-            else
-            {
-                floatingJoystick.gameObject.SetActive(false);
-            }
-        }
+       
 
         private bool IsPointerOverUIElement()
         {

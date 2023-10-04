@@ -17,19 +17,21 @@ namespace Runtime.Controllers.Player
 
         [SerializeField] private PlayerManager manager;
         [SerializeField] private new Rigidbody rigidbody;
+        
+        [SerializeField] private InputManager inputManager;
 
         #endregion
 
         #region Private Variables
 
         [Header("Data")]  private PlayerMovementData _data;
+        
          private bool _isReadyToMove, _isReadyToPlay;
          private float _inputValue;
         private Vector2 _clampValues;
-        [SerializeField] private GameStates currentGameState;
-        private Vector3 _movementDirection;
+       
 
-        public void UpdateIdleInputValue(IdleInputParams inputParam) => _movementDirection = inputParam.joystickMovement;
+        
         #endregion
 
         #endregion
@@ -39,9 +41,15 @@ namespace Runtime.Controllers.Player
             _data = movementData;
         }
 
+       
         private void OnEnable()
         {
             SubscribeEvents();
+        }
+
+        private void Awake()
+        {
+          inputManager = FindObjectOfType<InputManager>();
         }
 
         private void SubscribeEvents()
@@ -80,49 +88,57 @@ namespace Runtime.Controllers.Player
 
         private void FixedUpdate()
         {
-            if (_isReadyToPlay)
+            if (_isReadyToPlay )
             {
+                GameStateManager.GameState gameState = GameStateManager.CurrentGameState;
+
                 if (_isReadyToMove)
                 {
-                    if (currentGameState == GameStates.Runner)
+                    if (gameState == GameStateManager.GameState.Runner)
                     {
                         Move();
                     }
-                    else if (currentGameState == GameStates.Idle)
+                    else
                     {
                         IdleMove();
+                        StopSideways(); 
+                        Stop();
                     }
                 }
                 else
                 {
-                    if (currentGameState == GameStates.Runner)
+                    if (gameState == GameStateManager.GameState.Runner)
                     {
-                        StopSideways();
+                        StopSideways(); 
                     }
-                    else if (currentGameState == GameStates.Idle)
+                    else 
                     {
                         Stop();
                     }
                 }
+                
             }
             else
                 Stop();
         }
-        
+
         private void IdleMove()
         {
-            Vector3 velocity = rigidbody.velocity;
-            velocity = new Vector3(_movementDirection.x * _data.ForwardSpeed, velocity.y,
-                _movementDirection.z * _data.ForwardSpeed);
-            rigidbody.velocity = velocity;
-
-            if (_movementDirection != Vector3.zero)
+            if (inputManager != null && inputManager.joyStick != null && inputManager.joyStick.isActiveAndEnabled)
             {
-                Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
-                transform.rotation = toRotation;
-                return;
+                float horizontalInput = inputManager.joyStick.Horizontal;
+                float verticalInput = inputManager.joyStick.Vertical;
+
+              
+                Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
+                Vector3 newPosition = transform.position + movement * Time.deltaTime * 10;
+                transform.position = newPosition;
+               // Quaternion toRotation = Quaternion.LookRotation(new Vector3(horizontalInput, 0f, verticalInput*2));
+            
+                //transform.rotation = toRotation;
             }
         }
+
 
         private void Move()
         {

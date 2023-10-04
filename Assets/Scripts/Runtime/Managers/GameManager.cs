@@ -9,7 +9,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     #region Public Variables
 
-    public GameStates States;
+   
 
     #endregion
 
@@ -18,30 +18,5 @@ public class GameManager : MonoSingleton<GameManager>
     protected override void Awake()
     {
         Application.targetFrameRate = 60;
-    }
-
-    private void OnEnable()
-    {
-        SubscribeEvents();
-    }
-
-    private void SubscribeEvents()
-    {
-        CoreGameSignals.Instance.onChangeGameStates += OnChangeGameState;
-    }
-
-    private void OnChangeGameState(GameStates newState)
-    {
-        States = newState;
-    }
-
-    private void UnSubscribeEvents()
-    {
-        CoreGameSignals.Instance.onChangeGameStates -= OnChangeGameState;
-    }
-
-    private void OnDisable()
-    {
-        UnSubscribeEvents();
     }
 }

@@ -95,6 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 614604432351197866}
   rigidbody: {fileID: 1816796875779125281}
+  _currentGameState: 0
 --- !u!1 &1114913806536527142
 GameObject:
   m_ObjectHideFlags: 0
