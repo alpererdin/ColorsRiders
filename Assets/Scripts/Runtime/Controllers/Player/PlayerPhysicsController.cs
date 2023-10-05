@@ -32,6 +32,8 @@ namespace Runtime.Controllers.Player
         private readonly string _stageArea = "StageArea";
         private readonly string _gate = "Gate";
         private readonly string _drone = "DroneArea";
+        private readonly string _idle = "Idle";
+        private readonly string _finish = "Finish";
         #endregion
 
         #endregion
@@ -69,6 +71,14 @@ namespace Runtime.Controllers.Player
 
        private void OnTriggerEnter(Collider other)
         {
+            if (other.CompareTag(_idle))
+            {
+                GameStateManager.SetGameState(GameStateManager.GameState.Idle);
+            } 
+            if (other.CompareTag(_finish))
+            {
+                CoreGameSignals.Instance.onSizeUpPlayer?.Invoke();
+            }
             if (other.CompareTag("JumpArea"))
             {
                StackSignals.Instance.JumperArea?.Invoke();

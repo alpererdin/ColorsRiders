@@ -36,5 +36,8 @@ namespace Runtime.Signals
         public UnityAction<GameStates> onChangeGameState = delegate { };
         
         public Func<GameStates> onGetGameState;
+        
+        public UnityAction onSizeUpPlayer = delegate { };
+        
     }
 }

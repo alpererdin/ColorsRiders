@@ -38,9 +38,12 @@ namespace Runtime.Managers
         private const string PlayerDataPath = "Data/CD_Player";
         private ColorData _colorData;
 
-        private int _score=1;
+       
+
+        public int _score=1;
         private byte _currentValue = 0;
-     
+
+        
         #endregion
 
         #endregion
@@ -59,7 +62,7 @@ namespace Runtime.Managers
             _jumpCommand = new JumpCommand(ref _stackDatadata,transform);
             
             _material.color = _colorData.Color;
-            
+             
         }
 
         private void GetPlayerColorData() => _colorData = Resources.Load<CD_Color>("Data/CD_Color").Colors[(int)currentColor];
@@ -71,6 +74,7 @@ namespace Runtime.Managers
         private void SendPlayerDataToControllers()
         {
             movementController.SetMovementData(_data.MovementData);
+            meshController.SetData(_data.MeshData);
         }
 
         public void PlayerSpeedStageArea()
@@ -124,9 +128,15 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onExitDroneArea += OnExitDroneArea;
 
             StackSignals.Instance.JumperArea += _jumpCommand.Execute;
-            
-             
 
+            CoreGameSignals.Instance.onSizeUpPlayer += anotherCommand;
+
+        }
+
+        private void anotherCommand()
+        {
+             meshController.ScaleUpPlayer();
+             
         }
 
         private void OnExitDroneArea()

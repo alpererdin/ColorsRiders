@@ -95,7 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 614604432351197866}
   rigidbody: {fileID: 1816796875779125281}
-  _currentGameState: 0
+  inputManager: {fileID: 0}
 --- !u!1 &1114913806536527142
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,6 +611,7 @@ MonoBehaviour:
   scoreText: {fileID: 5049815272723777552}
   RunnersColorMaterial: {fileID: 2100000, guid: 8612ab69f064269409eac06eebc1707c,
     type: 2}
+  renderer: {fileID: 8224243910154730598}
 --- !u!1001 &1044023338978089692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -688,6 +689,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: mono
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b836ac01240f7d24287dde675adc95d2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: b836ac01240f7d24287dde675adc95d2,
         type: 3}

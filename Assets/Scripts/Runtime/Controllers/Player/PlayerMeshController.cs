@@ -1,9 +1,10 @@
 using System;
+using Runtime.Data.ValueObject;
 using Runtime.Enums;
 using Runtime.Signals;
 using TMPro;
 using UnityEngine;
-
+using DG.Tweening;
 namespace Runtime.Controllers.Player
 {
     public class PlayerMeshController : MonoBehaviour
@@ -15,15 +16,24 @@ namespace Runtime.Controllers.Player
         [SerializeField] private TextMeshPro scoreText;
         [SerializeField] public Material RunnersColorMaterial;
 
-        
+        [SerializeField] private  GameObject renderer;
         
         #endregion
 
+        private PlayerMeshData _data;
         #endregion
 
+        internal void SetData(PlayerMeshData scaleData)
+        {
+            _data = scaleData;
+        }
         internal void SetTotalScore(int value)
         {
             scoreText.text = value.ToString();
+        }
+        internal void ScaleUpPlayer()
+        {
+            renderer.transform.DOScale(_data.ScaleCounter, 1).SetEase(Ease.Flash);
         }
        /* internal void ChangeMaterial()
         {
@@ -56,6 +66,10 @@ namespace Runtime.Controllers.Player
             PlayerSignals.Instance.OnGatePassed -=ChangeMaterial;
         }
       */
+       internal void OnReset()
+       {
+           renderer.gameObject.transform.DOScaleX(1, 1).SetEase(Ease.Linear);
+       }
         
     }
 }

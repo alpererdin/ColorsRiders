@@ -6,6 +6,7 @@ namespace Runtime.Data.ValueObject
     public struct PlayerData
     {
         public PlayerMovementData MovementData;
+        public PlayerMeshData MeshData;
 
     }
 
@@ -15,4 +16,11 @@ namespace Runtime.Data.ValueObject
         public float ForwardSpeed;
         public float SidewaysSpeed;
     }
+    [Serializable]
+    public struct PlayerMeshData
+    {
+        public float ScaleCounter;
+        public float MiniGameScaleCounter;
+    }
+
 }
