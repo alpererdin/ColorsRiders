@@ -485,7 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelHolder: {fileID: 1412498950}
-  totalLevelCount: 1
+  totalLevelCount: 2
 --- !u!1 &226088602
 GameObject:
   m_ObjectHideFlags: 0
@@ -2064,6 +2064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   money: {fileID: 7481974019986545055, guid: 2410a98f6e45d0f4c99ccb8d359c5d1a, type: 3}
   _collectableList: []
+  _tempList: []
 --- !u!1 &2005717823
 GameObject:
   m_ObjectHideFlags: 0

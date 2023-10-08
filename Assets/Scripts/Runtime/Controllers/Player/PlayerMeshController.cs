@@ -17,6 +17,7 @@ namespace Runtime.Controllers.Player
         [SerializeField] public Material RunnersColorMaterial;
 
         [SerializeField] private  GameObject renderer;
+        private float size = 1.1f;
         
         #endregion
 
@@ -33,7 +34,15 @@ namespace Runtime.Controllers.Player
         }
         internal void ScaleUpPlayer()
         {
-            renderer.transform.DOScale(_data.ScaleCounter, 1).SetEase(Ease.Flash);
+            size += 0.1f;
+            renderer.transform.DOScale(size, 1).SetEase(Ease.Flash);
+             
+        }
+        internal void ScaleDownPlayer()
+        {
+            size -= 0.1f;
+            renderer.transform.DOScale(size, 1).SetEase(Ease.Flash);
+             
         }
        /* internal void ChangeMaterial()
         {

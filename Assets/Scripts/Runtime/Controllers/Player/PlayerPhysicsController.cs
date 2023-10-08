@@ -34,6 +34,7 @@ namespace Runtime.Controllers.Player
         private readonly string _drone = "DroneArea";
         private readonly string _idle = "Idle";
         private readonly string _finish = "Finish";
+        private readonly string _build = "Build";
         #endregion
 
         #endregion
@@ -77,7 +78,17 @@ namespace Runtime.Controllers.Player
             } 
             if (other.CompareTag(_finish))
             {
-                CoreGameSignals.Instance.onSizeUpPlayer?.Invoke();
+                StackSignals.Instance.onPrepareBuildingStae?.Invoke();
+               manager.PlayerDroneStageArea();
+               
+                
+            }
+            if (other.CompareTag(_build))
+            {
+                StackSignals.Instance.onRemoveFromSize?.Invoke();
+               manager.PlayerDroneStageArea();
+               
+                
             }
             if (other.CompareTag("JumpArea"))
             {
