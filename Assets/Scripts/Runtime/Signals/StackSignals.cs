@@ -23,7 +23,7 @@ namespace Runtime.Signals
         public UnityAction onStackUnFollowPlayer = delegate { };
         
     
-        public UnityAction onFirstInFirstOutSignal=delegate {  };
+       
 
         public Action<Transform> onStackEnterDroneArea;
         public UnityAction onLastCollectableEnterDroneArea = delegate { };
@@ -34,6 +34,9 @@ namespace Runtime.Signals
         public UnityAction<GameObject> droneareaExitAdder = delegate {  };
         
         public UnityAction JumperArea= delegate {  };
+        
+        public UnityAction onPrepareBuildingStae=delegate {  };
+        public UnityAction onRemoveFromSize=delegate {  };
         
          
     }
