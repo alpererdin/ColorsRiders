@@ -92,14 +92,8 @@ namespace Runtime.Managers
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                GameStateManager.SetGameState(GameStateManager.GameState.Idle);
-            }
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                GameStateManager.SetGameState(GameStateManager.GameState.Runner);
-            }
+           
+          
             if (!_isAvailableForTouch) return;
             
             GameStateManager.GameState gameState = GameStateManager.CurrentGameState;

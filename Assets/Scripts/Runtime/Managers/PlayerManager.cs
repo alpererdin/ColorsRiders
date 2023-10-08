@@ -131,6 +131,14 @@ namespace Runtime.Managers
 
             CoreGameSignals.Instance.onSizeUpPlayer += anotherCommand;
 
+
+            CoreGameSignals.Instance.onSizeDownPlayer += renameThisCommand;
+
+        }
+
+        private void renameThisCommand()
+        {
+            meshController.ScaleDownPlayer();
         }
 
         private void anotherCommand()

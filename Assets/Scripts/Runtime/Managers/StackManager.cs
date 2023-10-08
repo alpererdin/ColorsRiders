@@ -36,7 +36,7 @@ namespace Runtime.Managers
         [SerializeField] private GameObject money;
         
          [SerializeField] public List<GameObject> _collectableList = new List<GameObject>();
-       // [SerializeField] private List<Transform> _tempList = new List<Transform>();
+        [SerializeField] public List<GameObject> _tempList = new List<GameObject>();
 
         #endregion
 
@@ -57,6 +57,8 @@ namespace Runtime.Managers
         private StackNewInitalizerCommand _newInit;
  
        // private StackEnterDroneAreaCommand _stackEnterDroneAreaCommand;
+       private StackToSizeCommand _sizeCommand;
+       private SizeToBuildCommand _buildCommand;
         
         private readonly string _stackDataPath = "Data/CD_Stack";
 
@@ -84,6 +86,12 @@ namespace Runtime.Managers
             _firstInOutStack = new FirstInFirstOutInStackCommand(this, ref _collectableStack);
             _newInit = new StackNewInitalizerCommand(this, ref _collectableList );
             //_stackEnterDroneAreaCommand = new StackEnterDroneAreaCommand(ref _collectableList, ref _tempList);
+            
+            _sizeCommand=new StackToSizeCommand(this, ref _collectableStack,ref _tempList);
+            
+            
+            _buildCommand=new SizeToBuildCommand(this, ref _collectableStack,ref _tempList);
+           
 
         }
 
@@ -130,6 +138,11 @@ namespace Runtime.Managers
               StackSignals.Instance.droneareaAdder  += onAdderDroneareaObject;
              // StackSignals.Instance.JumperArea  += onJumperArea;
 
+             StackSignals.Instance.onPrepareBuildingStae += MiniGameArea;
+             
+             
+             StackSignals.Instance.onRemoveFromSize += MiniGameBuild;
+
 
         }
 
@@ -162,19 +175,44 @@ namespace Runtime.Managers
                 
 
             }
-     
         }
-        
+        private void MiniGameArea()
+        {
+            //StartCoroutine(WaitStackObjects());
+            
+            int collectableCount = _collectableStack.Count;
+            //int multipleCount = collectableCount * 2;
+            // countlvl = multipleCount;
+            //   StackSignals.Instance.onSetStackCount?.Invoke(collectableCount);
+            for (int i = 0; i < collectableCount; i++)
+            {
+                DOVirtual.DelayedCall((i+1)/10f,
+                    () => 
+                        _sizeCommand.Execute());
+                
 
+            }
+        }
+        private void MiniGameBuild()
+        { 
+            int temp = _tempList.Count;
+           
+            for (int i = 0; i < temp; i++)
+            {
+                DOVirtual.DelayedCall((i+1)/10f,
+                    () => 
+                        _buildCommand.Execute());
+           
+            }
+        }
+ 
         private void OnlastCollectale()
         {
              
             CoreGameSignals.Instance.onExitDroneArea?.Invoke();
 
         }
-
-
-        
+    
         private void OnUpdateStack( )
         {
             //_stackInitializerCommand.Execute();
