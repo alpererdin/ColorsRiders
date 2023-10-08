@@ -16,6 +16,7 @@ TagManager:
   - DroneGate
   - JumpArea
   - Idle
+  - Build
   layers:
   - Default
   - TransparentFX
