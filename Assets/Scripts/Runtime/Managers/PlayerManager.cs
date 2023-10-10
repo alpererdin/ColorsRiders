@@ -270,6 +270,12 @@ namespace Runtime.Managers
             Vector3 pos = new Vector3(position.x,position.y, position.z);
             StackSignals.Instance.onStackFollowPlayer?.Invoke(pos);
         } 
+        internal void SetSizeStackPosition()
+        {
+            var position = transform.position;
+            Vector3 pos = new Vector3(position.x,position.y, position.z);
+            StackSignals.Instance.onSizeStackFollowPlayer?.Invoke(pos);
+        } 
        
         
         private IEnumerator WaitForFinal()

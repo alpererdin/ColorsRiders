@@ -59,12 +59,20 @@ namespace Runtime.Managers
        // private StackEnterDroneAreaCommand _stackEnterDroneAreaCommand;
        private StackToSizeCommand _sizeCommand;
        private SizeToBuildCommand _buildCommand;
+       private SizeStackMoverCommand _sizeMoverCommand;
+       
+      
+
         
         private readonly string _stackDataPath = "Data/CD_Stack";
+        
+        private IEnumerator currentDecreaseStackCoroutine;
 
         #endregion
 
         #endregion
+        
+        private bool isPlayerBuilding = false;
 
         private void Awake()
         {
@@ -91,7 +99,8 @@ namespace Runtime.Managers
             
             
             _buildCommand=new SizeToBuildCommand(this, ref _collectableStack,ref _tempList);
-           
+
+            _sizeMoverCommand = new SizeStackMoverCommand();
 
         }
 
@@ -141,11 +150,118 @@ namespace Runtime.Managers
              StackSignals.Instance.onPrepareBuildingStae += MiniGameArea;
              
              
-             StackSignals.Instance.onRemoveFromSize += MiniGameBuild;
+            
+
+        
+
+             
+             StackSignals.Instance.onSizeStackFollowPlayer += OnSizeStackMove;
+             
+             
+            // StackSignals.Instance.onRemoveFromSize += MiniGameBuild;
+       
+             StackSignals.Instance.isPlayerBuildState += SubscribeToPlayerBuildState;
+             
+           
+
 
 
         }
 
+        #region building102 commandlines
+/*  private void SubscribeToPlayerBuildState(bool isBuilding,Transform target)
+        {
+            if (isBuilding)
+            {
+                
+                isPlayerBuilding = true;
+                build101(target);
+                
+            }
+            else
+            {
+                
+                isPlayerBuilding = false;
+                StopCoroutine(DecreaseStackListCount(target));
+            }
+        }
+       
+
+        private void build101(Transform target)
+        {
+            if (target != null)
+            {
+                StartCoroutine(DecreaseStackListCount(target));
+                
+                 
+
+            }else
+                Debug.Log("transform bost");
+        
+        }
+        
+        private IEnumerator DecreaseStackListCount(Transform target)
+        {
+             
+                 
+                int temp = _tempList.Count;
+                if (temp > 0)
+                {
+                   // _tempList.RemoveAt(temp - 1);
+                    _buildCommand.Execute(target);
+                }
+
+                 
+                yield return new WaitForSeconds(1f);
+                if (isPlayerBuilding)
+                {
+                    StartCoroutine(DecreaseStackListCount(target));
+                }
+             
+        }
+        */
+
+        #endregion
+      
+        private void SubscribeToPlayerBuildState(bool isBuilding,Transform target)
+        {
+            if (isBuilding)
+            {
+                isPlayerBuilding = true;
+                if (currentDecreaseStackCoroutine != null)
+                {
+                    StopCoroutine(currentDecreaseStackCoroutine);
+                }
+                currentDecreaseStackCoroutine = DecreaseStackListCount(target);
+                StartCoroutine(currentDecreaseStackCoroutine);
+            }
+            else
+            {
+                isPlayerBuilding = false;
+            }
+        }
+   
+        private IEnumerator DecreaseStackListCount(Transform target)
+        {
+            while (isPlayerBuilding)
+            {
+                int temp = _tempList.Count;
+                if (temp > 0)
+                { 
+                    _buildCommand.Execute(target);
+                }
+
+                yield return new WaitForSeconds(1f);
+            }
+        }
+        private void OnSizeStackMove(Vector3 direction)
+        {
+            transform.position = new Vector3(0, 0, 0);
+            if (_tempList.Count > 0)
+            {
+                _sizeMoverCommand.Execute(direction.x,direction.y,direction.z, _tempList);
+            }
+        }
         private void onJumperArea()
         {
             StartCoroutine(_stackAnimatorCommand.Execute());
@@ -157,55 +273,29 @@ namespace Runtime.Managers
             
         }
         private int setStack() => countlvl;
-        
-
         private void DroneArea()
         {
-            //StartCoroutine(WaitStackObjects());
-            
             int collectableCount = _collectableStack.Count;
-            //int multipleCount = collectableCount * 2;
-           // countlvl = multipleCount;
-         //   StackSignals.Instance.onSetStackCount?.Invoke(collectableCount);
+ 
             for (int i = 0; i < collectableCount; i++)
             {
                 DOVirtual.DelayedCall((i+1)/2f,
                     () => 
                _firstInOutStack.Execute());
-                
-
             }
         }
         private void MiniGameArea()
         {
-            //StartCoroutine(WaitStackObjects());
-            
             int collectableCount = _collectableStack.Count;
-            //int multipleCount = collectableCount * 2;
-            // countlvl = multipleCount;
-            //   StackSignals.Instance.onSetStackCount?.Invoke(collectableCount);
+ 
             for (int i = 0; i < collectableCount; i++)
             {
                 DOVirtual.DelayedCall((i+1)/10f,
                     () => 
                         _sizeCommand.Execute());
-                
-
             }
         }
-        private void MiniGameBuild()
-        { 
-            int temp = _tempList.Count;
-           
-            for (int i = 0; i < temp; i++)
-            {
-                DOVirtual.DelayedCall((i+1)/10f,
-                    () => 
-                        _buildCommand.Execute());
-           
-            }
-        }
- 
+     
         private void OnlastCollectale()
         {
              
