@@ -37,7 +37,12 @@ namespace Runtime.Signals
         
         public UnityAction onPrepareBuildingStae=delegate {  };
         public UnityAction onRemoveFromSize=delegate {  };
+
         
-         
+        
+        public UnityAction<Vector3> onSizeStackFollowPlayer = delegate { };
+
+        public UnityAction<bool ,Transform> isPlayerBuildState = delegate {  };
+      
     }
 }

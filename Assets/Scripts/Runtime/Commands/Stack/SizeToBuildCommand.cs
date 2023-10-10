@@ -25,9 +25,10 @@ namespace Runtime.Commands.Stack
 
         }
 
-        public void Execute()
-        
-        {
+        public void Execute(Transform target)
+      {
+          #region oldWay commandLines
+/* Debug.Log(target);
             _tempStack[0].SetActive(true);
 
         
@@ -46,16 +47,35 @@ namespace Runtime.Commands.Stack
             _tempStack.TrimExcess();
  
             
+            PlayerSignals.Instance.onSetTotalScore?.Invoke(-1);*/
+          
+
+          #endregion
+            
+            if (_tempStack.Count == 0)
+            {
+                Debug.Log("No objects in _temp ");
+                return;
+            }
+            GameObject objectToMove = _tempStack[0];
+            _tempStack.RemoveAt(0);
+            Vector3 targetPosition = target.position  ;  
+            objectToMove.SetActive(true);
+            objectToMove.transform.DOMove(targetPosition, 0.2f).OnComplete(() =>
+            {
+                CoreGameSignals.Instance.onSizeDownPlayer?.Invoke();
+            });
+            _tempStack.TrimExcess();
             PlayerSignals.Instance.onSetTotalScore?.Invoke(-1);
 
             if (_tempStack.Count == 0)
             {
-                //Debug.Log("sonobje de gecebilirdi");
+           
                 Debug.Log("new level");
                 GameStateManager.SetGameState(GameStateManager.GameState.Runner);
                 _tempStack.TrimExcess();
                  
             }
-        }
+      }
     }
 }
