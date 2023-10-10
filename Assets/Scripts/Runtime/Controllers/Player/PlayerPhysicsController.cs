@@ -51,6 +51,16 @@ namespace Runtime.Controllers.Player
                 PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Crouch);
                
             }
+
+          /*  if (other.CompareTag(_build))
+            {
+                //StackSignals.Instance.onRemoveFromSize?.Invoke();
+                StackSignals.Instance.isPlayerBuildState(true,other.gameObject.transform);
+                 //StackSignals.Instance.onPlayerInBuildState(other.gameObject.transform);
+               // manager.PlayerDroneStageArea();
+               
+                
+            }*/
             
         }
        private void OnTriggerExit(Collider other)
@@ -68,6 +78,12 @@ namespace Runtime.Controllers.Player
            {
                Destroy(other.transform.parent.gameObject);
            }
+           if (other.CompareTag(_build))
+           {
+               
+               StackSignals.Instance.isPlayerBuildState(false,gameObject.transform);
+            
+           }
        }
 
        private void OnTriggerEnter(Collider other)
@@ -79,17 +95,16 @@ namespace Runtime.Controllers.Player
             if (other.CompareTag(_finish))
             {
                 StackSignals.Instance.onPrepareBuildingStae?.Invoke();
-               manager.PlayerDroneStageArea();
+                manager.PlayerDroneStageArea();
                
                 
             }
             if (other.CompareTag(_build))
             {
-                StackSignals.Instance.onRemoveFromSize?.Invoke();
-               manager.PlayerDroneStageArea();
+                StackSignals.Instance.isPlayerBuildState(true,other.gameObject.transform);
                
                 
-            }
+            } 
             if (other.CompareTag("JumpArea"))
             {
                StackSignals.Instance.JumperArea?.Invoke();

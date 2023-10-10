@@ -100,6 +100,7 @@ namespace Runtime.Controllers.Player
                     }
                     else
                     {
+                        manager.SetSizeStackPosition();
                         IdleMove();
                         StopSideways(); 
                         Stop();
