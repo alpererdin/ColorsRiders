@@ -134,9 +134,10 @@ namespace Runtime.Controllers.Player
                 Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
                 Vector3 newPosition = transform.position + movement * Time.deltaTime * 10;
                 transform.position = newPosition;
-               // Quaternion toRotation = Quaternion.LookRotation(new Vector3(horizontalInput, 0f, verticalInput*2));
+                
+                Quaternion toRotation = Quaternion.LookRotation(new Vector3(horizontalInput, 0f, verticalInput*2));
             
-                //transform.rotation = toRotation;
+                transform.rotation = toRotation;
             }
         }
 
