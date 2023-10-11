@@ -81,6 +81,7 @@ MonoBehaviour:
   animationController: {fileID: 2577694953791286256}
   physicsController: {fileID: 3972194527216279057}
   meshController: {fileID: 5577312480283631375}
+  _score: 1
 --- !u!114 &3728413453173965148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +206,7 @@ GameObject:
   - component: {fileID: 6661317190679598209}
   - component: {fileID: 2373185516830396355}
   - component: {fileID: 5049815272723777552}
+  - component: {fileID: 3756995398563944432}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -366,6 +368,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 2373185516830396355}
   m_maskType: 0
+--- !u!114 &3756995398563944432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3664098379501064820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f869a2a993ce80b47866c8c9b70687da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5841039140642445013
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,6 +719,16 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: b7f81b3a053fa2041a26dcef85e82198, type: 2}
+    - target: {fileID: 5866666021909216657, guid: b836ac01240f7d24287dde675adc95d2,
+        type: 3}
+      propertyPath: m_UpdateMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: b836ac01240f7d24287dde675adc95d2,
+        type: 3}
+      propertyPath: m_CullingMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: b836ac01240f7d24287dde675adc95d2,
         type: 3}
       propertyPath: m_ApplyRootMotion
