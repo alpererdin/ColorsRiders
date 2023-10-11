@@ -27,9 +27,9 @@ namespace Runtime.Managers
         #endregion
         private void Awake()
         {
-              GetType();
+            GetBuildType();
         }
-        private void GetType()
+        private void GetBuildType()
         {
             data = Resources.Load<CD_Build>("Data/CD_Build").data[(int)BuildingTypes];
             currentScore = data.CurrentScore;

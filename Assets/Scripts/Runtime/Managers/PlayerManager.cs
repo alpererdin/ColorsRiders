@@ -41,7 +41,7 @@ namespace Runtime.Managers
        
 
         public int _score=1;
-        private byte _currentValue = 0;
+        //private byte _currentValue = 0;
 
         
         #endregion

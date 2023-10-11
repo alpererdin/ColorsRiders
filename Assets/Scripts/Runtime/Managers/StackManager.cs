@@ -251,7 +251,7 @@ namespace Runtime.Managers
                     _buildCommand.Execute(target);
                 }
 
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(.5f);
             }
         }
         private void OnSizeStackMove(Vector3 direction)
