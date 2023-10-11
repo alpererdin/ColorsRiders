@@ -16,10 +16,7 @@ namespace Runtime.Controllers.Player
 
         [SerializeField] private Rigidbody managerRigidbody;
         [SerializeField] private PlayerManager manager;
-        //[SerializeField] private GateManager gatemanager;
-        
-         
-
+ 
         #endregion
 
         #region Private Variables
@@ -51,17 +48,7 @@ namespace Runtime.Controllers.Player
                 PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Crouch);
                
             }
-
-          /*  if (other.CompareTag(_build))
-            {
-                //StackSignals.Instance.onRemoveFromSize?.Invoke();
-                StackSignals.Instance.isPlayerBuildState(true,other.gameObject.transform);
-                 //StackSignals.Instance.onPlayerInBuildState(other.gameObject.transform);
-               // manager.PlayerDroneStageArea();
-               
-                
-            }*/
-            
+ 
         }
        private void OnTriggerExit(Collider other)
        {
@@ -70,7 +57,6 @@ namespace Runtime.Controllers.Player
                CoreGameSignals.Instance.onExitTurretArea?.Invoke();
                PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Run);
                manager.PlayerSpeedExitStageArea();
-               // manager.SetStackPosition();
                
            }
 
@@ -80,9 +66,7 @@ namespace Runtime.Controllers.Player
            }
            if (other.CompareTag(_build))
            {
-               
                StackSignals.Instance.isPlayerBuildState(false,gameObject.transform);
-            
            }
        }
 
@@ -94,20 +78,16 @@ namespace Runtime.Controllers.Player
             } 
             if (other.CompareTag(_finish))
             {
-                //++
                 PlayerSignals.Instance.onPlayConditionChanged?.Invoke(false);
                 DOVirtual.DelayedCall(.5f,
                     () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Build));
-                //++
                 StackSignals.Instance.onPrepareBuildingStae?.Invoke();
                 manager.PlayerDroneStageArea();
-               
                 
             }
             if (other.CompareTag(_build))
             {
                 StackSignals.Instance.isPlayerBuildState(true,other.gameObject.transform);
-               
                 
             } 
             if (other.CompareTag("JumpArea"))
@@ -116,116 +96,73 @@ namespace Runtime.Controllers.Player
             }
             if (other.CompareTag(_drone))
             {
-               // CoreGameSignals.Instance.onMiniGameEntered?.Invoke();
+             
                 CoreGameSignals.Instance.onEnterDroneArea?.Invoke();
-              
-                
-              /*   DOVirtual.DelayedCall(.5f,
-                    () =>manager.PlayerSpeedStageArea());
-               DOVirtual.DelayedCall(2f,
-                    () =>manager.PlayerDroneStageArea());*/
-             
-                
-                /*DOVirtual.DelayedCall(.5f,
-                    () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.DroneArea));
-                DOVirtual.DelayedCall(4.5f,
-                    () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow));*/
-                //PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Run);
-            
-               // return;
-                
             }
-          /*  if (other.CompareTag(_stageArea))
+          
+            if (other.CompareTag(_stageArea))
             {
-             
-                manager.ForceCommand.Execute();
-                CoreGameSignals.Instance.onStageAreaEntered?.Invoke();
-                InputSignals.Instance.onDisableInput?.Invoke();
+        
+                PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Crouch);
+                manager.PlayerSpeedStageArea();
+            }
 
-                DOVirtual.DelayedCall(3, () =>
-                {
-                    var result = other.transform.parent.GetComponentInChildren<PoolController>()
-                        .TakeResults(manager.StageValue);
-
-                    if (result)
-                    {
-                        CoreGameSignals.Instance.onStageAreaSuccessful?.Invoke(manager.StageValue);
-                        InputSignals.Instance.onEnableInput?.Invoke();
-                    }
-                    else
-                    {
-                        CoreGameSignals.Instance.onLevelFailed?.Invoke();
-                    }
-                });
-                return;
-            }*/
-          if (other.CompareTag(_stageArea))
-          {
-              //CoreGameSignals.Instance.onEnterTurretArea?.Invoke();
-              PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Crouch);
-              manager.PlayerSpeedStageArea();
-          }
-
-          if (other.CompareTag(_gate))
-          {
-              PlayerSignals.Instance.OnGatePassed?.Invoke(other.GetComponent<GateManager>().currentColorType);
+            if (other.CompareTag(_gate))
+            {
+                PlayerSignals.Instance.OnGatePassed?.Invoke(other.GetComponent<GateManager>().currentColorType);
            
-          }
-          if (other.CompareTag(_obstacle))
-          {
-              managerRigidbody.transform.DOMoveZ(managerRigidbody.transform.position.z - 10f, 1f)
-                  .SetEase(Ease.OutBack);
-              return;
-          }
+            }
+            if (other.CompareTag(_obstacle))
+            {
+                managerRigidbody.transform.DOMoveZ(managerRigidbody.transform.position.z - 10f, 1f)
+                    .SetEase(Ease.OutBack);
+                return;
+            }
+            if (other.CompareTag(_atm))
+            {
+                CoreGameSignals.Instance.onAtmTouched?.Invoke(other.gameObject);
+                return;
+            }
 
-          if (other.CompareTag(_atm))
-          {
-              CoreGameSignals.Instance.onAtmTouched?.Invoke(other.gameObject);
-              return;
-          }
-
-          if (other.CompareTag(_collectable) )
-          {
+            if (other.CompareTag(_collectable) )
+            {
                
-              if (manager.currentColor == other.GetComponentInParent<CollectableManager>().currentColorType)
-              {
+                if (manager.currentColor == other.GetComponentInParent<CollectableManager>().currentColorType)
+                {
                     
-                  other.tag = "Collected";
-                  StackSignals.Instance.onInteractionCollectable?.Invoke(other.transform.parent.gameObject);
-                  PlayerSignals.Instance.onSetTotalScore?.Invoke(1);
-              }
-              else
-              {
-                  PlayerSignals.Instance.onPlayConditionChanged?.Invoke(false);
-                  PlayerSignals.Instance.onMoveConditionChanged?.Invoke(false);
-                  Destroy(other.transform.parent.gameObject);
-                  managerRigidbody.transform.DOMoveZ(managerRigidbody.transform.position.z - 2.3f, .4f)
-                      .SetEase(Ease.Linear).OnComplete(() =>
-                      {
-                          PlayerSignals.Instance.onPlayConditionChanged?.Invoke(true);
-                          PlayerSignals.Instance.onMoveConditionChanged?.Invoke(true);
+                    other.tag = "Collected";
+                    StackSignals.Instance.onInteractionCollectable?.Invoke(other.transform.parent.gameObject);
+                    PlayerSignals.Instance.onSetTotalScore?.Invoke(1);
+                }
+                else
+                {
+                    PlayerSignals.Instance.onPlayConditionChanged?.Invoke(false);
+                    PlayerSignals.Instance.onMoveConditionChanged?.Invoke(false);
+                    Destroy(other.transform.parent.gameObject);
+                    managerRigidbody.transform.DOMoveZ(managerRigidbody.transform.position.z - 2.3f, .4f)
+                        .SetEase(Ease.Linear).OnComplete(() =>
+                        {
+                            PlayerSignals.Instance.onPlayConditionChanged?.Invoke(true);
+                            PlayerSignals.Instance.onMoveConditionChanged?.Invoke(true);
                           
-                      });
-                  StackSignals.Instance.onInteractionObstacle?.Invoke(_stackHolder.transform.gameObject);
-                  PlayerSignals.Instance.onSetTotalScore?.Invoke(-1);
+                        });
+                    StackSignals.Instance.onInteractionObstacle?.Invoke(_stackHolder.transform.gameObject);
+                    PlayerSignals.Instance.onSetTotalScore?.Invoke(-1);
                   
-              }
+                }
                 
-              return;
-          }
+                return;
+            }
 
-          if (other.CompareTag(_conveyor))
-          {
-              CoreGameSignals.Instance.onMiniGameEntered?.Invoke();
-              DOVirtual.DelayedCall(1.5f,
-                  () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.MiniGame));
-              DOVirtual.DelayedCall(2.5f,
-                  () => CameraSignals.Instance.onSetCinemachineTarget?.Invoke(CameraTargetState.FakePlayer));
-              return;
-          }
-
-             
-            
+            if (other.CompareTag(_conveyor))
+            {
+                CoreGameSignals.Instance.onMiniGameEntered?.Invoke();
+                DOVirtual.DelayedCall(1.5f,
+                    () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.MiniGame));
+                DOVirtual.DelayedCall(2.5f,
+                    () => CameraSignals.Instance.onSetCinemachineTarget?.Invoke(CameraTargetState.FakePlayer));
+                return;
+            }
         }
     }
 }

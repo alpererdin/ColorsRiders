@@ -49,7 +49,7 @@ namespace Runtime.Controllers.UI
         
         private void OnOpenPanel(UIPanelTypes panel, int layerValue)
         {
-           // CoreUISignals.Instance.onClosePanel?.Invoke(layerValue);
+            CoreUISignals.Instance.onClosePanel?.Invoke(layerValue);
             Instantiate(Resources.Load<GameObject>($"Screens/{panel}Panel"), layers[layerValue].transform);
         }
 

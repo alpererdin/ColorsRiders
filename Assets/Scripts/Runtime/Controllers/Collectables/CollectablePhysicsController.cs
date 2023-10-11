@@ -21,16 +21,16 @@ namespace Runtime.Controllers.Collectables
 
         #region Private Variables
      
-        private byte stackInit=0;
+      //  private byte stackInit=0;
         
-        private readonly string _collectable = "Collectable";
+        //private readonly string _collectable = "Collectable";
         private readonly string _collected = "Collected";
         private readonly string _gate = "Gate";
         private readonly string _atm = "ATM";
         private readonly string _obstacle = "Obstacle";
         private readonly string _conveyor = "Conveyor";
         private readonly string _gunBullet = "GunBullet";
-        private readonly string _drone = "DroneArea";
+        //private readonly string _drone = "DroneArea";
         private readonly string _droneGate = "DroneGate";
         
 

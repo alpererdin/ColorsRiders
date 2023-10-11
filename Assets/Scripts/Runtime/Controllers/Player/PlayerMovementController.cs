@@ -29,7 +29,8 @@ namespace Runtime.Controllers.Player
          private bool _isReadyToMove, _isReadyToPlay;
          private float _inputValue;
         private Vector2 _clampValues;
-       
+
+        private bool idleAnimChecker= false;
 
         
         #endregion
@@ -135,9 +136,25 @@ namespace Runtime.Controllers.Player
                 Vector3 newPosition = transform.position + movement * Time.deltaTime * 10;
                 transform.position = newPosition;
                 
-                Quaternion toRotation = Quaternion.LookRotation(new Vector3(horizontalInput, 0f, verticalInput*2));
-            
-                transform.rotation = toRotation;
+                if (movement != Vector3.zero)
+                {
+                    if (!idleAnimChecker)
+                    {
+                        PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.BuildRun);
+                        idleAnimChecker = true;
+                    }
+                   
+                    Quaternion toRotation = Quaternion.LookRotation(new Vector3(horizontalInput, 0f, verticalInput * 2));
+                    transform.rotation = toRotation;
+                 
+                }
+                else
+                {
+                    PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Idle);
+                    idleAnimChecker = false;
+                    
+                }
+                
             }
         }
 
