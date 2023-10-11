@@ -21,15 +21,19 @@ namespace Runtime.Commands.Stack
 
         public void Execute()
         {
-            int counter = _collectedStack.Count;
+            int counter = _collectedStack.Count ;
             for (int i = 0; i < counter; i++)
             {
                 Debug.Log("kadar denedi");
                _stackManager.AdderOnStackCommand.Execute(_collectedStack[i]);
-              
                
-                
-                
+               //++
+               //ScoreSignals.Instance.onSetScore(1);
+               PlayerSignals.Instance.onSetTotalScore?.Invoke(1);
+
+
+
+
             }
             _stackManager.StackTypeUpdaterCommand.Execute();
             CollectableSignals.Instance.OnAfterDroneArea.Invoke();

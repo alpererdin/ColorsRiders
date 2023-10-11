@@ -46,16 +46,15 @@ namespace Runtime.Commands.Stack
         _collectableStack.TrimExcess();
         _stackManager.UpdateStack();
             
-           // PlayerSignals.Instance.onSetTotalScore?.Invoke(-1);
+          
 
            if (_collectableStack.Count == 0)
            {
-               //Debug.Log("sonobje de gecebilirdi");
-               Debug.Log("Start idle mover ");
+              
                GameStateManager.SetGameState(GameStateManager.GameState.Idle);
-               //
+               
                PlayerSignals.Instance.onPlayConditionChanged?.Invoke(true);
-               //++
+               
                _collectableStack.TrimExcess();
                  
            }
