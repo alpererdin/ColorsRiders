@@ -6,5 +6,6 @@ namespace Runtime.Enums
         Follow,
         MiniGame,
         DroneArea,
+        Build
     }
 }
