@@ -6,5 +6,6 @@ namespace Runtime.Enums
         Run,
         Happy,
         Crouch,
+        BuildRun,
     }
 }
