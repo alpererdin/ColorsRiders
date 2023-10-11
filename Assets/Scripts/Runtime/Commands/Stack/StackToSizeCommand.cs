@@ -53,6 +53,9 @@ namespace Runtime.Commands.Stack
                //Debug.Log("sonobje de gecebilirdi");
                Debug.Log("Start idle mover ");
                GameStateManager.SetGameState(GameStateManager.GameState.Idle);
+               //
+               PlayerSignals.Instance.onPlayConditionChanged?.Invoke(true);
+               //++
                _collectableStack.TrimExcess();
                  
            }
