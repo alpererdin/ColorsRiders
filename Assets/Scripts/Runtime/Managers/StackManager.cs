@@ -55,15 +55,9 @@ namespace Runtime.Managers
         private StackRemoverOnStackCommand _stackRemoverCommand;
         private FirstInFirstOutInStackCommand _firstInOutStack;
         private StackNewInitalizerCommand _newInit;
- 
-       // private StackEnterDroneAreaCommand _stackEnterDroneAreaCommand;
        private StackToSizeCommand _sizeCommand;
        private SizeToBuildCommand _buildCommand;
        private SizeStackMoverCommand _sizeMoverCommand;
-       
-      
-
-        
         private readonly string _stackDataPath = "Data/CD_Stack";
         
         private IEnumerator currentDecreaseStackCoroutine;
@@ -93,13 +87,8 @@ namespace Runtime.Managers
             _stackRemoverCommand = new StackRemoverOnStackCommand(this, ref _collectableStack);
             _firstInOutStack = new FirstInFirstOutInStackCommand(this, ref _collectableStack);
             _newInit = new StackNewInitalizerCommand(this, ref _collectableList );
-            //_stackEnterDroneAreaCommand = new StackEnterDroneAreaCommand(ref _collectableList, ref _tempList);
-            
             _sizeCommand=new StackToSizeCommand(this, ref _collectableStack,ref _tempList);
-            
-            
             _buildCommand=new SizeToBuildCommand(this, ref _collectableStack,ref _tempList);
-
             _sizeMoverCommand = new SizeStackMoverCommand();
 
         }
@@ -122,50 +111,41 @@ namespace Runtime.Managers
             StackSignals.Instance.onInteractionConveyor +=
                 _stackInteractionWithConveyorCommand.Execute;
             StackSignals.Instance.onStackFollowPlayer += OnStackMove;
-            
             StackSignals.Instance.onUpdateType += StackTypeUpdaterCommand.Execute;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
             StackSignals.Instance.onUpdateStack += OnUpdateStack;
             StackSignals.Instance.onRemoveStackObject += _itemRemoverOnStackCommand.Execute;
-
-            //StackSignals.Instance.onFirstInFirstOutSignal += _test.Execute;
-           // StackSignals.Instance.onFirstInFirstOutSignal += _firstInOutStack.Execute;
-            
-            
-            
-            // StackSignals.Instance.onMinigameState +=;
-            //StackSignals.Instance.onStackEnterDroneArea += _stackEnterDroneAreaCommand.OnStackEnterDroneArea;
- 
-            
             CoreGameSignals.Instance.onEnterDroneArea += DroneArea;
-            
             StackSignals.Instance.onLastCollectableEnterDroneArea += OnlastCollectale;
-           
             StackSignals.Instance.onSetStackCount += setStack;
-            
               StackSignals.Instance.droneareaAdder  += onAdderDroneareaObject;
-             // StackSignals.Instance.JumperArea  += onJumperArea;
-
              StackSignals.Instance.onPrepareBuildingStae += MiniGameArea;
-             
-             
-            
-
-        
-
-             
              StackSignals.Instance.onSizeStackFollowPlayer += OnSizeStackMove;
-             
-             
-            // StackSignals.Instance.onRemoveFromSize += MiniGameBuild;
-       
              StackSignals.Instance.isPlayerBuildState += SubscribeToPlayerBuildState;
-             
-           
 
-
-
+        }
+        private void UnSubscribeEvents()
+        {
+            StackSignals.Instance.onInteractionCollectable -= OnInteractionWithCollectable;
+            StackSignals.Instance.onInteractionObstacle -= _stackRemoverCommand.Execute;
+            StackSignals.Instance.onInteractionATM -= OnInteractionWithATM;
+            StackSignals.Instance.onInteractionConveyor -=
+                _stackInteractionWithConveyorCommand.Execute;
+            StackSignals.Instance.onStackFollowPlayer -= OnStackMove;
+            StackSignals.Instance.onUpdateType -= StackTypeUpdaterCommand.Execute;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onReset -= OnReset;
+            StackSignals.Instance.onLastCollectableEnterDroneArea -= OnlastCollectale;
+            CoreGameSignals.Instance.onEnterDroneArea -= DroneArea;
+            StackSignals.Instance.onUpdateStack -= OnUpdateStack;
+            StackSignals.Instance.onRemoveStackObject -= _itemRemoverOnStackCommand.Execute;
+            StackSignals.Instance.onSetStackCount -= setStack;
+            StackSignals.Instance.droneareaAdder  -= onAdderDroneareaObject;
+            StackSignals.Instance.onPrepareBuildingStae -= MiniGameArea;
+            StackSignals.Instance.onSizeStackFollowPlayer -= OnSizeStackMove;
+            StackSignals.Instance.isPlayerBuildState -= SubscribeToPlayerBuildState;
+ 
         }
 
         #region building102 commandlines
@@ -304,8 +284,7 @@ namespace Runtime.Managers
         }
     
         private void OnUpdateStack( )
-        {
-            //_stackInitializerCommand.Execute();
+        { 
             _newInit.Execute();
         }
 
@@ -317,8 +296,7 @@ namespace Runtime.Managers
                 _stackMoverCommand.Execute(direction.x,direction.y, _collectableStack);
             }
         }
-        
-        //+
+  
         public void UpdateStack()
         {
             float stackOffset = 0f;
@@ -326,17 +304,12 @@ namespace Runtime.Managers
             {
                 Vector3 newPos = new Vector3(_collectableStack[i].transform.position.x, _collectableStack[i].transform.position.y, -0.335f + stackOffset);
               _collectableStack[i].transform.localPosition = newPos;
-                //_collectableStack[i].transform.DOLocalMove(newPos,.8f);
                 stackOffset += _data.CollectableOffsetInStack;
-                //transform pos ++
             }
         }
         
-       
         private void OnInteractionWithATM(GameObject collectableGameObject)
         {
-            //ScoreSignals.Instance.onSetAtmScore?.Invoke((int)collectableGameObject.GetComponent<CollectableManager>()
-           //     .GetCurrentValue() + 1);
             if (LastCheck == false)
             {
                 _itemRemoverOnStackCommand.Execute(collectableGameObject);
@@ -346,7 +319,6 @@ namespace Runtime.Managers
                 collectableGameObject.SetActive(false);
             }
         }
-
         
         private void OnInteractionWithCollectable(GameObject collectableGameObject)
         {
@@ -360,31 +332,7 @@ namespace Runtime.Managers
         {
             _stackInitializerCommand.Execute();
         }
-
         
-        private void UnSubscribeEvents()
-        {
-            StackSignals.Instance.onInteractionCollectable -= OnInteractionWithCollectable;
-            StackSignals.Instance.onInteractionObstacle -= _stackRemoverCommand.Execute;
-            StackSignals.Instance.onInteractionATM -= OnInteractionWithATM;
-            StackSignals.Instance.onInteractionConveyor -=
-                _stackInteractionWithConveyorCommand.Execute;
-            StackSignals.Instance.onStackFollowPlayer -= OnStackMove;
-            StackSignals.Instance.onUpdateType -= StackTypeUpdaterCommand.Execute;
-            CoreGameSignals.Instance.onPlay -= OnPlay;
-            CoreGameSignals.Instance.onReset -= OnReset;
-            
-           // StackSignals.Instance.onFirstInFirstOutSignal -= _firstInOutStack.Execute;
-            // StackSignals.Instance.onMinigameState +=;
-            //StackSignals.Instance.onStackEnterDroneArea += _stackEnterDroneAreaCommand.OnStackEnterDroneArea;
-
-            StackSignals.Instance.onLastCollectableEnterDroneArea -= OnlastCollectale;
-            
-            
-            CoreGameSignals.Instance.onEnterDroneArea -= DroneArea;
- 
-        }
-
         private void OnDisable()
         {
             UnSubscribeEvents();
@@ -394,6 +342,8 @@ namespace Runtime.Managers
         {
             LastCheck = false;
             _collectableStack.Clear();
+            _collectableList.Clear();
+            _collectableList.TrimExcess();
             _collectableStack.TrimExcess();
         }
     }

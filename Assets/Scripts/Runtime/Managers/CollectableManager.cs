@@ -52,13 +52,7 @@ namespace Runtime.Managers
             _material.color = _colorData.Color;
             
         }
-
-      
-        public void colortyper()
-        {
-            
-        }
-
+ 
         private void GetCollectableColorData() => _colorData = Resources.Load<CD_Color>("Data/CD_Color").Colors[(int)currentColorType];
         private CollectableData GetCollectableData() => Resources.Load<CD_Collectable>(_collectableDataPath).Data;
 
@@ -128,11 +122,7 @@ namespace Runtime.Managers
         {
             CoreGameSignals.Instance.onEnterTurretArea?.Invoke(GO);
         }
-
-        public void ExitDroneAreaInitalizer(Color currentColor, GameObject collectableGameobject)
-        {
-            
-        }
+ 
 
  
     }

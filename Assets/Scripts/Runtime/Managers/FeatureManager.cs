@@ -70,6 +70,7 @@ namespace Runtime.Managers
             UISignals.Instance.onClickStack -= _onClickStackCommand.Execute;
         
             CoreGameSignals.Instance.onGetStackLevel -= OnGetStackLevel;
+            ScoreSignals.Instance.onTestAciton -= ontest;
         }
 
         private void OnDisable()

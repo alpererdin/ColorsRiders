@@ -19,6 +19,8 @@ namespace Runtime.Managers
         public MaterialColorTypes currentColorType;
 
         private Material _material;
+
+        private Collider selfCollider;
         
         #endregion
 
@@ -28,16 +30,13 @@ namespace Runtime.Managers
             _material = GetComponent<MeshRenderer>().material;
             GetGateColorData();
             _material.color = _data.Color;
+           
 
         }
         private void GetGateColorData() => _data = Resources.Load<CD_Color>("Data/CD_Color").Colors[(int)currentColorType];
-        
-        private void GatePassed()
-        { 
-            //PlayerSignals.Instance.OnGatePassed.Invoke();
-        }
 
-      
+       
+         
     }
     
 }

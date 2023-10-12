@@ -44,37 +44,12 @@ namespace Runtime.Controllers.Player
             renderer.transform.DOScale(size, 1).SetEase(Ease.Flash);
              
         }
-       /* internal void ChangeMaterial()
-        {
-            RunnersColorMaterial.SetColor("_Color", Color.red);
-            Debug.Log("degistimi");
-        }*/
-
-      /*  private void OnEnable()
-        {
-            PlayerSignals.Instance.OnGatePassed +=ChangeMaterial;
-        }
-         
-        
-        private void ChangeMaterial(MaterialColorTypes colorType)
-        {
-            // Debug.Log(colorType);
-
-
-        }
-        */
+      
         public void ChangeMaterialColor(Color color)
         {
             RunnersColorMaterial.color = color;
         }
-
-         
-
-       /* private void OnDisable()
-        {
-            PlayerSignals.Instance.OnGatePassed -=ChangeMaterial;
-        }
-      */
+ 
        internal void OnReset()
        {
            renderer.gameObject.transform.DOScaleX(1, 1).SetEase(Ease.Linear);

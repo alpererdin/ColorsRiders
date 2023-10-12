@@ -26,13 +26,7 @@ namespace Runtime.Commands.Stack
             {
                 Debug.Log("kadar denedi");
                _stackManager.AdderOnStackCommand.Execute(_collectedStack[i]);
-               
-               //++
-               //ScoreSignals.Instance.onSetScore(1);
                PlayerSignals.Instance.onSetTotalScore?.Invoke(1);
-
-
-
 
             }
             _stackManager.StackTypeUpdaterCommand.Execute();

@@ -102,7 +102,6 @@ namespace Runtime.Managers
             {
                 
                 joystickContainer.SetActive(true);
-              //  _isTouching = true;
                 InputSignals.Instance.onInputTaken?.Invoke();
 
                 
@@ -168,8 +167,6 @@ namespace Runtime.Managers
 
         }
         
-       
-
         private bool IsPointerOverUIElement()
         {
             var eventData = new PointerEventData(EventSystem.current)

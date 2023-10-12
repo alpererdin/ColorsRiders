@@ -20,17 +20,13 @@ namespace Runtime.Controllers.Collectables
         #endregion
 
         #region Private Variables
-     
-      //  private byte stackInit=0;
         
-        //private readonly string _collectable = "Collectable";
         private readonly string _collected = "Collected";
         private readonly string _gate = "Gate";
         private readonly string _atm = "ATM";
         private readonly string _obstacle = "Obstacle";
         private readonly string _conveyor = "Conveyor";
         private readonly string _gunBullet = "GunBullet";
-        //private readonly string _drone = "DroneArea";
         private readonly string _droneGate = "DroneGate";
         
 
@@ -46,6 +42,12 @@ namespace Runtime.Controllers.Collectables
                 manager.InteractionWithPlayer(animator);
                 
                 testCollider.enabled = true;
+                
+            }
+            if (other.CompareTag(_droneGate))
+            {
+                
+                manager.InteractionWithPlayer(animator);
                 
             }
         }
@@ -75,28 +77,11 @@ namespace Runtime.Controllers.Collectables
             }
           if (other.CompareTag(_droneGate)&&(manager.currentColorType==other.gameObject.GetComponent<DroneAreaManager>().currentColorType))
             {
-               // PlayerSignals.Instance.onSetTotalScore?.Invoke(1);
-               // ScoreSignals.Instance.onTestAciton?.Invoke();
+               
                StackSignals.Instance.droneareaAdder?.Invoke(transform.parent.gameObject);
                 Debug.Log("1 artacaktı");
 
             }
-           /*      if (other.CompareTag(_drone))
-            {
-              DOVirtual.DelayedCall(.3f,
-                    () => StackSignals.Instance.onFirstInFirstOutSignal?.Invoke());
-
-               transform.parent.gameObject.transform.DOMove(new Vector3(transform.position.x, transform.position.y,
-                    other.transform.position.z), 2);
-                // 
-
-            }*/
-             
-           /* if (other.CompareTag(_collectable) && CompareTag(_collected))
-            {
-                other.tag = _collected;
-                manager.InteractionWithCollectable(other.transform.parent.gameObject);
-            }*/
            if (other.CompareTag("StageArea"))
            {
                
@@ -106,7 +91,6 @@ namespace Runtime.Controllers.Collectables
            }
             if (other.CompareTag(_gate) && CompareTag(_collected))
             {
-                //manager.CollectableUpgrade(manager.GetCurrentValue());
                 manager.InteractionWithGate(transform.parent.gameObject);
                 manager.currentColorType=other.GetComponent<GateManager>().currentColorType;
 
@@ -120,6 +104,8 @@ namespace Runtime.Controllers.Collectables
             if (other.CompareTag(_gunBullet) && CompareTag(_collected))
             {
                 manager.InteractionWithAtm(transform.parent.gameObject);
+                Destroy(other.gameObject);
+                //
                 
             }
 
@@ -133,7 +119,7 @@ namespace Runtime.Controllers.Collectables
                 manager.InteractionWithConveyor();
             }
 
-            if (other.CompareTag("Player") /*|| other.CompareTag(_collected)*/)
+            if (other.CompareTag("Player") )
             {
                 if (manager.currentColorType==other.GetComponentInParent<PlayerManager>().currentColor)
                 {
@@ -141,7 +127,6 @@ namespace Runtime.Controllers.Collectables
                     manager.ChangeMaterial(manager.baseMaterial);
                 }
                 
-               // manager.ChangeMaterial(other.GetComponentInChildren<SkinnedMeshRenderer>().material);
             }
 
  

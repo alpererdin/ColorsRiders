@@ -12,15 +12,9 @@ namespace Runtime.Commands.Stack
         {
             float direct = Mathf.Lerp(collectableStack[0].transform.localPosition.x, directionX,
                 5);
-            // collectableStack[0].transform.localPosition = new Vector3(direct, 1f, 0.335f);
-            
-            //y axis
             float directY = Mathf.Lerp(collectableStack[0].transform.localPosition.y, directionY, 5);
-            
             float directZ = Mathf.Lerp(collectableStack[0].transform.localPosition.z, directionZ, 5);
-            
             collectableStack[0].transform.localPosition = new Vector3(direct, directY, directZ);
-            //y ax
             StackItemsLerpMove(collectableStack);
         }
 

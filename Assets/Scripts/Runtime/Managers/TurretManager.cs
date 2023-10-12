@@ -40,7 +40,7 @@ namespace Runtime.Managers
               
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
 
-                Vector3 targetPosition = targetToShoot.transform.position+new Vector3(0,1,0);
+                Vector3 targetPosition = targetToShoot.transform.position+new Vector3(0,2,0);
                 Vector3 direction = (targetPosition - bullet.transform.position).normalized;
                 bullet.GetComponent<Rigidbody>().velocity = direction * 40;
 

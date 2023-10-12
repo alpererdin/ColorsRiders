@@ -70,10 +70,8 @@ namespace Runtime.Commands.Stack
 
             if (_tempStack.Count == 0)
             {
-           
                 Debug.Log("new level");
-                //GameStateManager.SetGameState(GameStateManager.GameState.Runner);
-                //CoreGameSignals.Instance.onNextLevel?.Invoke();
+                CoreGameSignals.Instance.onReset.Invoke();
                 GameStateManager.SetGameState(GameStateManager.GameState.Runner);
                  CoreGameSignals.Instance.onLevelSuccessful?.Invoke();
                 _tempStack.TrimExcess();

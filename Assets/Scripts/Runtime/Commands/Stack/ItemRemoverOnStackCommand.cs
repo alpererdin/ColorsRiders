@@ -43,7 +43,6 @@ namespace Runtime.Commands.Stack
                 }
                 _stackManager.UpdateStack();
 
-                //  _stackManager.StackTypeUpdaterCommand.Execute();
             }
         }
     }

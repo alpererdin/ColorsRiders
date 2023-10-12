@@ -22,15 +22,16 @@ namespace Runtime.Commands.Stack
         {
           
             var stackLevell =StackSignals.Instance.onSetStackCount();
+            
             var stackLevel = stackLevell * 2;
             
-            for (int i = 1; i < stackLevel; i++)
+            for (int i = 1; i < stackLevell; i++)
             {
-                Debug.Log("kadar calisir");
-                GameObject obj = Object.Instantiate(_money);
-                CollectableSignals.Instance.OnAfterDroneArea.Invoke();
                 
-                //CollectableSignals.Instance.InitChangeCollectedMaterial.Invoke();
+                GameObject obj = Object.Instantiate(_money);
+                CollectableSignals.Instance.onChangeCollectableAnimationState(CollectableAnimationStates.Run, _money);
+                CollectableSignals.Instance.OnAfterDroneArea.Invoke();
+              
                _stackManager.AdderOnStackCommand.Execute(obj);
               
                

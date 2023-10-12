@@ -10,13 +10,9 @@ namespace Runtime.Managers
         private void OnEnable()
         {
             SubscribeEvents();
-
             OpenStartPanel();
-            
-      
-        }
-
      
+        }
 
         private void SubscribeEvents()
         {
@@ -25,17 +21,14 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             CoreGameSignals.Instance.onReset += OnReset;
             
-           
         }
-
-       
+        
         private void OpenStartPanel()
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 0);
             //CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Idle,2);
             
             //  CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
-            //   CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Shop, 2);
         }
 
         private void OnLevelInitialize(byte levelValue)
@@ -43,11 +36,9 @@ namespace Runtime.Managers
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 0);
             //CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Shop, 2);
-            
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Idle,2);
             UISignals.Instance.onSetNewLevelValue?.Invoke(levelValue);
         }
-
         public void OnPlay()
         {
             CoreGameSignals.Instance.onPlay?.Invoke();
@@ -55,8 +46,7 @@ namespace Runtime.Managers
             CoreUISignals.Instance.onClosePanel?.Invoke(2);
             CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow);
         }
-
-     
+        
         private void OnOpenWinPanel()
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Win, 2);
@@ -114,8 +104,7 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
             CoreGameSignals.Instance.onReset -= OnReset;
         }
-
-
+        
         private void OnReset()
         {
             CoreUISignals.Instance.onCloseAllPanels?.Invoke();

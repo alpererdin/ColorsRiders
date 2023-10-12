@@ -26,8 +26,7 @@ namespace Runtime.Managers
         [SerializeField] private PlayerAnimationController animationController;
         [SerializeField] private PlayerPhysicsController physicsController;
         [SerializeField] private PlayerMeshController meshController;
-
-        
+       
         #endregion
 
         #region Private Variables
@@ -37,13 +36,9 @@ namespace Runtime.Managers
         private StackData _stackDatadata;
         private const string PlayerDataPath = "Data/CD_Player";
         private ColorData _colorData;
-
-       
-
+ 
         public int _score=1;
-        //private byte _currentValue = 0;
-
-        
+   
         #endregion
 
         #endregion
@@ -69,7 +64,7 @@ namespace Runtime.Managers
 
         private PlayerData GetPlayerData() => Resources.Load<CD_Player>(PlayerDataPath).Data;
 
-        #region MyRegion
+        #region DeleteThis
 
         private void SendPlayerDataToControllers()
         {
@@ -99,9 +94,7 @@ namespace Runtime.Managers
         }
 
         #endregion
-     
-       
-         
+        
         private void OnEnable()
         {
             SubscribeEvents();
@@ -118,20 +111,13 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onLevelFailed +=
                 () => PlayerSignals.Instance.onPlayConditionChanged?.Invoke(false);
             CoreGameSignals.Instance.onReset += OnReset;
-
             PlayerSignals.Instance.onSetTotalScore += OnSetTotalScore;
             CoreGameSignals.Instance.onMiniGameEntered += OnMiniGameEntered;
-          
             PlayerSignals.Instance.OnGatePassed += OnChangePlayerColor;
-
             CoreGameSignals.Instance.onEnterDroneArea += OnEnterDroneArea;
             CoreGameSignals.Instance.onExitDroneArea += OnExitDroneArea;
-
             StackSignals.Instance.JumperArea += _jumpCommand.Execute;
-
             CoreGameSignals.Instance.onSizeUpPlayer += anotherCommand;
-
-
             CoreGameSignals.Instance.onSizeDownPlayer += renameThisCommand;
 
         }
@@ -223,13 +209,14 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onLevelFailed -=
                 () => PlayerSignals.Instance.onPlayConditionChanged?.Invoke(false);
             CoreGameSignals.Instance.onReset -= OnReset;
-
             PlayerSignals.Instance.onSetTotalScore -= OnSetTotalScore;
             CoreGameSignals.Instance.onMiniGameEntered -= OnMiniGameEntered;
             PlayerSignals.Instance.OnGatePassed -= OnChangePlayerColor;
-            
             CoreGameSignals.Instance.onEnterDroneArea -= OnEnterDroneArea;
             CoreGameSignals.Instance.onExitDroneArea -= OnExitDroneArea;
+            StackSignals.Instance.JumperArea -= _jumpCommand.Execute;
+            CoreGameSignals.Instance.onSizeUpPlayer -= anotherCommand;
+            CoreGameSignals.Instance.onSizeDownPlayer -= renameThisCommand;
           
         }
 

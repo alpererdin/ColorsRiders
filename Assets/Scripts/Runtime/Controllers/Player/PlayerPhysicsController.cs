@@ -62,7 +62,9 @@ namespace Runtime.Controllers.Player
 
            if (other.CompareTag(_drone))
            {
-               Destroy(other.transform.parent.gameObject);
+              // Destroy(other.transform.parent.gameObject);
+              
+              Debug.Log("drondankacti");
            }
            if (other.CompareTag(_build))
            {

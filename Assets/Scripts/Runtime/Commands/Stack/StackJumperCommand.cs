@@ -18,7 +18,6 @@ namespace Runtime.Commands.Stack
             _collectableStack = collectableStack;
             _levelHolder = GameObject.Find("LevelHolder").transform;
         }
-
         public void Execute(int last, int index)
         {
             for (int i = last; i > index; i--)
@@ -27,11 +26,8 @@ namespace Runtime.Commands.Stack
                 Vector3 newPosition = _collectableStack[i].transform.position;
                 newPosition.z += _data.CollectableOffsetInStack; 
                 _collectableStack[i].transform.DOMove(newPosition, 0.5f);
-
-                
                 SwapItems(i, i - 1);
             }
-            
             
         }
         private void SwapItems(int indexA, int indexB)

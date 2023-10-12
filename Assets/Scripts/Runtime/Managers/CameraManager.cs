@@ -1,6 +1,6 @@
 using System;
 using Cinemachine;
-using Runtime.Controllers.MiniGame;
+ 
 using Runtime.Enums;
 using Runtime.Signals;
 
@@ -66,8 +66,7 @@ namespace Runtime.Managers
                 case CameraTargetState.FakePlayer:
                 {
                     stateDrivenCamera.Follow = null;
-                    var fakePlayer = FindObjectOfType<WallCheckController>().transform.parent.transform;
-                    stateDrivenCamera.Follow = fakePlayer;
+               
                 }
                     break;
                 default:
