@@ -142,8 +142,8 @@ namespace Runtime.Managers
             DOVirtual.DelayedCall(.5f,
                 () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow));
 
-           //CoreGameSignals.Instance.onGetStackLevel?.Invoke(); silinsinnn
-           DOVirtual.DelayedCall(2f, 
+            
+           DOVirtual.DelayedCall(1f, 
                () =>StackSignals.Instance.onUpdateStack?.Invoke());
         
         }
@@ -173,7 +173,7 @@ namespace Runtime.Managers
         private void OnMiniGameEntered()
         {
             //PlayerSignals.Instance.onPlayConditionChanged?.Invoke(false);
-            
+            Debug.Log("delete w/ienum");
             DOVirtual.DelayedCall(.5f,
                 () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.DroneArea));
             StartCoroutine(WaitForFinal());
@@ -278,7 +278,7 @@ namespace Runtime.Managers
             //PlayerDroneStageArea();
             
            // PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Crouch);
-            yield return new WaitForSeconds(50f);
+            yield return new WaitForSeconds(1f);
             
             
            // PlayerExitDroneStageArea();

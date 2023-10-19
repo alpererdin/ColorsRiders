@@ -20,7 +20,7 @@ namespace Runtime.Managers
 
         private Material _material;
 
-        private Collider selfCollider;
+         
         
         #endregion
 
@@ -36,7 +36,6 @@ namespace Runtime.Managers
         private void GetGateColorData() => _data = Resources.Load<CD_Color>("Data/CD_Color").Colors[(int)currentColorType];
 
        
-         
     }
     
 }
