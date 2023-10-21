@@ -15,7 +15,7 @@ MonoBehaviour:
   Data:
     MovementData:
       ForwardSpeed: 14
-      SidewaysSpeed: 0.5
+      SidewaysSpeed: 10
     MeshData:
       ScaleCounter: 2
       MiniGameScaleCounter: 0
