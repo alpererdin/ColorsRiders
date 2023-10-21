@@ -60,12 +60,12 @@ namespace Runtime.Controllers.Player
                
            }
 
-           if (other.CompareTag(_drone))
+           /*if (other.CompareTag(_drone))
            {
               // Destroy(other.transform.parent.gameObject);
               
-              Debug.Log("drondankacti");
-           }
+               
+           }*/
            if (other.CompareTag(_build))
            {
                StackSignals.Instance.isPlayerBuildState(false,gameObject.transform);
@@ -138,6 +138,7 @@ namespace Runtime.Controllers.Player
                 }
                 else
                 {
+                   /*---
                     PlayerSignals.Instance.onPlayConditionChanged?.Invoke(false);
                     PlayerSignals.Instance.onMoveConditionChanged?.Invoke(false);
                     Destroy(other.transform.parent.gameObject);
@@ -149,8 +150,11 @@ namespace Runtime.Controllers.Player
                           
                         });
                     StackSignals.Instance.onInteractionObstacle?.Invoke(_stackHolder.transform.gameObject);
-                    PlayerSignals.Instance.onSetTotalScore?.Invoke(-1);
+                    PlayerSignals.Instance.onSetTotalScore?.Invoke(-1);*/
                   
+                    Destroy(other.transform.parent.gameObject);
+                    StackSignals.Instance.onInteractionObstacle?.Invoke(_stackHolder.transform.gameObject);
+                    PlayerSignals.Instance.onSetTotalScore?.Invoke(-1);
                 }
                 
                 return;

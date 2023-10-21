@@ -24,12 +24,12 @@ namespace Runtime.Commands.Stack
             int counter = _collectedStack.Count ;
             for (int i = 0; i < counter; i++)
             {
-                Debug.Log("kadar denedi");
+                 
                _stackManager.AdderOnStackCommand.Execute(_collectedStack[i]);
                PlayerSignals.Instance.onSetTotalScore?.Invoke(1);
-
+            Debug.Log("New init work");
             }
-          //  _stackManager.StackTypeUpdaterCommand.Execute();
+            //_stackManager.StackTypeUpdaterCommand.Execute();
             CollectableSignals.Instance.OnAfterDroneArea.Invoke();
 
         }

@@ -26,16 +26,20 @@ namespace Runtime.Commands.Stack
                 _collectableStack.Add(collectableGameObject);
                 collectableGameObject.transform.SetParent(_stackManager.transform);
                 collectableGameObject.transform.localPosition = new Vector3(0, 1f, 0.335f);
+                 
                 
        
             }
             else
             {
+             
                 collectableGameObject.transform.SetParent(_stackManager.transform);
                 Vector3 newPos = _collectableStack[^1].transform.localPosition;
                 newPos.z += _data.CollectableOffsetInStack;
                 collectableGameObject.transform.localPosition = newPos;
                 _collectableStack.Add(collectableGameObject);
+               
+               
           
             }
         }

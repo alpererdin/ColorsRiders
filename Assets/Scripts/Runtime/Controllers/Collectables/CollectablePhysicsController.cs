@@ -79,7 +79,7 @@ namespace Runtime.Controllers.Collectables
             {
                
                StackSignals.Instance.droneareaAdder?.Invoke(transform.parent.gameObject);
-                Debug.Log("1 artacaktı");
+//                Debug.Log("1 artacaktı");
 
             }
            if (other.CompareTag("StageArea"))

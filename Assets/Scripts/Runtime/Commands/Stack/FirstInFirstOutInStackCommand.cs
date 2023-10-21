@@ -28,11 +28,12 @@ namespace Runtime.Commands.Stack
              _collectableStack[0].transform.SetParent(_levelHolder.transform.GetChild(0));
              _collectableStack[0].transform.DOMove(new Vector3(_collectableStack[0].transform.position.x,
                  _collectableStack[0].transform.position.y,
-                 _collectableStack[0].transform.position.z + 4), 2);
+                 _collectableStack[0].transform.position.z + 8), 1);
             _collectableStack.RemoveAt(last);
             _collectableStack.TrimExcess();
            _stackManager.UpdateStack();
            PlayerSignals.Instance.onSetTotalScore?.Invoke(-1);
+     
             if (_collectableStack.Count == 0)
             {
                 StackSignals.Instance.onLastCollectableEnterDroneArea?.Invoke();

@@ -143,7 +143,7 @@ namespace Runtime.Managers
                 () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow));
 
             
-           DOVirtual.DelayedCall(1f, 
+           DOVirtual.DelayedCall(1.5f, 
                () =>StackSignals.Instance.onUpdateStack?.Invoke());
         
         }
@@ -272,7 +272,7 @@ namespace Runtime.Managers
             
            // PlayerSpeedStageArea();
           //  gameObject.SetActive(false);
-             gameObject.transform.GetChild(0).gameObject.SetActive(false);
+             //gameObject.transform.GetChild(0).gameObject.SetActive(false);
              //PlayerDroneStageArea();
             
             //PlayerDroneStageArea();
@@ -283,8 +283,8 @@ namespace Runtime.Managers
             
            // PlayerExitDroneStageArea();
             Debug.Log("5sn bekledik");
-            gameObject.transform.position += new Vector3(0, 0, 10f);
-            gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            //gameObject.transform.position += new Vector3(0, 0, 10f);
+            //gameObject.transform.GetChild(0).gameObject.SetActive(true);
             PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Run);
             // CoreGameSignals.Instance.onMiniGameStart?.Invoke();
         }

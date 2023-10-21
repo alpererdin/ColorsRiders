@@ -259,7 +259,7 @@ namespace Runtime.Managers
  
             for (int i = 0; i < collectableCount; i++)
             {
-                DOVirtual.DelayedCall((i+1)/2f,
+                DOVirtual.DelayedCall((i+1)/4f,
                     () => 
                _firstInOutStack.Execute());
             }
@@ -322,7 +322,7 @@ namespace Runtime.Managers
         
         private void OnInteractionWithCollectable(GameObject collectableGameObject)
         {
-            DOTween.Complete(StackJumperCommand);
+            //DOTween.Complete(StackJumperCommand);
             AdderOnStackCommand.Execute(collectableGameObject);
             StartCoroutine(_stackAnimatorCommand.Execute());
             StackTypeUpdaterCommand.Execute();

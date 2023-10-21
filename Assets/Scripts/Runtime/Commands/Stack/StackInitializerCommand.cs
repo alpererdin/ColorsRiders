@@ -23,8 +23,6 @@ namespace Runtime.Commands.Stack
           
             var stackLevell =StackSignals.Instance.onSetStackCount();
             
-            var stackLevel = stackLevell * 2;
-            
             for (int i = 1; i < stackLevell; i++)
             {
                 
