@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using MK.Toon;
 using Runtime.Enums;
 using Runtime.Extentions;
 using UnityEngine;
@@ -33,12 +35,18 @@ namespace Runtime.Signals
         public UnityAction onEnterDroneArea=delegate {  };
         public UnityAction onExitDroneArea=delegate {  };
         
+        
+    
+        
         public UnityAction<GameStates> onChangeGameState = delegate { };
         
         public Func<GameStates> onGetGameState;
         
         public UnityAction onSizeUpPlayer = delegate { };
         public UnityAction onSizeDownPlayer = delegate { };
+        public UnityAction<List<GameObject>> onPlayDroneAnim=delegate {  };
+        public UnityAction<GameObject> wrongSideDestroyer=delegate {  };
+        public UnityAction<OutlineData> onOutLineKiller=delegate {  };
         
     }
 }

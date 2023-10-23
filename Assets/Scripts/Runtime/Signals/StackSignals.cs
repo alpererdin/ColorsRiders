@@ -31,6 +31,7 @@ namespace Runtime.Signals
         public Func<int> onSetStackCount= delegate { return 0; };
         
         public UnityAction<GameObject> droneareaAdder = delegate {  };
+        
         public UnityAction<GameObject> droneareaExitAdder = delegate {  };
         
         public UnityAction JumperArea= delegate {  };
@@ -43,6 +44,8 @@ namespace Runtime.Signals
         public UnityAction<Vector3> onSizeStackFollowPlayer = delegate { };
 
         public UnityAction<bool ,Transform> isPlayerBuildState = delegate {  };
+        
+        public UnityAction<GameObject> wrongSideAdder = delegate {  };
       
     }
 }
