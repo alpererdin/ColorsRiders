@@ -28,13 +28,13 @@ namespace Runtime.Managers
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 0);
             //CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Idle,2);
             
-            //  CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
+             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
         }
 
         private void OnLevelInitialize(byte levelValue)
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 0);
-            //CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Shop, 2);
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Idle,2);
             UISignals.Instance.onSetNewLevelValue?.Invoke(levelValue);
@@ -108,6 +108,7 @@ namespace Runtime.Managers
         private void OnReset()
         {
             CoreUISignals.Instance.onCloseAllPanels?.Invoke();
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 1);
         }
     }
 }

@@ -1,5 +1,8 @@
 using DG.Tweening;
 using Runtime.Commands.Level;
+using Runtime.Data.UnityObjects;
+using Runtime.Data.ValueObjects;
+using Runtime.Enums;
 using Runtime.Signals;
 using UnityEngine;
 
@@ -11,7 +14,7 @@ namespace Runtime.Managers
 
         #region Serialized Variables
 
-        [Header("Holder")] [SerializeField] internal GameObject levelHolder;
+        [Header("Holder")] [SerializeField] private Transform levelHolder;
 
         [Space] [SerializeField] private byte totalLevelCount;
 
@@ -22,7 +25,7 @@ namespace Runtime.Managers
         private LevelLoaderCommand _levelLoader;
         private LevelDestroyerCommand _levelDestroyer;
         private byte _currentLevel;
-
+        private LevelData _levelData;
         #endregion
 
         #endregion
@@ -30,13 +33,26 @@ namespace Runtime.Managers
         private void Awake()
         {
             Init();
+            _currentLevel = GetActiveLevel();
+            _levelData = GetLevelData();
+        }
+        private LevelData GetLevelData()
+        {
+            return Resources.Load<CD_Level>("Data/CD_Level").Levels[_currentLevel];
+        }
+        private byte GetActiveLevel()
+        {
+            return (byte)_currentLevel;
         }
 
         private void Init()
         {
-            _levelLoader = new LevelLoaderCommand(this);
-            _levelDestroyer = new LevelDestroyerCommand(this);
+       
+            _levelLoader = new LevelLoaderCommand(levelHolder);
+            _levelDestroyer = new LevelDestroyerCommand(levelHolder);
         }
+        
+       
 
         private void OnEnable()
         {
@@ -70,19 +86,23 @@ namespace Runtime.Managers
         }
 
 
-        private byte GetLevelID()
+       /* private byte GetLevelID()
         {
             if (!ES3.FileExists()) return 0;
             return (byte)(ES3.KeyExists("Level") ? ES3.Load<int>("Level") % totalLevelCount : 0);
         }
-
+*/
+        private byte GetLevelID()
+        {
+            return (byte)((byte)_currentLevel % totalLevelCount);
+        }
 
         private void OnNextLevel()
         {
             _currentLevel++;
             SaveSignals.Instance.onSaveGameData?.Invoke();
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
-            CoreGameSignals.Instance.onLevelInitialize?.Invoke(GetLevelID());
+            CoreGameSignals.Instance.onLevelInitialize?.Invoke((byte)(_currentLevel % totalLevelCount));
         }
 
         private void OnRestartLevel()
@@ -90,6 +110,12 @@ namespace Runtime.Managers
             SaveSignals.Instance.onSaveGameData?.Invoke();
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
            CoreGameSignals.Instance.onLevelInitialize?.Invoke(GetLevelID());
+        }
+        private void Start()
+        {
+        CameraSignals.Instance.onSetCinemachineTarget?.Invoke(CameraTargetState.Player);
+           // CoreGameSignals.Instance.onLevelInitialize?.Invoke((byte)(_currentLevel % totalLevelCount));
+            //CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 1);
         }
     }
 }

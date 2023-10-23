@@ -38,6 +38,7 @@ namespace Runtime.Managers
          [SerializeField] public List<GameObject> _collectableList = new List<GameObject>();
         [SerializeField] public List<GameObject> _tempList = new List<GameObject>();
 
+        [SerializeField] public List<GameObject> _wrongSideList = new List<GameObject>();
         #endregion
 
         #region Private Variables
@@ -123,6 +124,8 @@ namespace Runtime.Managers
              StackSignals.Instance.onPrepareBuildingStae += MiniGameArea;
              StackSignals.Instance.onSizeStackFollowPlayer += OnSizeStackMove;
              StackSignals.Instance.isPlayerBuildState += SubscribeToPlayerBuildState;
+             
+             StackSignals.Instance.wrongSideAdder  += onAdderWrongSideList;
 
         }
         private void UnSubscribeEvents()
@@ -145,6 +148,8 @@ namespace Runtime.Managers
             StackSignals.Instance.onPrepareBuildingStae -= MiniGameArea;
             StackSignals.Instance.onSizeStackFollowPlayer -= OnSizeStackMove;
             StackSignals.Instance.isPlayerBuildState -= SubscribeToPlayerBuildState;
+            
+            StackSignals.Instance.wrongSideAdder  -= onAdderWrongSideList;
  
         }
 
@@ -275,11 +280,17 @@ namespace Runtime.Managers
                         _sizeCommand.Execute());
             }
         }
+        private void onAdderWrongSideList(GameObject collectableGameObject)
+        {
+            _wrongSideList.Add(collectableGameObject);
+            
+        }
      
         private void OnlastCollectale()
         {
-             
-            CoreGameSignals.Instance.onExitDroneArea?.Invoke();
+            
+            CoreGameSignals.Instance.onPlayDroneAnim?.Invoke(_wrongSideList);
+            //CoreGameSignals.Instance.onExitDroneArea?.Invoke();
 
         }
     
@@ -345,6 +356,8 @@ namespace Runtime.Managers
             _collectableList.Clear();
             _collectableList.TrimExcess();
             _collectableStack.TrimExcess();
+            _wrongSideList.Clear();
+            _wrongSideList.TrimExcess();
         }
     }
 }

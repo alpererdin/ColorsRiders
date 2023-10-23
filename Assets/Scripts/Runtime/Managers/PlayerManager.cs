@@ -11,6 +11,7 @@ using Runtime.Keys;
 using Runtime.Signals;
 
 using UnityEngine;
+using MK.Toon;
 
 namespace Runtime.Managers
 {
@@ -18,7 +19,7 @@ namespace Runtime.Managers
     {
         #region Self Variables
         public  Material _material;
-
+ 
         public MaterialColorTypes currentColor;
         #region Serialized Variables
 
@@ -36,6 +37,10 @@ namespace Runtime.Managers
         private StackData _stackDatadata;
         private const string PlayerDataPath = "Data/CD_Player";
         private ColorData _colorData;
+
+        public ParticleSystem front,back;
+        
+        
  
         public int _score=1;
    
@@ -57,6 +62,8 @@ namespace Runtime.Managers
             _jumpCommand = new JumpCommand(ref _stackDatadata,transform);
             
             _material.color = _colorData.Color;
+            
+             
              
         }
 
@@ -87,10 +94,18 @@ namespace Runtime.Managers
             _data.MovementData.ForwardSpeed =0f;
             SendPlayerDataToControllers();
         } 
+        
+        //update this
         public void PlayerExitDroneStageArea()
         {
-            _data.MovementData.ForwardSpeed = 14f;
-            SendPlayerDataToControllers();
+            Vector3 targetPosition = new Vector3(0,transform.position.y, transform.position.z + 20f);
+            gameObject.transform.DOMove(targetPosition, 1)
+                .OnComplete(() =>
+                {
+                    _data.MovementData.ForwardSpeed = 14f;
+                    SendPlayerDataToControllers();
+                });
+       
         }
 
         #endregion
@@ -119,7 +134,33 @@ namespace Runtime.Managers
             StackSignals.Instance.JumperArea += _jumpCommand.Execute;
             CoreGameSignals.Instance.onSizeUpPlayer += anotherCommand;
             CoreGameSignals.Instance.onSizeDownPlayer += renameThisCommand;
+            CoreGameSignals.Instance.onOutLineKiller += outlineKiller;
 
+
+        }
+
+       
+        public void outlineKiller(OutlineData type)
+        {
+            if (type == OutlineData.Normal)
+            {
+                _material.DOFloat(0, "_OutlineSize", 1f);
+                return;
+            }
+            else if (type == OutlineData.Baked)
+            {
+                _material.DOFloat(100, "_OutlineSize", 1f);
+                return;
+            }
+        }
+
+        public void playForwardParticle()
+        {
+            front.Play();
+        }
+        public void playbackParticle()
+        {
+            back.Play();
         }
 
         private void renameThisCommand()
@@ -137,7 +178,9 @@ namespace Runtime.Managers
         {
             
             PlayerExitDroneStageArea();
+            
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
+           
             PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Run);
             DOVirtual.DelayedCall(.5f,
                 () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow));
@@ -156,6 +199,7 @@ namespace Runtime.Managers
            // StartCoroutine(WaitForFinal());
            PlayerDroneStageArea();
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
+           
       
         }
 
@@ -238,8 +282,8 @@ namespace Runtime.Managers
                      return Color.red;
                  case MaterialColorTypes.blue:
                      return Color.blue;
-                 case MaterialColorTypes.black:
-                     return Color.black;
+                 case MaterialColorTypes.yellow:
+                     return Color.yellow;
                  default:
                      return Color.white;  
              }
@@ -280,7 +324,7 @@ namespace Runtime.Managers
            // PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Crouch);
             yield return new WaitForSeconds(1f);
             
-            
+           
            // PlayerExitDroneStageArea();
             Debug.Log("5sn bekledik");
             //gameObject.transform.position += new Vector3(0, 0, 10f);
