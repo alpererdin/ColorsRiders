@@ -4,6 +4,6 @@ namespace Runtime.Enums
     {
         red,
         blue,
-        black,
+        yellow,
     }
 }

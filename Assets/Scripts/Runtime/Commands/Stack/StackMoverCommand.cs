@@ -32,7 +32,7 @@ namespace Runtime.Commands.Stack
                 pos.y = collectableStack[i - 1].transform.localPosition.y;
                 float direct = Mathf.Lerp(collectableStack[i].transform.localPosition.x, pos.x, _data.LerpSpeed);
                //
-               float directY = Mathf.Lerp(collectableStack[i].transform.localPosition.y, pos.y, _data.LerpSpeed);
+               float directY = Mathf.Lerp(collectableStack[i].transform.localPosition.y, pos.y, .2f);
                 
                 collectableStack[i].transform.localPosition = new Vector3(direct, directY, pos.z);
             }

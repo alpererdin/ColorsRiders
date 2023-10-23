@@ -135,6 +135,7 @@ namespace Runtime.Controllers.Player
                     other.tag = "Collected";
                     StackSignals.Instance.onInteractionCollectable?.Invoke(other.transform.parent.gameObject);
                     PlayerSignals.Instance.onSetTotalScore?.Invoke(1);
+                    manager.playbackParticle();
                 }
                 else
                 {
@@ -153,6 +154,7 @@ namespace Runtime.Controllers.Player
                     PlayerSignals.Instance.onSetTotalScore?.Invoke(-1);*/
                   
                     Destroy(other.transform.parent.gameObject);
+                    manager.playForwardParticle();
                     StackSignals.Instance.onInteractionObstacle?.Invoke(_stackHolder.transform.gameObject);
                     PlayerSignals.Instance.onSetTotalScore?.Invoke(-1);
                 }

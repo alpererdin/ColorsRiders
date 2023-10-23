@@ -5,6 +5,7 @@ using UnityEngine;
 using Runtime.Signals;
 using Extentions;
 using Runtime.Enums;
+using UnityEngine.Events;
 
 namespace Runtime.Managers
 {
@@ -17,11 +18,12 @@ namespace Runtime.Managers
         private ColorData _data;
         private const string GateDataPath = "Data/CD_Color";
         public MaterialColorTypes currentColorType;
+       
 
         private Material _material;
 
-         
-        
+      
+
         #endregion
 
         #endregion
@@ -30,7 +32,8 @@ namespace Runtime.Managers
             _material = GetComponent<MeshRenderer>().material;
             GetGateColorData();
             _material.color = _data.Color;
-           
+  
+
 
         }
         private void GetGateColorData() => _data = Resources.Load<CD_Color>("Data/CD_Color").Colors[(int)currentColorType];

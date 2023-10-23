@@ -65,6 +65,7 @@ namespace Runtime.Controllers.Collectables
                     testCollider.enabled = true;
                     manager.InteractionWithTurret(gameObject);
                 }
+                
             }
         }
 
@@ -75,20 +76,28 @@ namespace Runtime.Controllers.Collectables
                 manager.InteractionWithStage(animator);
                 
             }
-          if (other.CompareTag(_droneGate)&&(manager.currentColorType==other.gameObject.GetComponent<DroneAreaManager>().currentColorType))
+            if (other.CompareTag(_droneGate)&&(manager.currentColorType==other.gameObject.GetComponent<DroneAreaManager>().currentColorType))
             {
                
                StackSignals.Instance.droneareaAdder?.Invoke(transform.parent.gameObject);
-//                Debug.Log("1 artacaktı");
+ 
 
             }
-           if (other.CompareTag("StageArea"))
-           {
+            if (other.CompareTag(_droneGate)&&(manager.currentColorType!=other.gameObject.GetComponent<DroneAreaManager>().currentColorType))
+            {
+               
+              StackSignals.Instance.wrongSideAdder?.Invoke(transform.parent.gameObject);
+              CoreGameSignals.Instance.wrongSideDestroyer?.Invoke(other.transform.gameObject);
+
+
+            } 
+            if (other.CompareTag("StageArea"))
+            {
                
                manager.InteractionWithStage(animator);
                
                
-           }
+            }
             if (other.CompareTag(_gate) && CompareTag(_collected))
             {
                 manager.InteractionWithGate(transform.parent.gameObject);
