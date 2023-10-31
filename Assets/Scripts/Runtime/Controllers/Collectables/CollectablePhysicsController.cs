@@ -15,7 +15,8 @@ namespace Runtime.Controllers.Collectables
 
         [SerializeField] private CollectableManager manager;
         [SerializeField] private GameObject animator;
-        [SerializeField] private CapsuleCollider testCollider;
+        [SerializeField] private BoxCollider testCollider;
+        //[SerializeField] private CapsuleCollider testCollider;
 
         #endregion
 
