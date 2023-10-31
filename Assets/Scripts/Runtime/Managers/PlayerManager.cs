@@ -28,6 +28,8 @@ namespace Runtime.Managers
         [SerializeField] private PlayerPhysicsController physicsController;
         [SerializeField] private PlayerMeshController meshController;
        
+        public AudioClip impact;
+        public AudioSource audioSource;
         #endregion
 
         #region Private Variables
@@ -56,7 +58,7 @@ namespace Runtime.Managers
             Init();
         }
 
-    
+        
         public void Init()
         {
             _jumpCommand = new JumpCommand(ref _stackDatadata,transform);
@@ -232,6 +234,8 @@ namespace Runtime.Managers
         {
             
             _score += value;
+            audioSource.PlayOneShot(impact, 0.7F);
+            
             meshController.SetTotalScore(_score);
         }
 

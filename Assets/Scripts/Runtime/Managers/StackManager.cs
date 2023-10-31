@@ -313,7 +313,7 @@ namespace Runtime.Managers
             float stackOffset = 0f;
             for (int i = 0; i < _collectableStack.Count; i++)
             {
-                Vector3 newPos = new Vector3(_collectableStack[i].transform.position.x, _collectableStack[i].transform.position.y, -0.335f + stackOffset);
+                Vector3 newPos = new Vector3(_collectableStack[i].transform.position.x, _collectableStack[i].transform.position.y, -1.5f + stackOffset);
               _collectableStack[i].transform.localPosition = newPos;
                 stackOffset += _data.CollectableOffsetInStack;
             }

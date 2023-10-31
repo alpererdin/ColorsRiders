@@ -25,7 +25,7 @@ namespace Runtime.Commands.Stack
             {
                 _collectableStack.Add(collectableGameObject);
                 collectableGameObject.transform.SetParent(_stackManager.transform);
-                collectableGameObject.transform.localPosition = new Vector3(0, 1f, -4f);
+                collectableGameObject.transform.localPosition = new Vector3(0, 1f, -1.5f);
                 collectableGameObject.transform.rotation = new Quaternion(0,-180f,0,0);
 
 
