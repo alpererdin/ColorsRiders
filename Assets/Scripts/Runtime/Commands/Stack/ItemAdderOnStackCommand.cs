@@ -25,10 +25,11 @@ namespace Runtime.Commands.Stack
             {
                 _collectableStack.Add(collectableGameObject);
                 collectableGameObject.transform.SetParent(_stackManager.transform);
-                collectableGameObject.transform.localPosition = new Vector3(0, 1f, 0.335f);
-                 
-                
-       
+                collectableGameObject.transform.localPosition = new Vector3(0, 1f, -4f);
+                collectableGameObject.transform.rotation = new Quaternion(0,-180f,0,0);
+
+
+
             }
             else
             {
@@ -37,6 +38,7 @@ namespace Runtime.Commands.Stack
                 Vector3 newPos = _collectableStack[^1].transform.localPosition;
                 newPos.z += _data.CollectableOffsetInStack;
                 collectableGameObject.transform.localPosition = newPos;
+                collectableGameObject.transform.rotation = new Quaternion(0,-180f,0,0);
                 _collectableStack.Add(collectableGameObject);
                
                
