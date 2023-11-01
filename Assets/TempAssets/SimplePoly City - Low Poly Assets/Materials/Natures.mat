@@ -65,7 +65,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AdvancedTab: 0
+    - _AdvancedTab: 1
     - _AlphaClipping: 0
     - _AlphaCutoff: 0.5
     - _Blend: 0
@@ -87,8 +87,8 @@ Material:
     - _OutlineFadeMax: 2
     - _OutlineFadeMin: 0.25
     - _OutlineNoise: 0
-    - _OutlineSize: 5
-    - _OutlineTab: 0
+    - _OutlineSize: 150
+    - _OutlineTab: 1
     - _RenderFace: 2
     - _RenderPriority: 0
     - _Saturation: 1
@@ -100,7 +100,7 @@ Material:
     - _StencilRef: 0
     - _StencilWriteMask: 255
     - _StencilZFail: 0
-    - _StylizeTab: 0
+    - _StylizeTab: 1
     - _Surface: 0
     - _VertexAnimation: 0
     - _VertexAnimationIntensity: 0.05

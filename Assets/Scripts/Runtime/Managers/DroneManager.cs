@@ -16,6 +16,11 @@ public class DroneManager : MonoBehaviour
     private int currentTargetIndex = 0;
 
     private GameObject targetObj;
+    public GameObject explosionPrefab;
+    public AudioClip impact;
+    public AudioClip impact2;
+    public AudioSource audioSource;
+    public Transform shotpoint;
     private void OnEnable()
     {
         CoreGameSignals.Instance.onPlayDroneAnim += droneAnim;
@@ -32,7 +37,7 @@ public class DroneManager : MonoBehaviour
     {
         droneTestObj.SetActive(false);
         currentTargetIndex = 0;
-        targetList.Clear();
+        
     }
 
     private void droneAnim(List<GameObject> list)
@@ -70,7 +75,7 @@ public class DroneManager : MonoBehaviour
                 {
                     GameObject currentTarget = targetList[currentTargetIndex];
 
-                    droneTestObj.transform.DOMoveY(initialPosition.y + 8f, duration / 2f)
+                    droneTestObj.transform.DOMoveY(initialPosition.y + 20f, duration / 2f)
                         .SetEase(Ease.OutQuad)
                         .OnComplete(() =>
                         {
@@ -108,25 +113,34 @@ public class DroneManager : MonoBehaviour
     {
         if (target != null)  
         {
-            GameObject bullet = Instantiate(bulletPrefab, droneTestObj.transform.position, Quaternion.identity);
-            bullet.transform.DOMove(target.transform.position, .2f)
+            GameObject bullet = Instantiate(bulletPrefab, shotpoint.transform.position, Quaternion.identity);
+            audioSource.PlayOneShot(impact2, 0.7F);
+            bullet.transform.DOMove(target.transform.position, 1f)
                 .OnComplete(() =>
                 {
-                    if (Vector3.Distance(bullet.transform.position, target.transform.position) < 0.5f)
+                    for (int i = 0; i < targetList.Count; i++)
                     {
-                        Destroy(target);
+                        Destroy(targetList[i]);
+                        
                     }
                     Destroy(bullet);
+                    ShowExplosion(target.transform.position);
                     currentTargetIndex++;
-                    MoveToNextTarget();
+                    audioSource.PlayOneShot(impact, 0.7F);
+                     targetList.Clear();
+                     MoveToNextTarget();
                 });
         }
         else
         {
-             
+             targetList.Clear();
             currentTargetIndex++;
             MoveToNextTarget();
         }
+    }
+    private void ShowExplosion(Vector3 position)
+    {
+        Instantiate(explosionPrefab, position, Quaternion.identity);
     }
 
     private void OnDisable()

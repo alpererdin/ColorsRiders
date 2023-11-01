@@ -284,8 +284,8 @@ namespace Runtime.Managers
              {
                  case MaterialColorTypes.red:
                      return Color.red;
-                 case MaterialColorTypes.blue:
-                     return Color.blue;
+                 case MaterialColorTypes.green:
+                     return Color.green;
                  case MaterialColorTypes.yellow:
                      return Color.yellow;
                  default:
