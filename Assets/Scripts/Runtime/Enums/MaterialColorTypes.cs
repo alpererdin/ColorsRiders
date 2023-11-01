@@ -3,7 +3,7 @@ namespace Runtime.Enums
     public enum MaterialColorTypes
     {
         red,
-        blue,
+        green,
         yellow,
     }
 }

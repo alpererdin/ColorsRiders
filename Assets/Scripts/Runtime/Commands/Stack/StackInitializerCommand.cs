@@ -22,8 +22,8 @@ namespace Runtime.Commands.Stack
         {
           
             var stackLevell =StackSignals.Instance.onSetStackCount();
-            
-            for (int i = 1; i < stackLevell; i++)
+            //1
+            for (int i = 0; i < stackLevell; i++)
             {
                 
                 GameObject obj = Object.Instantiate(_money);
