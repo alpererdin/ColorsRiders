@@ -8,19 +8,25 @@ namespace Runtime.Commands.Stack
     public class StackMoverCommand
     {
         private StackData _data;
+        
 
         public StackMoverCommand(ref StackData stackData)
         {
             _data = stackData;
+             
         }
 
         public void Execute(float directionX,float directionY, List<GameObject> collectableStack)
         {
             float direct = Mathf.Lerp(collectableStack[0].transform.localPosition.x, directionX,
                 _data.LerpSpeed);
-            float directY = Mathf.Lerp(collectableStack[0].transform.localPosition.y, directionY, _data.LerpSpeed);
+            float directY = Mathf.Lerp(collectableStack[0].transform.localPosition.y, directionY,
+                _data.LerpSpeed);
             collectableStack[0].transform.localPosition = new Vector3(direct, directY, -1.5f);
+            
             StackItemsLerpMove(collectableStack);
+            
+            
         }
 
         public void StackItemsLerpMove(List<GameObject> collectableStack)
@@ -35,6 +41,8 @@ namespace Runtime.Commands.Stack
                float directY = Mathf.Lerp(collectableStack[i].transform.localPosition.y, pos.y, .2f);
                 
                 collectableStack[i].transform.localPosition = new Vector3(direct, directY, pos.z);
+                
+        
             }
         }
         

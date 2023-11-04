@@ -27894,7 +27894,7 @@ PrefabInstance:
     - target: {fileID: 1816796875779125281, guid: c8a75ac581fced746a710aa2d2c2e41c,
         type: 3}
       propertyPath: m_Constraints
-      value: 116
+      value: 84
       objectReference: {fileID: 0}
     - target: {fileID: 2043857265442560858, guid: c8a75ac581fced746a710aa2d2c2e41c,
         type: 3}
@@ -27994,7 +27994,7 @@ PrefabInstance:
     - target: {fileID: 8957997245628761113, guid: c8a75ac581fced746a710aa2d2c2e41c,
         type: 3}
       propertyPath: m_Constraints
-      value: 116
+      value: 84
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

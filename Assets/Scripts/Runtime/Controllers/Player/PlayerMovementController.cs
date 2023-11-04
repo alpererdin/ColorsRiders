@@ -20,6 +20,7 @@ namespace Runtime.Controllers.Player
         
         [SerializeField] private InputManager inputManager;
 
+        
         #endregion
 
         #region Private Variables
@@ -29,6 +30,7 @@ namespace Runtime.Controllers.Player
          private bool _isReadyToMove, _isReadyToPlay;
          private float _inputValue;
         private Vector2 _clampValues;
+      
 
         private bool idleAnimChecker= false;
 
@@ -53,11 +55,16 @@ namespace Runtime.Controllers.Player
           inputManager = FindObjectOfType<InputManager>();
         }
 
+       
+
         private void SubscribeEvents()
         {
+         
             PlayerSignals.Instance.onPlayConditionChanged += OnPlayConditionChanged;
             PlayerSignals.Instance.onMoveConditionChanged += OnMoveConditionChanged;
         }
+
+         
 
         private void OnPlayConditionChanged(bool condition) => _isReadyToPlay = condition;
         private void OnMoveConditionChanged(bool condition) => _isReadyToMove = condition;
@@ -87,8 +94,20 @@ namespace Runtime.Controllers.Player
             }
         }
 
+       
+        private void RotateCharacter()
+        {
+           
+            float rotationSpeed = 20.0f;
+            float rotationAngle = _inputValue * 10.0f;
+            Quaternion targetRotation = Quaternion.Euler(0, rotationAngle, 0);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
+        
+
         private void FixedUpdate()
         {
+           
             if (_isReadyToPlay )
             {
                 GameStateManager.GameState gameState = GameStateManager.CurrentGameState;
@@ -98,13 +117,15 @@ namespace Runtime.Controllers.Player
                     if (gameState == GameStateManager.GameState.Runner)
                     {
                         Move();
+                        
+                        RotateCharacter();
                     }
                     else
                     {
                         manager.SetSizeStackPosition();
                         IdleMove();
                         StopSideways(); 
-                        Stop();
+                       Stop();
                     }
                 }
                 else
@@ -157,10 +178,12 @@ namespace Runtime.Controllers.Player
                 
             }
         }
+      
 
 
         private void Move()
         {
+             
             var velocity = rigidbody.velocity;
             velocity = new Vector3(_inputValue * _data.SidewaysSpeed, velocity.y,
                 _data.ForwardSpeed);
@@ -177,21 +200,19 @@ namespace Runtime.Controllers.Player
 
         private void StopSideways()
         {
+            _inputValue = 0;
             rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, _data.ForwardSpeed);
             rigidbody.angularVelocity = Vector3.zero;
+            RotateCharacter();
         }
-
-        public void StopHorizontal()
-        {
-            _data.ForwardSpeed = 0;
-            
-        }
-
+ 
       
         private void Stop()
         {
+            _inputValue = 0;
             rigidbody.velocity = Vector3.zero;
             rigidbody.angularVelocity = Vector3.zero;
+            RotateCharacter();
         }
 
         public void OnReset()
