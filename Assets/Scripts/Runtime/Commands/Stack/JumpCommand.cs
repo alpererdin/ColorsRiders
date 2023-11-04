@@ -22,11 +22,11 @@ namespace Runtime.Commands
 
         public void Execute()
         {
-            _transform.DOMoveY(5, 1)
-                .SetEase(Ease.OutQuad).SetAutoKill();
+            _transform.DOMoveY(8, 2)
+                .SetEase(Ease.OutExpo).SetAutoKill();
             DOVirtual.DelayedCall(1, () =>
                 _transform.DOMoveY(1, 1)
-                    .SetEase(Ease.InOutCubic).SetAutoKill());
+                    .SetEase(Ease.InCubic).SetAutoKill());
         }
     }
 }

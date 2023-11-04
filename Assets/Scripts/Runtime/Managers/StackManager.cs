@@ -245,6 +245,7 @@ namespace Runtime.Managers
             if (_tempList.Count > 0)
             {
                 _sizeMoverCommand.Execute(direction.x,direction.y,direction.z, _tempList);
+                
             }
         }
         private void onJumperArea()
@@ -305,6 +306,7 @@ namespace Runtime.Managers
             if (gameObject.transform.childCount > 0)
             {
                 _stackMoverCommand.Execute(direction.x,direction.y, _collectableStack);
+              
             }
         }
   

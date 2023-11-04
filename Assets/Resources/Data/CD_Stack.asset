@@ -15,6 +15,7 @@ MonoBehaviour:
   Data:
     CollectableOffsetInStack: -3
     LerpSpeed: 0.35
+    JumpSpeed: 0.1
     StackAnimDuraction: 0.1
     StackScaleValue: 1.25
     JumpForce: 7
