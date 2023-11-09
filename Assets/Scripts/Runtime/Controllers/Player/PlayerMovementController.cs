@@ -98,10 +98,10 @@ namespace Runtime.Controllers.Player
         private void RotateCharacter()
         {
            
-            float rotationSpeed = 20.0f;
+           // float rotationSpeed = 20.0f;
             float rotationAngle = _inputValue * 10.0f;
             Quaternion targetRotation = Quaternion.Euler(0, rotationAngle, 0);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * _data.RotateSpeed);
         }
         
 
