@@ -13,6 +13,7 @@ namespace Runtime.Data.ValueObject
     [Serializable]
     public struct PlayerMovementData
     {
+        public float RotateSpeed;
         public float ForwardSpeed;
         public float SidewaysSpeed;
     }

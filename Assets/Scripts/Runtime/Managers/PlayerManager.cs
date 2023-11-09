@@ -84,15 +84,19 @@ namespace Runtime.Managers
         public void PlayerSpeedStageArea()
         {
             _data.MovementData.ForwardSpeed = _data.MovementData.ForwardSpeed / 2f;
+        //    _data.MovementData.RotateSpeed = _data.MovementData.RotateSpeed / 2f;
             SendPlayerDataToControllers();
         }
         public void PlayerSpeedExitStageArea()
         {
             _data.MovementData.ForwardSpeed = _data.MovementData.ForwardSpeed * 2f;
+            //
+           // _data.MovementData.RotateSpeed = _data.MovementData.RotateSpeed * 2f;
             SendPlayerDataToControllers();
         }
         public void PlayerDroneStageArea()
         {
+            //_data.MovementData.RotateSpeed = 0f;
             _data.MovementData.ForwardSpeed =0f;
             SendPlayerDataToControllers();
         } 
@@ -105,6 +109,7 @@ namespace Runtime.Managers
                 .OnComplete(() =>
                 {
                     _data.MovementData.ForwardSpeed = 14f;
+                   // _data.MovementData.RotateSpeed = 20f;
                     SendPlayerDataToControllers();
                 });
        
