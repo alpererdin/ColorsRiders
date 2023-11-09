@@ -302,13 +302,16 @@ namespace Runtime.Managers
 
         private void OnStackMove(Vector3 direction)
         {
+ 
             transform.position = new Vector3(0, 0, direction.z - 2f);
             if (gameObject.transform.childCount > 0)
             {
                 _stackMoverCommand.Execute(direction.x,direction.y, _collectableStack);
               
             }
+           
         }
+       
   
         public void UpdateStack()
         {
