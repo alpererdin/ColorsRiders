@@ -99,7 +99,9 @@ namespace Runtime.Controllers.Player
         {
            
            // float rotationSpeed = 20.0f;
+           
             float rotationAngle = _inputValue * 10.0f;
+            rotationAngle = Mathf.Clamp(rotationAngle,-50,50);
             Quaternion targetRotation = Quaternion.Euler(0, rotationAngle, 0);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * _data.RotateSpeed);
         }
