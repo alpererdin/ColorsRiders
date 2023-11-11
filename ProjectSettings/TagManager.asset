@@ -17,6 +17,7 @@ TagManager:
   - JumpArea
   - Idle
   - Build
+  - Test
   layers:
   - Default
   - TransparentFX

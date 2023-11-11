@@ -84,24 +84,24 @@ namespace Runtime.Managers
         public void PlayerSpeedStageArea()
         {
             _data.MovementData.ForwardSpeed = _data.MovementData.ForwardSpeed / 2f;
-        //    _data.MovementData.RotateSpeed = _data.MovementData.RotateSpeed / 2f;
+            //_data.MovementData.RotateSpeed = _data.MovementData.RotateSpeed / 2f;
+            //_data.MovementData.SidewaysSpeed = _data.MovementData.SidewaysSpeed / 2f;
             SendPlayerDataToControllers();
         }
         public void PlayerSpeedExitStageArea()
         {
             _data.MovementData.ForwardSpeed = _data.MovementData.ForwardSpeed * 2f;
             //
-           // _data.MovementData.RotateSpeed = _data.MovementData.RotateSpeed * 2f;
+         //   _data.MovementData.RotateSpeed = _data.MovementData.RotateSpeed * 2f;
+           // _data.MovementData.SidewaysSpeed = _data.MovementData.SidewaysSpeed * 2f;
             SendPlayerDataToControllers();
         }
         public void PlayerDroneStageArea()
         {
-            //_data.MovementData.RotateSpeed = 0f;
+          //  _data.MovementData.RotateSpeed = 0f;
             _data.MovementData.ForwardSpeed =0f;
             SendPlayerDataToControllers();
         } 
-        
-        //update this
         public void PlayerExitDroneStageArea()
         {
             Vector3 targetPosition = new Vector3(0,transform.position.y, transform.position.z + 20f);

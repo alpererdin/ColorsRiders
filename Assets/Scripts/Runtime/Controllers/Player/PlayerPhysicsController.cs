@@ -41,23 +41,29 @@ namespace Runtime.Controllers.Player
             _stackHolder= GameObject.Find("StackManager").transform;
         }
 
-        private void OnTriggerStay(Collider other)
+         private void OnTriggerStay(Collider other)
         {
-            if (other.CompareTag(_stageArea))
+           /* if (other.CompareTag(_stageArea))
             {
                 PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Crouch);
                
-            }
+            }*/
+           
  
-        }
+        } 
        private void OnTriggerExit(Collider other)
        {
            if (other.CompareTag(_stageArea))
            {
-               CoreGameSignals.Instance.onExitTurretArea?.Invoke();
+               //CoreGameSignals.Instance.onExitTurretArea?.Invoke();
                PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Run);
-               manager.PlayerSpeedExitStageArea();
+              //// manager.PlayerSpeedExitStageArea();
                
+           }
+           if (other.CompareTag("Test"))
+           {
+               CoreGameSignals.Instance.onExitTurretArea?.Invoke();
+               manager.PlayerSpeedExitStageArea();
            }
 
            /*if (other.CompareTag(_drone))
@@ -74,6 +80,10 @@ namespace Runtime.Controllers.Player
 
        private void OnTriggerEnter(Collider other)
         {
+            if (other.CompareTag("Test"))
+            {
+                manager.PlayerSpeedStageArea();
+            }
             if (other.CompareTag(_idle))
             {
                 GameStateManager.SetGameState(GameStateManager.GameState.Idle);
@@ -106,7 +116,7 @@ namespace Runtime.Controllers.Player
             {
         
                 PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Crouch);
-                manager.PlayerSpeedStageArea();
+                ////manager.PlayerSpeedStageArea();
             }
 
             if (other.CompareTag(_gate))
