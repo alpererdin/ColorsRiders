@@ -27,6 +27,7 @@ namespace Runtime.Managers
             _material = GetComponent<MeshRenderer>().material;
               GetGateColorData();
               _material.color = _data.Color;
+          
 
         }
         private void GetGateColorData() => _data = Resources.Load<CD_Color>("Data/CD_Color").Colors[(int)currentColorType];

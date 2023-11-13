@@ -5,7 +5,7 @@ using UnityEngine;
 
 [Serializable]
 public class MusicManager
-{
+{/*
     public List<AudioClip> backgroundMusicAudioClips;
     public AudioSource backgroundMusicAudioSource;
     public float musicChangeTime, musicMaxVolume, musicVolumeChangeTime;
@@ -55,5 +55,5 @@ public class MusicManager
             yield return new WaitForEndOfFrame();
         }
         SetNewMusic();
-    }
+    }*/
 }
