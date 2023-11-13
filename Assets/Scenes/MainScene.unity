@@ -785,7 +785,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 686732673}
-  - component: {fileID: 686732674}
   m_Layer: 0
   m_Name: MusicManager
   m_TagString: Untagged
@@ -808,18 +807,6 @@ Transform:
   m_Father: {fileID: 1764648222}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &686732674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 686732672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a938f52ccdb6fd40be6e3f0221a70fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &690427201
 GameObject:
   m_ObjectHideFlags: 3
@@ -977,12 +964,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c03cdc42dab485fa118c09cac7ad5d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicManager:
-    backgroundMusicAudioClips: []
-    backgroundMusicAudioSource: {fileID: 0}
-    musicChangeTime: 0
-    musicMaxVolume: 0
-    musicVolumeChangeTime: 0
 --- !u!1 &832720285
 GameObject:
   m_ObjectHideFlags: 3
