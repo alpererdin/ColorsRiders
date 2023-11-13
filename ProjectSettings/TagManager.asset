@@ -18,6 +18,7 @@ TagManager:
   - Idle
   - Build
   - Test
+  - ExitTest
   layers:
   - Default
   - TransparentFX
