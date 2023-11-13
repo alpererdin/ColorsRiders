@@ -18,6 +18,14 @@ namespace Runtime.Managers
         private void OnEnable()
         {
             CoreGameSignals.Instance.onEnterTurretArea += ActivateTurret;
+            CoreGameSignals.Instance.onExitTurretArea += DeactivateTurret;
+            
+        }
+
+        private void DeactivateTurret()
+        {
+            //
+            isFiring = false;
         }
 
         private void ActivateTurret(GameObject target)
