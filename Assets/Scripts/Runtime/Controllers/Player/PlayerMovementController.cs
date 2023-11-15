@@ -205,7 +205,11 @@ namespace Runtime.Controllers.Player
             _inputValue = 0;
             rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, _data.ForwardSpeed);
             rigidbody.angularVelocity = Vector3.zero;
-            RotateCharacter();
+            if (GameStateManager.CurrentGameState == GameStateManager.GameState.Runner)
+            {
+                RotateCharacter();
+            }
+            //RotateCharacter();
         }
  
       
@@ -214,7 +218,11 @@ namespace Runtime.Controllers.Player
             _inputValue = 0;
             rigidbody.velocity = Vector3.zero;
             rigidbody.angularVelocity = Vector3.zero;
-            RotateCharacter();
+            if (GameStateManager.CurrentGameState == GameStateManager.GameState.Runner)
+            {
+                RotateCharacter();
+            }
+            //RotateCharacter();
         }
 
         public void OnReset()

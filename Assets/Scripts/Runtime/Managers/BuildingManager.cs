@@ -24,6 +24,7 @@ namespace Runtime.Managers
         private float totalAmount;
         public TextMeshPro scoreTxt;
         private BuildingData data;
+        public GameObject SizeUpPlane;
         #endregion
         private void Awake()
         {
@@ -34,7 +35,7 @@ namespace Runtime.Managers
             data = Resources.Load<CD_Build>("Data/CD_Build").data[(int)BuildingTypes];
             currentScore = data.CurrentScore;
             buildScore = data.BuildScore;
-            increAseamount = 1.7f / buildScore;
+            increAseamount = 1f/ buildScore;
             totalAmount = increAseamount * currentScore;
             
         }
@@ -52,6 +53,7 @@ namespace Runtime.Managers
         {
             if (other.CompareTag("Collected")&& currentScore <=buildScore)
             {
+                
                 if (currentScore == buildScore-1)
                 {
                     StackSignals.Instance.isPlayerBuildState(false, transform);
@@ -62,7 +64,23 @@ namespace Runtime.Managers
                 saturation101(increAseamount);
                 scoreTxt.text =  buildScore +"/"+ currentScore;
             }
+
+            if (other.CompareTag("Player"))
+            {
+                SizeUpPlane.transform.DOScaleX(6.5f, 1);
+                SizeUpPlane.transform.DOScaleZ(7f, 1);
+            }
         }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                SizeUpPlane.transform.DOScaleX(5.53f, 1);
+                SizeUpPlane.transform.DOScaleZ(6.18f, 1);
+            }
+        }
+
         private void saturation101(float increaseAmount)
         {
             totalAmount += increaseAmount;

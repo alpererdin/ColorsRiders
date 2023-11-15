@@ -225,9 +225,11 @@ namespace Runtime.Managers
                 isPlayerBuilding = false;
             }
         }
+      
    
         private IEnumerator DecreaseStackListCount(Transform target)
         {
+            yield return new WaitForSeconds(1f);
             while (isPlayerBuilding)
             {
                 int temp = _tempList.Count;
