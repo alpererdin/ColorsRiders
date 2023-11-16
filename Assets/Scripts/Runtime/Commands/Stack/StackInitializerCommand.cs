@@ -20,8 +20,9 @@ namespace Runtime.Commands.Stack
 
         public void Execute()
         {
+            Debug.Log("İNİTTTTTTTTTTTTTTT");
           
-            var stackLevell =StackSignals.Instance.onSetStackCount();
+            /*var stackLevell =StackSignals.Instance.onSetStackCount();
             //1
             for (int i = 0; i < stackLevell; i++)
             {
@@ -35,7 +36,7 @@ namespace Runtime.Commands.Stack
                
             }
 
-            _stackManager.StackTypeUpdaterCommand.Execute();
+            _stackManager.StackTypeUpdaterCommand.Execute();*/
         }
     }
 }

@@ -29,35 +29,35 @@ namespace Runtime.Commands.Stack
         
         {
 
-         _collectableStack[0].transform.SetParent(_levelHolder.transform.GetChild(0));
+            _collectableStack[0].transform.SetParent(_levelHolder.transform.GetChild(0));
         
-        _collectableStack[0].transform.DOMove(
-            new Vector3(_collectableStack[0].transform.position.x,
-                _collectableStack[0].transform.position.y, _collectableStack[0].transform.position.z + 4),
-            .2f).OnComplete(() =>
-        {
-            CoreGameSignals.Instance.onSizeUpPlayer?.Invoke(); 
+            _collectableStack[0].transform.DOMove(
+                new Vector3(_collectableStack[0].transform.position.x,
+                    _collectableStack[0].transform.position.y, _collectableStack[0].transform.position.z + 4),
+                .2f).OnComplete(() =>
+            {
+                CoreGameSignals.Instance.onSizeUpPlayer?.Invoke(); 
            
             
-        });
-        _tempStack.Add(_collectableStack[0]);
-        _collectableStack[0].SetActive(false);
-        _collectableStack.RemoveAt(0);
-        _collectableStack.TrimExcess();
-        _stackManager.UpdateStack();
+            });
+            _tempStack.Add(_collectableStack[0]);
+            _collectableStack[0].SetActive(false);
+            _collectableStack.RemoveAt(0);
+            _collectableStack.TrimExcess();
+            _stackManager.UpdateStack();
             
           
 
-           if (_collectableStack.Count == 0)
-           {
+            if (_collectableStack.Count == 0)
+            {
               
-               GameStateManager.SetGameState(GameStateManager.GameState.Idle);
+                GameStateManager.SetGameState(GameStateManager.GameState.Idle);
                
-               PlayerSignals.Instance.onPlayConditionChanged?.Invoke(true);
+                PlayerSignals.Instance.onPlayConditionChanged?.Invoke(true);
                
-               _collectableStack.TrimExcess();
+                _collectableStack.TrimExcess();
                  
-           }
+            }
         }
     }
 }

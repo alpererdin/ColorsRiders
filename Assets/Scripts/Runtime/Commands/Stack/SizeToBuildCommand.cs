@@ -51,14 +51,24 @@ namespace Runtime.Commands.Stack
           
 
           #endregion
-            
+          if (target == null)
+          {
+              Debug.LogError("Target Transform is null.");
+              return;
+          }
             if (_tempStack.Count == 0)
             {
                 Debug.Log("No objects in _temp ");
                 return;
             }
+            
             GameObject objectToMove = _tempStack[0];
             _tempStack.RemoveAt(0);
+            if (objectToMove == null)
+            {
+                Debug.LogError("Object to move is null.");
+                return;
+            }
             Vector3 targetPosition = target.position  ;  
             objectToMove.SetActive(true);
             objectToMove.transform.DOMove(targetPosition, 0.2f).OnComplete(() =>
@@ -71,8 +81,8 @@ namespace Runtime.Commands.Stack
             if (_tempStack.Count == 0)
             {
                 Debug.Log("new level");
-                CoreGameSignals.Instance.onReset.Invoke();
-                GameStateManager.SetGameState(GameStateManager.GameState.Runner);
+               // CoreGameSignals.Instance.onReset.Invoke();
+               // GameStateManager.SetGameState(GameStateManager.GameState.Runner);
                  CoreGameSignals.Instance.onLevelSuccessful?.Invoke();
                 _tempStack.TrimExcess();
                  

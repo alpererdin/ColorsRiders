@@ -21,6 +21,7 @@ namespace Runtime.Commands.Stack
 
         public void Execute()
         {
+          
             int counter = _collectedStack.Count ;
             for (int i = 0; i < counter; i++)
             {
