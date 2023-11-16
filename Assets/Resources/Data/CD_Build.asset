@@ -18,7 +18,7 @@ MonoBehaviour:
     CurrentScore: 0
   - BuildingType: 1
     BuildScore: 10
-    CurrentScore: 0
+    CurrentScore: 7
   - BuildingType: 2
     BuildScore: 20
     CurrentScore: 0
