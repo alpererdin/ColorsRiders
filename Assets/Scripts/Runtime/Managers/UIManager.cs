@@ -7,6 +7,8 @@ namespace Runtime.Managers
 {
     public class UIManager : MonoBehaviour
     {
+        private bool _isReadyForIdleGame = false;
+        
         private void OnEnable()
         {
             SubscribeEvents();
@@ -35,8 +37,8 @@ namespace Runtime.Managers
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 0);
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
-            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Shop, 2);
-            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Idle,2);
+          //  CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Shop, 2);
+           // CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Idle,2);
             UISignals.Instance.onSetNewLevelValue?.Invoke(levelValue);
         }
         public void OnPlay()
@@ -44,7 +46,9 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onPlay?.Invoke();
             CoreUISignals.Instance.onClosePanel?.Invoke(0);
             CoreUISignals.Instance.onClosePanel?.Invoke(2);
+        
             CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow);
+            
         }
         
         private void OnOpenWinPanel()
@@ -62,12 +66,19 @@ namespace Runtime.Managers
         {
             CoreGameSignals.Instance.onNextLevel?.Invoke();
             CoreGameSignals.Instance.onReset?.Invoke();
+            CameraSignals.Instance.onSetCinemachineTarget?.Invoke(CameraTargetState.Player);
+            GameStateManager.SetGameState(GameStateManager.GameState.Runner);
+            CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow);
+           
         }
 
         public void OnRestartLevel()
         {
             CoreGameSignals.Instance.onRestartLevel?.Invoke();
             CoreGameSignals.Instance.onReset?.Invoke();
+            CameraSignals.Instance.onSetCinemachineTarget?.Invoke(CameraTargetState.Player);
+            GameStateManager.SetGameState(GameStateManager.GameState.Runner);
+            CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow);
         }
 
         private void OnLevelFailed()
@@ -91,6 +102,18 @@ namespace Runtime.Managers
             UISignals.Instance.onClickStack?.Invoke();
             UISignals.Instance.onSetStackLvlText?.Invoke();
         }
+        private void OnLastCollectableAddedToPlayer(bool isReady)
+        {
+            _isReadyForIdleGame = isReady;
+        }
+        public void Claim()
+        {
+            if (_isReadyForIdleGame )
+            {
+                //CoreGameSignals.Instance.onChangeGameState?.Invoke();
+                //ScoreSignals.Instance.onSendScore?.Invoke();
+            }
+        }
 
         private void OnDisable()
         {
@@ -107,8 +130,9 @@ namespace Runtime.Managers
         
         private void OnReset()
         {
-            CoreUISignals.Instance.onCloseAllPanels?.Invoke();
-            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 1);
+            CameraSignals.Instance.onSetCinemachineTarget?.Invoke(CameraTargetState.Player);
+            //CoreUISignals.Instance.onCloseAllPanels?.Invoke();
+          //  CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 1);
         }
     }
 }

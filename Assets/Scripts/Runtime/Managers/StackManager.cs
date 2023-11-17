@@ -25,6 +25,8 @@ namespace Runtime.Managers
 
         public ItemAdderOnStackCommand AdderOnStackCommand { get; private set; }
         
+      //  public ResetStackCommand resetStack { get; private set; }
+        
       
 
         public bool LastCheck { get; set; }
@@ -348,7 +350,7 @@ namespace Runtime.Managers
 
         private void OnPlay()
         {
-            _stackInitializerCommand.Execute();
+           // _stackInitializerCommand.Execute();
         }
         
         private void OnDisable()
@@ -356,8 +358,18 @@ namespace Runtime.Managers
             UnSubscribeEvents();
         }
 
+        
+        private void DestroyChildObj()
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
+        }
+
         private void OnReset()
         {
+            isPlayerBuilding = false;
             LastCheck = false;
             _collectableStack.Clear();
             _collectableList.Clear();
@@ -365,6 +377,9 @@ namespace Runtime.Managers
             _collectableStack.TrimExcess();
             _wrongSideList.Clear();
             _wrongSideList.TrimExcess();
+            _tempList.Clear();
+            _tempList.TrimExcess();
+            DestroyChildObj();
         }
     }
 }

@@ -15,5 +15,7 @@ namespace Runtime.Signals
         public Func<float> onGetMultiplier = delegate { return 0; };
         
         public UnityAction onTestAciton= delegate {  };
+        
+     //   public UnityAction onSendScore = delegate { };
     }
 }
