@@ -96,7 +96,7 @@ namespace Runtime.Managers
 
         private void OnReset()
         {
-            CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Initial);
+            CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow);
             stateDrivenCamera.Follow = null;
             stateDrivenCamera.LookAt = null;
             transform.position = _initialPosition;

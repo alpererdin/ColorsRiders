@@ -41,8 +41,8 @@ namespace Runtime.Managers
         private ColorData _colorData;
 
         public ParticleSystem front,back;
-        
-        
+
+      //  public ParticleSystem one;
  
         public int _score=1;
    
@@ -161,6 +161,11 @@ namespace Runtime.Managers
             }
         }
 
+      /*  public void buildParticle()
+        {
+            one.Play();
+             
+        }*/
         public void playForwardParticle()
         {
             front.Play();
