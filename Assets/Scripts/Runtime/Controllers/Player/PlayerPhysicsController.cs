@@ -75,11 +75,12 @@ namespace Runtime.Controllers.Player
             } 
             if (other.CompareTag(_finish))
             {
-               
-                PlayerSignals.Instance.onPlayConditionChanged?.Invoke(false);
+                DOVirtual.DelayedCall(.6f, () =>  manager.playFinishSound());
+                //PlayerSignals.Instance.onPlayConditionChanged?.Invoke(false);
                 DOVirtual.DelayedCall(.5f,
                     () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Build));
-                StackSignals.Instance.onPrepareBuildingStae?.Invoke();
+                DOVirtual.DelayedCall(1f,
+                    () => StackSignals.Instance.onPrepareBuildingStae?.Invoke());
                 manager.PlayerDroneStageArea();
               //  manager.buildParticle();
                 
