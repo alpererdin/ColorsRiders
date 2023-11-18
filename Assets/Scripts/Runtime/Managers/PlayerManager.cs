@@ -29,6 +29,9 @@ namespace Runtime.Managers
         [SerializeField] private PlayerMeshController meshController;
        
         public AudioClip impact;
+        public AudioClip finishSound;
+        public AudioClip pic;
+        
         public AudioSource audioSource;
         #endregion
 
@@ -99,9 +102,36 @@ namespace Runtime.Managers
         public void PlayerDroneStageArea()
         {
           //  _data.MovementData.RotateSpeed = 0f;
-            _data.MovementData.ForwardSpeed =0f;
+            //_data.MovementData.ForwardSpeed =0f;
+           // SendPlayerDataToControllers();
+        
+            _data.MovementData.ForwardSpeed = 14f;  
             SendPlayerDataToControllers();
-        } 
+    
+            StartCoroutine(FinishStageArea());
+        }
+
+        private IEnumerator FinishStageArea()
+        {
+            float targetSpeed = 0f;
+            float duration = 2f;
+
+            float startSpeed = _data.MovementData.ForwardSpeed;
+            float elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                float newSpeed = Mathf.Lerp(startSpeed, targetSpeed, elapsedTime / duration);
+                _data.MovementData.ForwardSpeed = newSpeed;
+                SendPlayerDataToControllers();
+
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+ 
+            _data.MovementData.ForwardSpeed = targetSpeed;
+            SendPlayerDataToControllers();
+        }
         public void PlayerExitDroneStageArea()
         {
             Vector3 targetPosition = new Vector3(0,transform.position.y, transform.position.z + 20f);
@@ -142,11 +172,14 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onSizeUpPlayer += anotherCommand;
             CoreGameSignals.Instance.onSizeDownPlayer += renameThisCommand;
             CoreGameSignals.Instance.onOutLineKiller += outlineKiller;
+             
 
 
         }
 
-       
+        
+
+
         public void outlineKiller(OutlineData type)
         {
             if (type == OutlineData.Normal)
@@ -245,8 +278,13 @@ namespace Runtime.Managers
             
             _score += value;
             audioSource.PlayOneShot(impact, 0.7F);
-            
+       
             meshController.SetTotalScore(_score);
+        }
+
+        public void playFinishSound()
+        {
+            audioSource.PlayOneShot(finishSound, 0.5F);
         }
 
        

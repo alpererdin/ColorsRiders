@@ -70,6 +70,8 @@ namespace Runtime.Managers
         #endregion
         
         private bool isPlayerBuilding = false;
+        
+        
 
         private void Awake()
         {
@@ -209,7 +211,9 @@ namespace Runtime.Managers
         */
 
         #endregion
-      
+
+       
+
         private void SubscribeToPlayerBuildState(bool isBuilding,Transform target)
         {
             if (isBuilding)
@@ -276,13 +280,16 @@ namespace Runtime.Managers
         }
         private void MiniGameArea()
         {
+           
             int collectableCount = _collectableStack.Count;
  
             for (int i = 0; i < collectableCount; i++)
             {
-                DOVirtual.DelayedCall((i+1)/10f,
+                 
+                DOVirtual.DelayedCall((i+1)/5f,
                     () => 
                         _sizeCommand.Execute());
+                
             }
         }
         private void onAdderWrongSideList(GameObject collectableGameObject)
