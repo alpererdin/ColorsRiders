@@ -154,8 +154,11 @@ namespace Runtime.Managers
             StackSignals.Instance.isPlayerBuildState -= SubscribeToPlayerBuildState;
             
             StackSignals.Instance.wrongSideAdder  -= onAdderWrongSideList;
+        
  
         }
+
+         
 
         #region building102 commandlines
 /*  private void SubscribeToPlayerBuildState(bool isBuilding,Transform target)
@@ -231,9 +234,29 @@ namespace Runtime.Managers
                 isPlayerBuilding = false;
             }
         }
-      
-   
         private IEnumerator DecreaseStackListCount(Transform target)
+        {
+            yield return new WaitForSeconds(1f);
+            float initialWaitTime = 1f;
+            float minWaitTime = 0.1f;
+            float waitTimeDecrement = 0.1f;
+    
+            while (isPlayerBuilding)
+            {
+                int temp = _tempList.Count;
+                if (temp > 0)
+                { 
+                    _buildCommand.Execute(target);
+                }
+
+                
+                float waitTime = Mathf.Max(initialWaitTime - temp * waitTimeDecrement, minWaitTime);
+                yield return new WaitForSeconds(waitTime);
+            }
+        }
+
+   
+       /* private IEnumerator DecreaseStackListCount(Transform target)
         {
             yield return new WaitForSeconds(1f);
             while (isPlayerBuilding)
@@ -246,7 +269,7 @@ namespace Runtime.Managers
 
                 yield return new WaitForSeconds(.5f);
             }
-        }
+        }*/
         private void OnSizeStackMove(Vector3 direction)
         {
             transform.position = new Vector3(0, 0, 0);
@@ -280,7 +303,7 @@ namespace Runtime.Managers
         }
         private void MiniGameArea()
         {
-           
+            _collectableStack[0].SetActive(false);
             int collectableCount = _collectableStack.Count;
  
             for (int i = 0; i < collectableCount; i++)

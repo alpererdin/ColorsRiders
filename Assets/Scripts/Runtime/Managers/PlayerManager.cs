@@ -31,6 +31,7 @@ namespace Runtime.Managers
         public AudioClip impact;
         public AudioClip finishSound;
         public AudioClip pic;
+        public AudioClip pics;
         
         public AudioSource audioSource;
         #endregion
@@ -172,12 +173,20 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onSizeUpPlayer += anotherCommand;
             CoreGameSignals.Instance.onSizeDownPlayer += renameThisCommand;
             CoreGameSignals.Instance.onOutLineKiller += outlineKiller;
-             
+            StackSignals.Instance.playPicSound  += picSound;
+            StackSignals.Instance.playPicsSound  += picsSound;
 
 
         }
 
-        
+        private void picSound()
+        {
+            audioSource.PlayOneShot(pic,.7F);
+        }
+        private void picsSound()
+        {
+            audioSource.PlayOneShot(pics,1F);
+        }
 
 
         public void outlineKiller(OutlineData type)
@@ -313,6 +322,8 @@ namespace Runtime.Managers
             StackSignals.Instance.JumperArea -= _jumpCommand.Execute;
             CoreGameSignals.Instance.onSizeUpPlayer -= anotherCommand;
             CoreGameSignals.Instance.onSizeDownPlayer -= renameThisCommand;
+            StackSignals.Instance.playPicSound  -= picSound;
+            StackSignals.Instance.playPicsSound  -= picsSound;
           
         }
 

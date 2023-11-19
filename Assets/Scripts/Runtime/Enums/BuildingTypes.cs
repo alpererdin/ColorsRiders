@@ -5,6 +5,7 @@ namespace Runtime.Enums
         One,
         Two,
         Three,
+        Four,
       
     }
 }
