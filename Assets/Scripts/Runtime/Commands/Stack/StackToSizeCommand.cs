@@ -26,22 +26,25 @@ namespace Runtime.Commands.Stack
         }
 
         public void Execute()
-        
         {
-
+            
+            StackSignals.Instance.playPicSound?.Invoke();
+          
             _collectableStack[0].transform.SetParent(_levelHolder.transform.GetChild(0));
-        
+             
             _collectableStack[0].transform.DOMove(
                 new Vector3(_collectableStack[0].transform.position.x,
                     _collectableStack[0].transform.position.y, _collectableStack[0].transform.position.z + 4),
-                .2f).OnComplete(() =>
+                0.05f).OnComplete(() =>
             {
                 CoreGameSignals.Instance.onSizeUpPlayer?.Invoke(); 
-           
-            
+              
+                _collectableStack[0].SetActive(false);
+             
             });
+          
             _tempStack.Add(_collectableStack[0]);
-            _collectableStack[0].SetActive(false);
+           
             _collectableStack.RemoveAt(0);
             _collectableStack.TrimExcess();
             _stackManager.UpdateStack();
@@ -50,10 +53,16 @@ namespace Runtime.Commands.Stack
 
             if (_collectableStack.Count == 0)
             {
-              
-                GameStateManager.SetGameState(GameStateManager.GameState.Idle);
-               
-                PlayerSignals.Instance.onPlayConditionChanged?.Invoke(true);
+                PlayerSignals.Instance.onPlayConditionChanged?.Invoke(false);
+                
+                DOVirtual.DelayedCall(.5f, () => 
+                    StackSignals.Instance.playPicsSound?.Invoke());
+                
+                DOVirtual.DelayedCall(.5f, () => 
+                GameStateManager.SetGameState(GameStateManager.GameState.Idle));
+                
+                DOVirtual.DelayedCall(.5f, () => 
+                PlayerSignals.Instance.onPlayConditionChanged?.Invoke(true));
                
                 _collectableStack.TrimExcess();
                  

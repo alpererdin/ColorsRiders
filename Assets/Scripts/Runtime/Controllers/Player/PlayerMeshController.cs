@@ -35,13 +35,13 @@ namespace Runtime.Controllers.Player
         internal void ScaleUpPlayer()
         {
             size += 0.1f;
-            renderer.transform.DOScale(size, 1).SetEase(Ease.Flash);
+            renderer.transform.DOScale(size, .5f).SetEase(Ease.Flash);
              
         }
         internal void ScaleDownPlayer()
         {
             size -= 0.1f;
-            renderer.transform.DOScale(size, 1).SetEase(Ease.Flash);
+            renderer.transform.DOScale(size, .5f).SetEase(Ease.Flash);
              
         }
       
