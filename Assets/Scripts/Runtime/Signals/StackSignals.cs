@@ -46,6 +46,8 @@ namespace Runtime.Signals
         public UnityAction<bool ,Transform> isPlayerBuildState = delegate {  };
         
         public UnityAction<GameObject> wrongSideAdder = delegate {  };
+        public UnityAction playPicSound = delegate {  };
+        public UnityAction playPicsSound = delegate {  };
         
         
         
