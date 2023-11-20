@@ -28,7 +28,7 @@ namespace Runtime.Commands.Stack
              _collectableStack[0].transform.SetParent(_levelHolder.transform.GetChild(0));
              _collectableStack[0].transform.DOMove(new Vector3(_collectableStack[0].transform.position.x,
                  _collectableStack[0].transform.position.y,
-                 _collectableStack[0].transform.position.z + 15), 1);
+                 _collectableStack[0].transform.position.z + 8), 1);
             _collectableStack.RemoveAt(last);
             _collectableStack.TrimExcess();
            _stackManager.UpdateStack();
@@ -36,7 +36,8 @@ namespace Runtime.Commands.Stack
      
             if (_collectableStack.Count == 0)
             {
-                StackSignals.Instance.onLastCollectableEnterDroneArea?.Invoke();
+                //StackSignals.Instance.onLastCollectableEnterDroneArea?.Invoke();
+                PlayerSignals.Instance.DroneAreaPlayerMove?.Invoke();
                 _collectableStack.TrimExcess();
                  
             }
