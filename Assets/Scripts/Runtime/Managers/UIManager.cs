@@ -131,8 +131,9 @@ namespace Runtime.Managers
         private void OnReset()
         {
             CameraSignals.Instance.onSetCinemachineTarget?.Invoke(CameraTargetState.Player);
-            //CoreUISignals.Instance.onCloseAllPanels?.Invoke();
-          //  CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 1);
+            CoreUISignals.Instance.onCloseAllPanels?.Invoke();
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 0);
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
         }
     }
 }
