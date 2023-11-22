@@ -32,6 +32,9 @@ namespace Runtime.Managers
         public AudioClip finishSound;
         public AudioClip pic;
         public AudioClip pics;
+        public AudioClip sound3;
+        public AudioClip sound7;
+        
         
         public AudioSource audioSource;
         #endregion
@@ -112,6 +115,13 @@ namespace Runtime.Managers
             StartCoroutine(FinishStageArea());
         }
 
+        private void PlayerRealDroneStage()
+        {
+            _data.MovementData.ForwardSpeed = 0f;
+            SendPlayerDataToControllers();
+            
+        }
+
         private IEnumerator FinishStageArea()
         {
             float targetSpeed = 0f;
@@ -176,7 +186,19 @@ namespace Runtime.Managers
             StackSignals.Instance.playPicSound  += picSound;
             StackSignals.Instance.playPicsSound  += picsSound;
 
+            PlayerSignals.Instance.DroneAreaPlayerMove += moveOnDroneArea;
 
+
+        }
+
+        private void moveOnDroneArea()
+        {
+            transform.DOMove(new Vector3(transform.position.x,
+                transform.position.y,
+                transform.position.z + 8), 2).OnComplete(() =>
+            {
+                StackSignals.Instance.onLastCollectableEnterDroneArea?.Invoke();
+            });
         }
 
         private void picSound()
@@ -247,12 +269,13 @@ namespace Runtime.Managers
 
         private void OnEnterDroneArea()
         {
-            
+         //   gatestate();
             DOVirtual.DelayedCall(.5f,
                 () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.DroneArea));
            // StartCoroutine(WaitForFinal());
-           PlayerDroneStageArea();
-            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+           //PlayerDroneStageArea();
+           PlayerRealDroneStage();
+          gameObject.transform.GetChild(0).gameObject.SetActive(false);
            
       
         }
@@ -296,9 +319,22 @@ namespace Runtime.Managers
             audioSource.PlayOneShot(finishSound, 0.5F);
         }
 
-       
+        public void GateSound()
+        {
+            audioSource.PlayOneShot(sound3, 0.6F);
+        }
+
+        public void jumpSound()
+        {
+            audioSource.PlayOneShot(sound7, 0.6F);
+        }
+       /* public void gatestate()
+        {
+            audioSource.PlayOneShot(sound50, 0.6F);
+        }*/
         private void OnReset()
         {
+            _material.DOFloat(100, "_OutlineSize", 1f);
             movementController.OnReset();
             animationController.OnReset();
         }
@@ -322,9 +358,11 @@ namespace Runtime.Managers
             StackSignals.Instance.JumperArea -= _jumpCommand.Execute;
             CoreGameSignals.Instance.onSizeUpPlayer -= anotherCommand;
             CoreGameSignals.Instance.onSizeDownPlayer -= renameThisCommand;
+            CoreGameSignals.Instance.onOutLineKiller -= outlineKiller;
             StackSignals.Instance.playPicSound  -= picSound;
             StackSignals.Instance.playPicsSound  -= picsSound;
           
+            PlayerSignals.Instance.DroneAreaPlayerMove -= moveOnDroneArea;
         }
 
          private void OnChangePlayerColor(MaterialColorTypes type)
