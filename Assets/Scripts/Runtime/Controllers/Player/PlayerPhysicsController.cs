@@ -45,10 +45,10 @@ namespace Runtime.Controllers.Player
         
        private void OnTriggerExit(Collider other)
        {
-           /*if (other.CompareTag(_stageArea))
+         /*  if (other.CompareTag(_stageArea))
            {
-               //CoreGameSignals.Instance.onExitTurretArea?.Invoke();
-               PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Run);
+               CoreGameSignals.Instance.onExitTurretArea?.Invoke();
+              // PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Run);
               //// manager.PlayerSpeedExitStageArea();
                
            }*/

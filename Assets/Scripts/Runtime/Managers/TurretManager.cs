@@ -26,6 +26,7 @@ namespace Runtime.Managers
         {
             //
             isFiring = false;
+             
         }
 
         private void ActivateTurret(GameObject target)
@@ -72,6 +73,7 @@ namespace Runtime.Managers
         private void OnDisable()
         {
             CoreGameSignals.Instance.onEnterTurretArea -= ActivateTurret;
+            CoreGameSignals.Instance.onExitTurretArea -= DeactivateTurret;
         }
     }
 }
