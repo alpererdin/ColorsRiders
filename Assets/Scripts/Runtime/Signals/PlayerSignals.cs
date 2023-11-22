@@ -14,6 +14,7 @@ namespace Runtime.Signals
         public UnityAction<int> onSetTotalScore = delegate { };
 
         public UnityAction<MaterialColorTypes> OnGatePassed = delegate {  };
+        public UnityAction DroneAreaPlayerMove = delegate {  };
         
         
     }
