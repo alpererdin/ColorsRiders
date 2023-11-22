@@ -28,7 +28,7 @@ namespace Runtime.Commands.Stack
                  
                _stackManager.AdderOnStackCommand.Execute(_collectedStack[i]);
                PlayerSignals.Instance.onSetTotalScore?.Invoke(1);
-            Debug.Log("New init work");
+             
             }
             //_stackManager.StackTypeUpdaterCommand.Execute();
             CollectableSignals.Instance.OnAfterDroneArea.Invoke();

@@ -32,6 +32,7 @@ namespace Runtime.Controllers.Player
         private readonly string _idle = "Idle";
         private readonly string _finish = "Finish";
         private readonly string _build = "Build";
+        
         #endregion
 
         #endregion
@@ -58,8 +59,22 @@ namespace Runtime.Controllers.Player
            }
        }
 
+     
+
        private void OnTriggerEnter(Collider other)
         {
+             
+          /*  if (other.CompareTag(_stageArea))
+            {
+                if (manager.currentColor!=other.GetComponentInParent<GateManager>().currentColorType)
+                {
+                    CoreGameSignals.Instance.onEnterTurretArea?.Invoke(transform.gameObject);
+                    
+                    
+                }
+              
+               
+            }*/
             if (other.CompareTag("Test"))
             {
                 manager.PlayerSpeedStageArea();
@@ -92,6 +107,7 @@ namespace Runtime.Controllers.Player
             } 
             if (other.CompareTag("JumpArea"))
             {
+                manager.jumpSound();
                StackSignals.Instance.JumperArea?.Invoke();
             }
             if (other.CompareTag(_drone))
@@ -109,6 +125,7 @@ namespace Runtime.Controllers.Player
 
             if (other.CompareTag(_gate))
             {
+                manager.GateSound();
                 PlayerSignals.Instance.OnGatePassed?.Invoke(other.GetComponent<GateManager>().currentColorType);
            
             }
@@ -169,6 +186,8 @@ namespace Runtime.Controllers.Player
                     () => CameraSignals.Instance.onSetCinemachineTarget?.Invoke(CameraTargetState.FakePlayer));
                 return;
             }
+
+          
         }
     }
 }

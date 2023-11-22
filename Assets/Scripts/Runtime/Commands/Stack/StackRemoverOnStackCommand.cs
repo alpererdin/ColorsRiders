@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Runtime.Managers;
+using Runtime.Signals;
 using UnityEngine;
 
 namespace Runtime.Commands.Stack
@@ -19,13 +20,24 @@ namespace Runtime.Commands.Stack
         }
 
         public void Execute(GameObject collectableGameObject)
-        { 
-            int last = _collectableStack.Count - 1;
-            _collectableStack.RemoveAt(last);
-            _collectableStack.TrimExcess();
-            GameObject a = collectableGameObject.transform.GetChild(last).gameObject;
-            Object.Destroy(a);
-            _stackManager.StackTypeUpdaterCommand.Execute();
+        {
+            if (_collectableStack.Count==0)
+            {
+                PlayerSignals.Instance.onPlayConditionChanged?.Invoke(false);
+                Debug.Log("arraediniz");
+                CoreGameSignals.Instance.onLevelFailed?.Invoke();
+              
+            }
+            else
+            {
+                int last = _collectableStack.Count - 1;
+                _collectableStack.RemoveAt(last);
+                _collectableStack.TrimExcess();
+                GameObject a = collectableGameObject.transform.GetChild(last).gameObject;
+                Object.Destroy(a);
+                _stackManager.StackTypeUpdaterCommand.Execute();
+            }
+           
         }
     }
 }
