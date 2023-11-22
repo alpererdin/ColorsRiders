@@ -25677,7 +25677,7 @@ PrefabInstance:
     - target: {fileID: 3783389435460376085, guid: b10be80e013f01b44b98d61ee4361e5c,
         type: 3}
       propertyPath: currentColorType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7481974019986545055, guid: b10be80e013f01b44b98d61ee4361e5c,
         type: 3}
@@ -25866,7 +25866,7 @@ PrefabInstance:
     - target: {fileID: 3783389435460376085, guid: b10be80e013f01b44b98d61ee4361e5c,
         type: 3}
       propertyPath: currentColorType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7481974019986545055, guid: b10be80e013f01b44b98d61ee4361e5c,
         type: 3}
@@ -28322,7 +28322,7 @@ PrefabInstance:
     - target: {fileID: 3783389435460376085, guid: b10be80e013f01b44b98d61ee4361e5c,
         type: 3}
       propertyPath: currentColorType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7481974019986545055, guid: b10be80e013f01b44b98d61ee4361e5c,
         type: 3}
@@ -30741,7 +30741,7 @@ PrefabInstance:
     - target: {fileID: 3783389435460376085, guid: b10be80e013f01b44b98d61ee4361e5c,
         type: 3}
       propertyPath: currentColorType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7481974019986545055, guid: b10be80e013f01b44b98d61ee4361e5c,
         type: 3}
@@ -33204,7 +33204,7 @@ PrefabInstance:
     - target: {fileID: 3783389435460376085, guid: b10be80e013f01b44b98d61ee4361e5c,
         type: 3}
       propertyPath: currentColorType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7481974019986545055, guid: b10be80e013f01b44b98d61ee4361e5c,
         type: 3}
@@ -35335,7 +35335,7 @@ PrefabInstance:
     - target: {fileID: 3783389435460376085, guid: b10be80e013f01b44b98d61ee4361e5c,
         type: 3}
       propertyPath: currentColorType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7481974019986545055, guid: b10be80e013f01b44b98d61ee4361e5c,
         type: 3}
@@ -35430,7 +35430,7 @@ PrefabInstance:
     - target: {fileID: 3123242180473058267, guid: befce558c2991f245babb6eff0b68a22,
         type: 3}
       propertyPath: currentColorType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8071600177023849511, guid: befce558c2991f245babb6eff0b68a22,
         type: 3}
