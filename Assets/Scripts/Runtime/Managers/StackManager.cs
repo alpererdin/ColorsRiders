@@ -215,7 +215,13 @@ namespace Runtime.Managers
 
         #endregion
 
-       
+        private void stackCheck()
+        {
+            if (_collectableStack.Count==0)
+            {
+                
+            }
+        }
 
         private void SubscribeToPlayerBuildState(bool isBuilding,Transform target)
         {
