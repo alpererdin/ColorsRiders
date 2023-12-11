@@ -31,8 +31,7 @@ namespace Runtime.Commands
                _transform.DOMoveY(1, 1)
                     .SetEase(Ease.InCubic).SetAutoKill());
             
-          /*  DOVirtual.DelayedCall(1,()=> 
-                _transform.DORotate( new Vector3(20,_transform.rotation.y,_transform.rotation.z), 1,RotateMode.Fast) );*/
+   
         }
 
          
