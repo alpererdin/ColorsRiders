@@ -36,7 +36,7 @@ namespace Runtime.Commands.Stack
      
             if (_collectableStack.Count == 0)
             {
-                //StackSignals.Instance.onLastCollectableEnterDroneArea?.Invoke();
+          
                 PlayerSignals.Instance.DroneAreaPlayerMove?.Invoke();
                 _collectableStack.TrimExcess();
                  
