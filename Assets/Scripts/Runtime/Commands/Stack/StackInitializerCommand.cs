@@ -22,21 +22,7 @@ namespace Runtime.Commands.Stack
         {
             Debug.Log("İNİTTTTTTTTTTTTTTT");
           
-            /*var stackLevell =StackSignals.Instance.onSetStackCount();
-            //1
-            for (int i = 0; i < stackLevell; i++)
-            {
-                
-                GameObject obj = Object.Instantiate(_money);
-                CollectableSignals.Instance.onChangeCollectableAnimationState(CollectableAnimationStates.Run, _money);
-                CollectableSignals.Instance.OnAfterDroneArea.Invoke();
-              
-               _stackManager.AdderOnStackCommand.Execute(obj);
-              
-               
-            }
-
-            _stackManager.StackTypeUpdaterCommand.Execute();*/
+           
         }
     }
 }
