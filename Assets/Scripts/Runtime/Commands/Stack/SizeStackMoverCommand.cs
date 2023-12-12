@@ -27,7 +27,6 @@ namespace Runtime.Commands.Stack
                 pos.y = collectableStack[i - 1].transform.localPosition.y;
                 pos.z = collectableStack[i - 1].transform.localPosition.z;
                 float direct = Mathf.Lerp(collectableStack[i].transform.localPosition.x, pos.x, 5);
-                //
                 float directY = Mathf.Lerp(collectableStack[i].transform.localPosition.y, pos.y, 5);
                 float directZ = Mathf.Lerp(collectableStack[i].transform.localPosition.z, pos.z, 5);
                 
