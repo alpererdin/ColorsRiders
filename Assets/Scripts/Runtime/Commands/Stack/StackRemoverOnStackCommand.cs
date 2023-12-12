@@ -24,7 +24,7 @@ namespace Runtime.Commands.Stack
             if (_collectableStack.Count==0)
             {
                 PlayerSignals.Instance.onPlayConditionChanged?.Invoke(false);
-                Debug.Log("arraediniz");
+                
                 CoreGameSignals.Instance.onLevelFailed?.Invoke();
               
             }

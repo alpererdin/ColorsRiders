@@ -30,7 +30,7 @@ namespace Runtime.Commands.Stack
                PlayerSignals.Instance.onSetTotalScore?.Invoke(1);
              
             }
-            //_stackManager.StackTypeUpdaterCommand.Execute();
+        
             CollectableSignals.Instance.OnAfterDroneArea.Invoke();
 
         }
