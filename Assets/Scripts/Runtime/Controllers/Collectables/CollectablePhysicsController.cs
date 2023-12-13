@@ -16,7 +16,7 @@ namespace Runtime.Controllers.Collectables
         [SerializeField] private CollectableManager manager;
         [SerializeField] private GameObject animator;
         [SerializeField] private BoxCollider testCollider;
-        //[SerializeField] private CapsuleCollider testCollider;
+   
 
         #endregion
 
@@ -115,8 +115,7 @@ namespace Runtime.Controllers.Collectables
             {
                 manager.InteractionWithAtm(transform.parent.gameObject);
                 Destroy(other.gameObject);
-                //
-                
+           
             }
 
             if (other.CompareTag(_obstacle) && CompareTag(_collected))
