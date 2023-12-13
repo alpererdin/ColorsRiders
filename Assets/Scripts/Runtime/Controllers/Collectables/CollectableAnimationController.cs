@@ -56,7 +56,7 @@ namespace Runtime.Controllers.Collectables
 
         internal void OnReset()
         {
-           // CollectableSignals.Instance.onChangeCollectableAnimationState?.Invoke(CollectableAnimationStates.Idle);
+           // CollectableSignals.Instance. 
         }
     }
 }
