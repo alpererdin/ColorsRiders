@@ -49,7 +49,7 @@ namespace Runtime.Controllers.Player
            {
                CoreGameSignals.Instance.onExitTurretArea?.Invoke();
               // PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Run);
-              //// manager.PlayerSpeedExitStageArea();
+    
                
            }*/
         
@@ -64,17 +64,7 @@ namespace Runtime.Controllers.Player
        private void OnTriggerEnter(Collider other)
         {
              
-          /*  if (other.CompareTag(_stageArea))
-            {
-                if (manager.currentColor!=other.GetComponentInParent<GateManager>().currentColorType)
-                {
-                    CoreGameSignals.Instance.onEnterTurretArea?.Invoke(transform.gameObject);
-                    
-                    
-                }
-              
-               
-            }*/
+          
             if (other.CompareTag("Test"))
             {
                 manager.PlayerSpeedStageArea();
@@ -116,12 +106,7 @@ namespace Runtime.Controllers.Player
                 CoreGameSignals.Instance.onEnterDroneArea?.Invoke();
             }
           
-            /*if (other.CompareTag(_stageArea))
-            {
-        
-                PlayerSignals.Instance.onChangePlayerAnimationState(PlayerAnimationStates.Crouch);
-                ////manager.PlayerSpeedStageArea();
-            }*/
+       
 
             if (other.CompareTag(_gate))
             {
@@ -154,19 +139,7 @@ namespace Runtime.Controllers.Player
                 }
                 else
                 {
-                   /*---
-                    PlayerSignals.Instance.onPlayConditionChanged?.Invoke(false);
-                    PlayerSignals.Instance.onMoveConditionChanged?.Invoke(false);
-                    Destroy(other.transform.parent.gameObject);
-                    managerRigidbody.transform.DOMoveZ(managerRigidbody.transform.position.z - 2.3f, .4f)
-                        .SetEase(Ease.Linear).OnComplete(() =>
-                        {
-                            PlayerSignals.Instance.onPlayConditionChanged?.Invoke(true);
-                            PlayerSignals.Instance.onMoveConditionChanged?.Invoke(true);
-                          
-                        });
-                    StackSignals.Instance.onInteractionObstacle?.Invoke(_stackHolder.transform.gameObject);
-                    PlayerSignals.Instance.onSetTotalScore?.Invoke(-1);*/
+                  
                   
                     Destroy(other.transform.parent.gameObject);
                     manager.playForwardParticle();
