@@ -34,7 +34,7 @@ namespace Runtime.Managers
         
         private void GatePassed()
         { 
-            //PlayerSignals.Instance.OnGatePassed.Invoke();
+            //PlayerSignals.Ins 
         }
     }
     
