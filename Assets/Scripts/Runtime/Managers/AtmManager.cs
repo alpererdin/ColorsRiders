@@ -26,7 +26,7 @@ namespace Runtime.Managers
 
         private void GetReferences()
         {
-           // doTweenAnimation = GetComponentInChildren<DOTweenAnimation>();
+           // doTweenAnimation 
         }
 
         private void OnEnable()
@@ -37,7 +37,7 @@ namespace Runtime.Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onAtmTouched += OnAtmTouched;
-            //AtmSignals.Instance.onSetAtmScoreText += OnSetAtmScoreText;
+             
         }
 
 
@@ -51,13 +51,13 @@ namespace Runtime.Managers
 
         private void OnSetAtmScoreText(int value)
         {
-           // atmText.text = value.ToString();
+           // atmText.text  
         }
 
         private void UnSubscribeEvents()
         {
             CoreGameSignals.Instance.onAtmTouched -= OnAtmTouched;
-            //AtmSignals.Instance.onSetAtmScoreText -= OnSetAtmScoreText;
+       
         }
 
         private void OnDisable()
