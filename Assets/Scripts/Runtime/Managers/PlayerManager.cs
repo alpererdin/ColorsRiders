@@ -328,10 +328,7 @@ namespace Runtime.Managers
         {
             audioSource.PlayOneShot(sound7, 0.6F);
         }
-       /* public void gatestate()
-        {
-            audioSource.PlayOneShot(sound50, 0.6F);
-        }*/
+      
         private void OnReset()
         {
             _material.DOFloat(100, "_OutlineSize", 1f);
