@@ -22,9 +22,9 @@ namespace Runtime.Managers
 
         private bool _isTouching;
 
-        private float _currentVelocity; //ref type
-        private Vector2? _mousePosition; //ref type
-        private Vector3 _moveVector; //ref type
+        private float _currentVelocity;  
+        private Vector2? _mousePosition;  
+        private Vector3 _moveVector; //ref  
 
         [Header("Data")] private InputData _data;
         private bool _isFirstTimeTouchTaken;
