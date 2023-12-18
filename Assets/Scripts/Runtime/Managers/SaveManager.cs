@@ -32,7 +32,7 @@ namespace Runtime.Managers
 
         private void SaveData()
         {
-//            Debug.LogWarning(ScoreSignals.Instance.onGetMoney());
+ 
            
             OnSaveGame(
                 new SaveGameDataParams()
