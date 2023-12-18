@@ -43,7 +43,7 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onLevelFailed += RefreshMoney;
             UISignals.Instance.onClickIncome += OnSetValueMultiplier;
 
-            //ScoreSignals.Instance.onSendScore += sendScore;
+            //ScoreSignals.Instan 
 
 
         }
