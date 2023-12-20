@@ -24,7 +24,7 @@ namespace Runtime.Managers
 
         private void DeactivateTurret()
         {
-            //
+         
             isFiring = false;
              
         }
