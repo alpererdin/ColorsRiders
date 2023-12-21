@@ -16,6 +16,6 @@ namespace Runtime.Signals
         
         public UnityAction onTestAciton= delegate {  };
         
-     //   public UnityAction onSendScore = delegate { };
+  
     }
 }
