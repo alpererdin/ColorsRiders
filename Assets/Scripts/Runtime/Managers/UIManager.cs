@@ -28,7 +28,7 @@ namespace Runtime.Managers
         private void OpenStartPanel()
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 0);
-            //CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Idle,2);
+          
             
              CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
         }
@@ -37,8 +37,7 @@ namespace Runtime.Managers
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 0);
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
-          //  CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Shop, 2);
-           // CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Idle,2);
+ 
             UISignals.Instance.onSetNewLevelValue?.Invoke(levelValue);
         }
         public void OnPlay()
@@ -111,7 +110,7 @@ namespace Runtime.Managers
             if (_isReadyForIdleGame )
             {
                 //CoreGameSignals.Instance.onChangeGameState?.Invoke();
-                //ScoreSignals.Instance.onSendScore?.Invoke();
+                
             }
         }
 
