@@ -73,6 +73,10 @@ namespace Runtime.Controllers.Player
             {
                 CoreGameSignals.Instance.onExitTurretArea?.Invoke();
                 manager.PlayerSpeedExitStageArea();
+                Transform firstParent = other.transform.parent;
+                Transform ScondParent = other.transform.parent;
+                ScondParent.gameObject.SetActive(false);
+
             }
             if (other.CompareTag(_idle))
             {
